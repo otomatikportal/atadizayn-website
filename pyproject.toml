@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atadizayn_website"
+version = "0.1.0"
+description = "Django Analytics and Tracking System"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+dependencies = [
+    "Django>=5.0",
+    "gunicorn>=21.2",
+    "django-environ",
+    "psycopg[binary]>=3.1",
+    "celery>=5.3",
+    "redis>=5.0",
+    "django-redis>=5.4",
+    "geoip2>=4.8",
+    "django-user-agents>=0.4",
+    "django-cookie-consent>=0.5",
+]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["config", "atadizayn_website"]
+namespaces = false
