@@ -1,0 +1,13 @@
+{
+  "name": "atadizayn-bootstrap-customizer",
+  "version": "1.0.0",
+  "description": "Bootstrap custom build for Atadizayn",
+  "scripts": {
+    "build:css": "sass src/custom.scss ../static/css/bootstrap-custom.css --style expanded --no-source-map",
+    "watch:css": "sass src/custom.scss ../static/css/bootstrap-custom.css --style expanded --no-source-map --watch"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.97.1"
+  }
+}

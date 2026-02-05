@@ -1,0 +1,63 @@
+// =========================================================
+// 4. SHARED MIXINS (Soft Marketing Theme)
+// =========================================================
+@mixin brand-link {
+  color: $primary;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: darken($primary, 10%);
+  }
+}
+
+@mixin soft-focus {
+  border-color: rgba($primary, 0.55);
+  box-shadow: 0 0 0 0.2rem rgba($primary, 0.2);
+}
+
+@mixin soft-surface($radius: $border-radius-lg) {
+  background-color: $white;
+  border: 1px solid rgba($dark, 0.08);
+  border-radius: $radius;
+  box-shadow: $volt-shadow-sm;
+}
+
+@mixin soft-button-variant($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color !important;
+  border: 1px solid transparent;
+  border-radius: $border-radius-pill;
+  box-shadow: 0 1px 4px rgba($bg-color, 0.18);
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover {
+    background-color: darken($bg-color, 6%);
+    box-shadow: 0 2px 6px rgba($bg-color, 0.2);
+  }
+
+  &:active {
+    box-shadow: 0 1px 3px rgba($bg-color, 0.18);
+  }
+}
+
+@mixin soft-outline-variant($color) {
+  color: $color;
+  border: 1px solid rgba($color, 0.5);
+  background-color: transparent;
+  border-radius: $border-radius-pill;
+  transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover {
+    color: $white;
+    background-color: $color;
+    box-shadow: 0 2px 5px rgba($color, 0.18);
+  }
+}
+
+@mixin soft-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}

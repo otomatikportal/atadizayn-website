@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+<footer class="border-top py-4 shadow-sm">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-12 col-lg-3">
+        <div class="text-body-secondary mb-2">{% trans "Kategoriler" %}</div>
+        {% include "partials/_category_tree.html" with nodes=footer_categories|slice:"0:1" %}
+      </div>
+      <div class="col-12 col-lg-3">
+        <div class="text-body-secondary mb-2">{% trans "Kategoriler" %}</div>
+        {% include "partials/_category_tree.html" with nodes=footer_categories|slice:"1:2" %}
+      </div>
+      <div class="col-12 col-lg-3">
+        <div class="text-body-secondary mb-2">{% trans "Politikalarımız" %}</div>
+        <!-- Empty for now -->
+      </div>
+      <div class="col-12 col-lg-3">
+        <div class="text-body-secondary mb-2">{% trans "Kurumsal" %}</div>
+        <!-- Empty for now -->
+      </div>
+    </div>
+    <div class="row pt-3 mt-3 border-top align-items-center">
+      <div class="col-12 col-md-4">
+        <div class="text-body-secondary">{% trans "© 2026 Atadizayn. Tüm Hakları Saklıdır." %}</div>
+      </div>
+      <div class="col-12 col-md-4 text-center my-2 my-md-0">
+        <img src="{% static 'svg/ata_logo_no_text.svg' %}" alt="{% trans "Atadizayn" %}" style="width:64px; height:auto;">
+      </div>
+      <div class="col-12 col-md-4 text-md-end">
+        <div class="text-body-secondary">{% trans "Made in Türkiye" %}</div>
+      </div>
+    </div>
+  </div>
+</footer>

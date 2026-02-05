@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n translated_fields %}
+
+{% block content %}
+  <h1>{% trans "Home" %}</h1>
+
+  {% if root_categories %}
+    <h2>{% trans "Categories" %}</h2>
+    <ul>
+      {% for category in root_categories %}
+        <li><a href="{{ category.get_absolute_url }}">{{ category|trans_field:"name" }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>{% trans "No categories yet." %}</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n translated_fields %}
+
+{% block content %}
+  <h1>{{ category|trans_field:"name" }}</h1>
+
+  {% if children %}
+    <h2>{% trans "Subcategories" %}</h2>
+    <ul>
+      {% for child in children %}
+        <li><a href="{{ child.get_absolute_url }}">{{ child|trans_field:"name" }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if products %}
+    <h2>{% trans "Products" %}</h2>
+    <ul>
+      {% for product in products %}
+        <li><a href="{{ product.get_absolute_url }}">{{ product|trans_field:"name" }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
