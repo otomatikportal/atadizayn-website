@@ -27,7 +27,6 @@ dependencies = [
     { name = "django-cors-headers" },
     { name = "django-environ" },
     { name = "django-modeltranslation" },
-    { name = "django-mptt" },
     { name = "django-storages" },
     { name = "gunicorn" },
     { name = "pillow" },
@@ -48,7 +47,6 @@ requires-dist = [
     { name = "django-cors-headers", specifier = ">=4.3" },
     { name = "django-environ" },
     { name = "django-modeltranslation", specifier = ">=0.19" },
-    { name = "django-mptt", specifier = ">=0.16" },
     { name = "django-storages", specifier = ">=1.14" },
     { name = "djlint", marker = "extra == 'dev'", specifier = ">=1.36" },
     { name = "gunicorn", specifier = ">=21.2" },
@@ -230,18 +228,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c1/af/3c34fca94fccae681a15734bc6557cf9be958d1d063ddbb233580b894054/django_modeltranslation-0.19.19.tar.gz", hash = "sha256:26dd8454f19540a2eb05e303608a2d89dd80aacb75ab95f8ea272cf4324d2644", size = 77750, upload-time = "2025-12-15T10:25:38.112Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a7/2a/fdf265e91e37ee363b2c45f3d2a01752a3b38ab082a3ec0b0677105bd367/django_modeltranslation-0.19.19-py3-none-any.whl", hash = "sha256:55ac2ce47486b9e8ca18b155f7705170a53b7e1346bf7bf89304e99787486e8f", size = 93441, upload-time = "2025-12-15T10:25:35.942Z" },
-]
-
-[[package]]
-name = "django-mptt"
-version = "0.18.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django-js-asset" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/eb/25/04bb8e4384f3484dabbd0e2a84946f1c972b95b07512509a17aaa361be0f/django_mptt-0.18.0.tar.gz", hash = "sha256:cf5661357ff22bc64e20d3341c26e538aa54583aea0763cfe6aaec0ab8e3a8ee", size = 71407, upload-time = "2025-08-26T09:27:01.05Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/51/9e/78aad58a90f2e4d0c898eeadd2f2b720bcae29b43676dd37c2b627c4c6c6/django_mptt-0.18.0-py3-none-any.whl", hash = "sha256:bfa3f01627e3966a1df901aeca74570a3e933e66809ebf58d9df673e63627afb", size = 120157, upload-time = "2025-08-26T09:27:02.168Z" },
 ]
 
 [[package]]

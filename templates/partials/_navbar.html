@@ -4,7 +4,7 @@
 {% get_language_info_list for LANGUAGES as languages %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom">
   <div class="container-fluid">
-    <a class="navbar-brand fw-semibold d-flex align-items-center p-0" href="{% url 'products:home' %}">
+    <a class="navbar-brand fw-semibold d-flex align-items-center p-0" href="{% url 'home' %}">
       <img src="{% static 'svg/ata_logo_white_text.svg' %}" alt="{% trans 'Atadizayn' %}" class="navbar-logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,24 +13,7 @@
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'products:home' %}">{% trans "Home" %}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'kitchen_sink' %}">{% trans "Kitchen sink" %}</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {% trans "More" %}
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">{% trans "Action" %}</a></li>
-            <li><a class="dropdown-item" href="#">{% trans "Another action" %}</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">{% trans "Something else here" %}</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{% trans "Disabled" %}</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">{% trans "Ana sayfa" %}</a>
         </li>
       </ul>
       <div class="d-flex align-items-center gap-2">

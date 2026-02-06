@@ -1,24 +1,151 @@
 {% extends "base.html" %}
-{% load i18n translated_fields %}
+{% load i18n %}
+
+{% block head %}
+  <title>{{ category.name }}</title>
+  <meta name="description" content="{{ category.description }}">
+  <link rel="canonical" href="{{ category.get_canonical_url }}">
+{% endblock head %}
 
 {% block content %}
-  <h1>{{ category|trans_field:"name" }}</h1>
+  <!-- Category Header -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h1 class="display-4 fw-bold mb-3">{{ category.name }}</h1>
+      {% if category.description %}
+        <p class="lead text-muted">{{ category.description }}</p>
+      {% endif %}
+    </div>
+  </div>
 
-  {% if children %}
-    <h2>{% trans "Subcategories" %}</h2>
-    <ul>
-      {% for child in children %}
-        <li><a href="{{ child.get_absolute_url }}">{{ child|trans_field:"name" }}</a></li>
-      {% endfor %}
-    </ul>
+  <!-- Category Images Gallery -->
+  {% if category.images.all %}
+    <div class="row mb-5">
+      <div class="col-12 col-lg-8 mx-auto">
+        <div id="categoryImageCarousel" class="carousel slide carousel-overlay mb-3" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for image in category.images.all %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="category-banner">
+              </div>
+            {% endfor %}
+          </div>
+          {% if category.images.all|length > 1 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#categoryImageCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">{% trans "Önceki" %}</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#categoryImageCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">{% trans "Sonraki" %}</span>
+            </button>
+          {% endif %}
+        </div>
+        <div class="row g-2">
+          {% for image in category.images.all %}
+            <div class="col-4 col-md-3">
+              <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="img-thumbnail cursor-pointer thumbnail-square" data-bs-target="#categoryImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}">
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
   {% endif %}
 
-  {% if products %}
-    <h2>{% trans "Products" %}</h2>
-    <ul>
-      {% for product in products %}
-        <li><a href="{{ product.get_absolute_url }}">{{ product|trans_field:"name" }}</a></li>
-      {% endfor %}
-    </ul>
+  <!-- Rich Text Content -->
+  {% if category.rich_text %}
+    <div class="row mb-5">
+      <div class="col-12 col-lg-8 mx-auto">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            {{ category.rich_text|safe }}
+          </div>
+        </div>
+      </div>
+    </div>
   {% endif %}
-{% endblock %}
+
+  <!-- Documents Section -->
+  {% if category.documents.all %}
+    <div class="row mb-5">
+      <div class="col-12">
+        <h3 class="mb-3">{% trans "Dökümanlar" %}</h3>
+        <div class="row g-3">
+          {% for document in category.documents.all %}
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title">{{ document.title }}</h6>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                  <a href="{{ document.file.url }}" class="btn btn-sm btn-outline-primary" download>
+                    <i class="bi bi-download"></i> {% trans "İndir" %}
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Products Section -->
+  {% if category.products.all %}
+    <div class="row mb-5">
+      <div class="col-12">
+        <h3 class="mb-3">{% trans "Ürünler" %}</h3>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>{% trans "Ürün Adı" %}</th>
+                <th>{% trans "Kod" %}</th>
+                <th>{% trans "Renk" %}</th>
+                <th>{% trans "Ölçü" %}</th>
+                <th>{% trans "Paket ağırlığı" %}</th>
+                <th>{% trans "Paket Ölçüsü" %}</th>
+                <th>{% trans "Paket İçi" %}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for product in category.products.all %}
+                <tr>
+                  <td>
+                    <a href="{{ product.get_absolute_url }}" class="text-decoration-none">
+                      <strong>{{ product.name }}</strong>
+                    </a>
+                  </td>
+                  <td>
+                    <code>{{ product.code }}</code>
+                  </td>
+                  <td>{{ product.color|default:"-" }}</td>
+                  <td>{{ product.size|default:"-" }}</td>
+                  <td>{{ product.package_weight|default:"-" }}</td>
+                  <td>{{ product.package_size|default:"-" }}</td>
+                  <td>{{ product.package_quantity|default:"-" }}</td>
+                  <td>
+                    <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-primary">
+                      {% trans "Detay" %}
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Back Button -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <a href="javascript:history.back()" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> {% trans "Geri Dön" %}
+      </a>
+    </div>
+  </div>
+
+{% endblock content %}

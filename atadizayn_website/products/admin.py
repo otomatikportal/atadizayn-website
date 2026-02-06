@@ -1,14 +1,11 @@
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin
-from mptt.admin import MPTTModelAdmin
-
 from .models import (
 	Category,
-	CategoryDocument,
-	CategoryImage,
 	Product,
-	ProductDocument,
+	CategoryImage,
+	CategoryDocument,
 	ProductImage,
+	ProductDocument,
 )
 
 
@@ -23,11 +20,10 @@ class CategoryDocumentInline(admin.TabularInline):
 
 
 @admin.register(Category)
-class CategoryAdmin(TranslationAdmin, MPTTModelAdmin):
-	list_display = ("name", "parent", "updated_at")
-	search_fields = ("name", "slug")
-	inlines = [CategoryImageInline, CategoryDocumentInline]
+class CategoryAdmin(admin.ModelAdmin):
+	list_display = ["name", "slug", "collection", "publish_date"]
 	prepopulated_fields = {"slug": ("name",)}
+	inlines = [CategoryImageInline, CategoryDocumentInline]
 
 
 class ProductImageInline(admin.TabularInline):
@@ -41,20 +37,26 @@ class ProductDocumentInline(admin.TabularInline):
 
 
 @admin.register(Product)
-class ProductAdmin(TranslationAdmin):
-	list_display = ("name", "code", "category", "updated_at")
-	search_fields = ("name", "code")
-	list_filter = ("updated_at",)
+class ProductAdmin(admin.ModelAdmin):
+	list_display = ["name", "code", "category", "publish_date"]
 	inlines = [ProductImageInline, ProductDocumentInline]
-	prepopulated_fields = {"code": ("name",)}
+
+
+@admin.register(CategoryImage)
+class CategoryImageAdmin(admin.ModelAdmin):
+	list_display = ["category", "is_primary", "sort_order"]
+
+
+@admin.register(CategoryDocument)
+class CategoryDocumentAdmin(admin.ModelAdmin):
+	list_display = ["category", "title", "sort_order"]
 
 
 @admin.register(ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):
-	list_display = ("product", "is_primary", "sort_order")
-	list_filter = ("is_primary",)
+	list_display = ["product", "is_primary", "sort_order"]
 
 
 @admin.register(ProductDocument)
 class ProductDocumentAdmin(admin.ModelAdmin):
-	list_display = ("product", "title", "sort_order")
+	list_display = ["product", "title", "sort_order"]

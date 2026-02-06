@@ -3,20 +3,28 @@
 <footer class="border-top py-4 shadow-sm">
   <div class="container">
     <div class="row g-3">
-      <div class="col-12 col-lg-3">
-        <div class="text-body-secondary mb-2">{% trans "Kategoriler" %}</div>
-        {% include "partials/_category_tree.html" with nodes=footer_categories|slice:"0:1" %}
-      </div>
-      <div class="col-12 col-lg-3">
-        <div class="text-body-secondary mb-2">{% trans "Kategoriler" %}</div>
-        {% include "partials/_category_tree.html" with nodes=footer_categories|slice:"1:2" %}
-      </div>
-      <div class="col-12 col-lg-3">
-        <div class="text-body-secondary mb-2">{% trans "Politikalarımız" %}</div>
-        <!-- Empty for now -->
-      </div>
+      {% for collection_key, collection_data in footer_categories_by_collection.items %}
+        <div class="col-12 col-lg-3">
+          <div class="text-body-secondary mb-2">{{ collection_data.label }}</div>
+          {% if collection_data.categories %}
+            <ul class="list-unstyled small mb-0 d-grid gap-1">
+              {% for category in collection_data.categories %}
+                <li>
+                  <a class="link" href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted small mb-0">{% trans "Kategori bulunamadı." %}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
       <div class="col-12 col-lg-3">
         <div class="text-body-secondary mb-2">{% trans "Kurumsal" %}</div>
+        <!-- Empty for now -->
+      </div>
+            <div class="col-12 col-lg-3">
+        <div class="text-body-secondary mb-2">{% trans "Politikalarımız" %}</div>
         <!-- Empty for now -->
       </div>
     </div>
@@ -25,7 +33,9 @@
         <div class="text-body-secondary">{% trans "© 2026 Atadizayn. Tüm Hakları Saklıdır." %}</div>
       </div>
       <div class="col-12 col-md-4 text-center my-2 my-md-0">
-        <img src="{% static 'svg/ata_logo_no_text.svg' %}" alt="{% trans "Atadizayn" %}" style="width:64px; height:auto;">
+        <a href="{% url 'admin:index' %}">
+          <img src="{% static 'svg/ata_logo_no_text.svg' %}" alt="{% trans "Atadizayn" %}" style="width:64px; height:auto;">
+        </a>
       </div>
       <div class="col-12 col-md-4 text-md-end">
         <div class="text-body-secondary">{% trans "Made in Türkiye" %}</div>

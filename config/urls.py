@@ -14,10 +14,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
-from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
@@ -29,3 +31,6 @@ urlpatterns += i18n_patterns(
     path("", include("atadizayn_website.products.urls")),
     path("", include("atadizayn_website.core.urls")),
 )
+
+if settings.MEDIA_STORAGE == "local":
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

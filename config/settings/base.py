@@ -16,7 +16,6 @@ INSTALLED_APPS = [
 	"corsheaders",
 	"storages",
 	"modeltranslation",
-	"mptt",
 	"atadizayn_website.products",
 	"atadizayn_website.core",
 	"django.contrib.admin",
@@ -126,8 +125,9 @@ if MEDIA_STORAGE == "s3":
 
 	MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 	STORAGES["default"] = {"BACKEND": "storages.backends.s3.S3Storage"}
+
 elif MEDIA_STORAGE == "local":
-	MEDIA_URL = "media/"
+	MEDIA_URL = "/media/"
 	MEDIA_ROOT = BASE_DIR / "media"
 	STORAGES["default"] = {"BACKEND": "django.core.files.storage.FileSystemStorage"}
 else:

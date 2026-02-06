@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% load i18n translated_fields %}
-
-{% block content %}
-  <h1>{{ product|trans_field:"name" }}</h1>
-  {% if product.description %}
-    <p>{{ product|trans_field:"description" }}</p>
-  {% endif %}
-{% endblock %}
