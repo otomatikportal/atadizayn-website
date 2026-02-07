@@ -122,9 +122,10 @@ if MEDIA_STORAGE == "s3":
 	AWS_DEFAULT_ACL = None
 	AWS_QUERYSTRING_AUTH = False
 	AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=31536000"}
+	AWS_LOCATION = env("AWS_LOCATION", default=AWS_STORAGE_BUCKET_NAME)
 
-	MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
-	STORAGES["default"] = {"BACKEND": "storages.backends.s3.S3Storage"}
+	MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
+	STORAGES["default"] = {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}
 
 elif MEDIA_STORAGE == "local":
 	MEDIA_URL = "/media/"
