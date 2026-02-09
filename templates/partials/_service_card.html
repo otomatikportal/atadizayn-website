@@ -1,0 +1,16 @@
+<div class="col">
+  <div class="card h-100 border-0 shadow-sm hover-lift">
+    <div class="card-body text-center p-4">
+      <div class="d-inline-flex align-items-center justify-content-center fs-1 mb-3 text-{{ color }} bg-{{ color }}-subtle rounded-circle icon-box">
+        <i class="bi {{ icon }}"></i>
+      </div>
+      <h4 class="card-title fw-bold">{% trans title %}</h4>
+      <p class="card-text text-muted small">
+        {% trans text %}
+      </p>
+    </div>
+    <div class="card-footer bg-transparent border-0 text-center pb-4">
+      <span class="text-{{ color }} fw-medium small">{% trans footer %} &rarr;</span>
+    </div>
+  </div>
+</div>
