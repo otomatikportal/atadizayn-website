@@ -19,7 +19,6 @@ class ProductTranslationOptions(TranslationOptions):
         "name",
         "description",
         "rich_text",
-        "color",
     )
 
 @register(ProductVariant)

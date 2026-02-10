@@ -25,8 +25,6 @@ def global_search(request):
                 "name", "name_en", "name_tr",
                 "description", "description_en", "description_tr",
                 "rich_text", "rich_text_en", "rich_text_tr",
-                "color", "color_en", "color_tr",
-                "min_size", "max_size",
                 # Removed variants__code to rely on direct variant search
             ),
         ).filter(search=query).distinct()

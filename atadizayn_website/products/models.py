@@ -107,21 +107,6 @@ class Product(models.Model):
         unique=True, # Recommended to add unique=True if using name-based slugs
         verbose_name=_("Slug"),
     )
-    min_size = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Minimum ölçü"),
-    )
-    max_size = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Maksimum ölçü"),
-    )
-    color = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Renk"),
-    )
     publish_date = models.DateField(
         default=timezone.localdate,
         verbose_name=_("Yayım tarihi"),
@@ -326,6 +311,27 @@ class ProductDocument(models.Model):
 
     def __str__(self) -> str:
         return self.title or f"{self.product.name} dokümanı"
+
+    @property
+    def icon_name(self):
+        import os
+        if not self.file:
+            return "bi-file-earmark"
+        name, ext = os.path.splitext(self.file.name)
+        ext = ext.lower().replace(".", "")
+        if ext == "pdf":
+            return "bi-file-pdf"
+        if ext in ["xls", "xlsx", "csv"]:
+            return "bi-file-excel"
+        if ext in ["doc", "docx"]:
+            return "bi-file-word"
+        if ext in ["jpg", "jpeg", "png", "gif", "webp"]:
+            return "bi-file-earmark-image"
+        if ext in ["zip", "rar", "7z"]:
+            return "bi-file-zip"
+        if ext == "txt":
+            return "bi-file-text"
+        return "bi-file-earmark"
     
 class ProductVariant(models.Model):
     product = models.ForeignKey(
