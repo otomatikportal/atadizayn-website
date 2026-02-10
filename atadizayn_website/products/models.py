@@ -372,3 +372,19 @@ class ProductVariant(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - {self.code} ({self.size})"
+
+    @property
+    def name(self):
+        return f"{self.product.name} - {self.code}"
+        
+    @property
+    def description(self):
+        parts = []
+        if self.size:
+            parts.append(self.size)
+        if self.package_quantity:
+            parts.append(f"Paket: {self.package_quantity}")
+        return " - ".join(parts)
+
+    def get_absolute_url(self):
+        return self.product.get_absolute_url()

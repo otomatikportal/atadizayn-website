@@ -25,7 +25,8 @@ INSTALLED_APPS = [
 	"django.contrib.messages",
 	"django.contrib.staticfiles",
 	"django.contrib.sites",
-	"cookie_consent",
+    "django.contrib.postgres",
+    "cookie_consent",
 ]
 
 MIDDLEWARE = [

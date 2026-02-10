@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load i18n static core_tags %}
+
+{% block page_title %}
+    {% if collection_type == 'stand' %}
+        {% trans "POS Stand Çözümleri" %}
+    {% else %}
+        {% trans "Bağlantı ve Mağaza Ekipmanları" %}
+    {% endif %}
+    | Ata Dizayn
+{% endblock page_title %}
+
+{% block content %}
+
+{# --- HERO SECTION --- #}
+<div class="position-relative w-100 bg-dark overflow-hidden mb-5">
+    {# Desktop Banner (16:9) #}
+    <div class="d-none d-lg-block position-relative w-100">
+        <div style="padding-top: 40%;" class="position-relative">
+             {% if collection_type == 'stand' %}
+                <img src="{% asset_url 'stand_index_banner_desktop' %}" alt="{% trans 'POS Stand Çözümleri' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
+             {% else %}
+                <img src="{% asset_url 'part_index_banner_desktop' %}" alt="{% trans 'Bağlantı ve Mağaza Ekipmanları' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
+             {% endif %}
+        </div>
+    </div>
+
+    {# Mobile Banner (1:1) #}
+    <div class="d-lg-none position-relative w-100">
+         <div style="padding-top: 100%;" class="position-relative">
+             {% if collection_type == 'stand' %}
+                <img src="{% asset_url 'stand_index_banner_mobile' %}" alt="{% trans 'POS Stand Çözümleri' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
+             {% else %}
+                <img src="{% asset_url 'part_index_banner_mobile' %}" alt="{% trans 'Bağlantı ve Mağaza Ekipmanları' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
+             {% endif %}
+         </div>
+    </div>
+    
+    {# Overlay Content #}
+    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white z-1 px-3">
+        <h1 class="display-4 fw-bold mb-2 text-shadow">
+            {% if collection_type == 'stand' %}
+                {% trans "POS Stand Çözümleri" %}
+            {% else %}
+                {% trans "Bağlantı ve Mağaza Ekipmanları" %}
+            {% endif %}
+        </h1>
+        <p class="lead w-75 mx-auto text-shadow d-none d-md-block">
+            {% if collection_type == 'stand' %}
+                {% trans "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları." %}
+            {% else %}
+                {% trans "Endüstriyel bağlantı çözümleri, mağaza ekipmanları ve geniş ürün yelpazemiz." %}
+            {% endif %}
+        </p>
+    </div>
+</div>
+
+<style>
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+</style>
+
+{# --- CATEGORIES GRID --- #}
+<div class="container pb-5">
+    <div class="row g-4 justify-content-center">
+        {% for category in categories %}
+        <div class="col-md-6 col-lg-4">
+            <a href="{{ category.get_absolute_url }}" class="text-decoration-none card-hover-effect d-block h-100">
+                <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden product-card">
+                    
+                    {# Image Section #}
+                    <div class="card-img-wrapper position-relative bg-light overflow-hidden">
+                        {% if category.images.first %}
+                            <img src="{{ category.images.first.image.url }}" alt="{{ category.name }}" class="w-100 h-100 object-fit-cover transition-transform">
+                        {% else %}
+                            <div class="d-flex w-100 h-100 align-items-center justify-content-center text-muted bg-secondary bg-opacity-10" style="height: 300px;">
+                                <i class="bi bi-image fs-1 opacity-50"></i>
+                            </div>
+                        {% endif %}
+                        
+                        {# Badge: Item Count #}
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-dark shadow-sm rounded-pill px-3 py-2 border border-light">
+                                <i class="bi bi-box-seam me-1 text-primary"></i> 
+                                {{ category.items_count }} {% trans "Çeşit" %}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body p-4 text-center d-flex flex-column">
+                        <h3 class="h4 fw-bold text-dark mb-2">{{ category.name }}</h3>
+                        
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-center gap-2">
+                                <div class="h-1px w-50px bg-primary rounded"></div>
+                            </div>
+                        </div>
+
+                        {% if category.description %}
+                            <p class="text-muted small line-clamp-3 mb-4 flex-grow-1">{{ category.description }}</p>
+                        {% else %}
+                            <p class="text-muted small mb-4 flex-grow-1">{% trans "Bu kategori için açıklama bulunmamaktadır." %}</p>
+                        {% endif %}
+                        
+                        <div class="mt-auto">
+                            <span class="text-primary fw-bold small tracking-wide hover-underline">
+                                {% trans "Kategoriyi incele" %} <i class="bi bi-arrow-right ms-1"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="py-5 bg-light rounded-4">
+                 <i class="bi bi-inbox fs-1 text-muted mb-3 d-block"></i>
+                <h3 class="text-muted">{% trans "Henüz bu koleksiyonda kategori bulunmamaktadır." %}</h3>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card-img-wrapper {
+        height: 280px; 
+    }
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .product-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover-effect:hover .product-card {
+        transform: translateY(-8px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
+    }
+    .transition-transform {
+        transition: transform 0.5s ease;
+    }
+    .card-hover-effect:hover .transition-transform {
+        transform: scale(1.05);
+    }
+    .h-1px { height: 3px; }
+    .w-50px { width: 40px; }
+    .tracking-wide { letter-spacing: 1px; }
+</style>
+
+{% endblock content %}

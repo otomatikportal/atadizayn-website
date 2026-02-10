@@ -11968,9 +11968,9 @@ a:hover {
 .navbar.navbar-dark .nav-link.active,
 .navbar.bg-primary .nav-link.active,
 .navbar.bg-dark .nav-link.active {
-  background: rgba(255, 255, 255, 0.28);
+  background: #ff671f;
   color: #ffffff !important;
-  box-shadow: 0 2px 6px rgba(37, 40, 42, 0.18);
+  box-shadow: 0 3px 8px rgba(37, 40, 42, 0.25);
 }
 
 .nav-link {

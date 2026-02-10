@@ -2,30 +2,64 @@
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_language_info_list for LANGUAGES as languages %}
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand fw-semibold d-flex align-items-center p-0" href="{% url 'home' %}">
+    <a class="navbar-brand fw-bold d-flex align-items-center p-0" href="{% url 'home' %}">
       <img src="{% static 'svg/ata_logo_white_text.svg' %}" alt="{% trans 'Atadizayn' %}" class="navbar-logo">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">{% trans "Ana sayfa" %}</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-medium">
+        <li class="nav-item mt-md-0 mt-3">
+          <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">
+            <i class="bi bi-house-door-fill me-1"></i> {% trans "Ana sayfa" %}
+          </a>
+        </li>
+        
+        {# Stand Solutions Dropdown #}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if collection_type == 'stand' or category.collection == 'stand' %}active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             {% trans "POS Stand Çözümleri" %}
+          </a>
+          <ul class="dropdown-menu">
+            {% if footer_categories_by_collection.stand.categories %}
+                {% for cat in footer_categories_by_collection.stand.categories %}
+                    <li><a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+                {% endfor %}
+            {% else %}
+                <li><span class="dropdown-item text-muted">{% trans "Kategori yok" %}</span></li>
+            {% endif %}
+          </ul>
+        </li>
+
+        {# Part & Equipment Dropdown #}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if collection_type == 'part' or category.collection == 'part' %}active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             {% trans "Bağlantı ve Mağaza Ekipmanları" %}
+          </a>
+          <ul class="dropdown-menu">
+             {% if footer_categories_by_collection.part.categories %}
+                {% for cat in footer_categories_by_collection.part.categories %}
+                    <li><a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+                {% endfor %}
+            {% else %}
+                <li><span class="dropdown-item text-muted">{% trans "Kategori yok" %}</span></li>
+            {% endif %}
+          </ul>
         </li>
       </ul>
       <div class="d-flex align-items-center gap-2">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="{% trans 'Search' %}" aria-label="{% trans 'Search' %}">
-          <button class="btn btn-outline-light" type="submit">{% trans "Search" %}</button>
+        <form class="d-flex" role="search" action="{% url 'global_search' %}" method="get">
+          <input class="form-control me-2 border-0 opacity-75 focus-ring focus-ring-light" type="search" name="q" placeholder="{% trans 'Arama...' %}" aria-label="{% trans 'Search' %}" value="{{ request.GET.q }}">
+          <button class="btn btn-light text-info fw-bold" type="submit"><i class="bi bi-search"></i></button>
         </form>
         <div class="dropdown">
-          <button class="btn btn-primary d-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% trans "Language" %}" title="{% trans "Language" %}">
+          <button class="btn btn-light text-info d-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% trans "Language" %}" title="{% trans "Language" %}">
             <i class="bi bi-translate"></i>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end p-2" style="min-width: 12rem;">
+          <ul class="dropdown-menu dropdown-menu-end p-2 border-0 shadow-lg mt-2" style="min-width: 12rem;">
             {% for language in languages %}
               <li>
                 <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center justify-content-between gap-2">
