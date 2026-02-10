@@ -3,6 +3,9 @@
 <html data-bs-theme="light" lang="{{ LANGUAGE_CODE }}">
   <head>
     {% include "partials/_head.html" %}
+    <title>{% block page_title %}Ata Dizayn{% endblock page_title %}</title>
+    <meta name="description" content="{% block page_description %}{% trans "Ata Dizayn enjeksiyon kalıbı ve POS pazarlama ürünlerini endüstriyel ölçekte üretebilen bir ürün geliştirme şirketidir" %}{% endblock page_description %}">
+    {% if canonical_url %}<link rel="canonical" href="{{ canonical_url }}">{% endif %}
   </head>
 <body class="d-flex flex-column min-vh-100" data-landing-nav="{% if request.resolver_match and request.resolver_match.url_name == 'home' %}1{% endif %}">
     

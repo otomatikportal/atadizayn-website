@@ -106,14 +106,20 @@
 {# --- PARTNERS: INFINITE SCROLL CAROUSEL --- #}
 <div class="bg-light py-5 border-bottom overflow-hidden">
     <div class="container mb-4 text-center">
-        <p class="text-uppercase fw-bold text-muted opacity-50 letter-spacing-2 m-0">{% trans "Bize Güvenen Markalar" %}</p>
+        <p class="fw-bold text-muted letter-spacing-2 m-0">{% trans "BİZE GÜVENEN MARKALAR" %}</p>
     </div>
     
     {# Marquee Container #}
     <div class="marquee-wrapper">
-        <div class="marquee-track">
-            {# --- ORIGINAL LOGOS --- #}
-            <div class="marquee-content">
+        <div class="marquee-track" id="marqueeTrack">
+            {% if brands %}
+                {% for brand in brands %}
+                <div class="partner-item" title="{{ brand.alt_text }}">
+                    <i class="bi {{ brand.icon_name }} fs-1"></i>
+                </div>
+                {% endfor %}
+            {% else %}
+                {# Fallback if no brands defined #}
                 {% for i in "123456" %}
                 <div class="partner-item">
                     <i class="bi bi-microsoft fs-1"></i>
@@ -134,30 +140,7 @@
                     <i class="bi bi-meta fs-1"></i>
                 </div>
                 {% endfor %}
-            </div>
-            {# --- DUPLICATE LOGOS (For seamless loop) --- #}
-            <div class="marquee-content">
-                 {% for i in "123456" %}
-                <div class="partner-item">
-                    <i class="bi bi-microsoft fs-1"></i>
-                </div>
-                <div class="partner-item">
-                    <i class="bi bi-apple fs-1"></i>
-                </div>
-                <div class="partner-item">
-                    <i class="bi bi-google fs-1"></i>
-                </div>
-                <div class="partner-item">
-                    <i class="bi bi-spotify fs-1"></i>
-                </div>
-                <div class="partner-item">
-                    <i class="bi bi-amazon fs-1"></i>
-                </div>
-                <div class="partner-item">
-                    <i class="bi bi-meta fs-1"></i>
-                </div>
-                {% endfor %}
-            </div>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -166,7 +149,7 @@
 <div class="container my-5 py-5" id="services">
     
     <div class="text-center mb-5">
-        <span class="badge text-bg-info text-white rounded-pill px-3 py-2 mb-3 shadow-sm text-uppercase">{% trans "Hizmetlerimiz" %}</span>
+        <span class="badge text-bg-info text-white rounded-pill px-3 fs-2 py-2 mb-3 shadow-sm">{% trans "Hizmetlerimiz" %}</span>
         <h2 class="display-5 fw-bold">{% trans "Değer Katan Çözümler" %}</h2>
         <p class="text-muted w-75 mx-auto">{% trans "Modern makine parkurumuz ve uzman mühendis kadromuzla, projenizin her aşamasında kalite ve hızı garanti ediyoruz." %}</p>
     </div>
@@ -281,23 +264,21 @@
     
     .marquee-track {
         display: flex;
+        align-items: center;
         width: max-content;
-        animation: scroll 40s linear infinite;
+        animation: scroll 0s linear infinite;
+        gap: 4rem;
+        padding-right: 4rem;
     }
     
     .marquee-track:hover { animation-play-state: paused; }
-    
-    .marquee-content {
-        display: flex;
-        align-items: center;
-        gap: 4rem; /* Spacing between logos */
-        padding-right: 4rem;
-    }
 
     .partner-item {
         opacity: 0.5;
         transition: opacity 0.3s, transform 0.3s;
         filter: grayscale(100%);
+        flex-shrink: 0;
+        cursor: pointer;
     }
     
     .partner-item:hover {
@@ -309,7 +290,44 @@
 
     @keyframes scroll {
         0% { transform: translateX(0); }
-        100% { transform: translateX(-100%); }
+        100% { transform: translateX(calc(-100% / 2)); }
     }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const track = document.getElementById('marqueeTrack');
+    if (!track) return;
+
+    const items = track.querySelectorAll('.partner-item');
+    if (items.length === 0) return;
+
+    // Clone all items to create seamless loop
+    const itemsHTML = track.innerHTML;
+    track.innerHTML = itemsHTML + itemsHTML;
+
+    // Calculate animation duration based on content width
+    function updateAnimation() {
+        const trackWidth = track.scrollWidth / 2; // Half because we duplicated
+        const speed = 60; // pixels per second
+        const duration = trackWidth / speed;
+        
+        track.style.animationDuration = duration + 's';
+    }
+
+    // Initial animation setup
+    updateAnimation();
+
+    // Update on window resize
+    window.addEventListener('resize', updateAnimation);
+
+    // Reset animation on completion for infinite loop without jump
+    track.addEventListener('animationiteration', function() {
+        track.style.animation = 'none';
+        setTimeout(() => {
+            track.style.animation = '';
+        }, 50);
+    });
+});
+</script>
 {% endblock scripts %}

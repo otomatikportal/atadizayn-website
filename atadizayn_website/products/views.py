@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 
 from .models import Category, Product
+from atadizayn_website.core.models import BrandCarouselImage
 
 
 def home(request):
@@ -14,9 +15,14 @@ def home(request):
 		carousel_categories.append(category)
 		if len(carousel_categories) >= 3:
 			break
+	
+	# Get brand carousel images
+	brands = BrandCarouselImage.objects.filter(is_active=True)
+	
 	context = {
 		"categories": categories,
 		"carousel_categories": carousel_categories,
+		"brands": brands,
 	}
 	return render(request, "products/home.html", context)
 
@@ -30,6 +36,7 @@ def category_detail(request, category_slug: str):
 		"category": category,
 		"products": products,
 		"other_categories": other_categories,
+		"canonical_url": category.seo_canonical,
 	}
 	return render(request, "products/category_detail.html", context)
 
@@ -41,5 +48,6 @@ def product_detail(request, category_slug: str, product_code: str):
 	context = {
 		"category": category,
 		"product": product,
+		"canonical_url": product.get_absolute_url(),
 	}
 	return render(request, "products/product_detail.html", context)

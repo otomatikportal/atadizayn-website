@@ -1,151 +1,250 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block head %}
-  <title>{{ category.name }}</title>
-  <meta name="description" content="{{ category.description }}">
-  <link rel="canonical" href="{{ category.get_canonical_url }}">
-{% endblock head %}
+{% block page_title %}{{ category.name }} - Atadizayn{% endblock page_title %}
+{% block page_description %}{{ category.description }}{% endblock page_description %}
+
+<style>
+  .carousel-control-custom {
+    transition: color 0.2s ease;
+  }
+  .carousel-control-custom:hover i {
+    color: #0d6efd !important;
+  }
+  
+  .thumbnail-button {
+    transition: all 0.2s ease;
+  }
+  .thumbnail-button:hover {
+    border-color: #999 !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+  }
+  .thumbnail-button.active {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.5) !important;
+  }
+</style>
 
 {% block content %}
-  <!-- Category Header -->
-  <div class="row mb-5">
-    <div class="col-12">
+  <!-- Category Introduction Section -->
+  <section class="category-intro mb-5">
+    <!-- Category Header -->
+    <div class="mb-4">
       <h1 class="display-4 fw-bold mb-3">{{ category.name }}</h1>
       {% if category.description %}
-        <p class="lead text-muted">{{ category.description }}</p>
+      <p class="lead text-muted">{{ category.description }}</p>
       {% endif %}
     </div>
-  </div>
 
-  <!-- Category Images Gallery -->
-  {% if category.images.all %}
-    <div class="row mb-5">
-      <div class="col-12 col-lg-8 mx-auto">
-        <div id="categoryImageCarousel" class="carousel slide carousel-overlay mb-3" data-bs-ride="carousel">
-          <div class="carousel-inner">
+    {% if category.images.all or category.rich_text %}
+    <hr class="my-4">
+    {% endif %}
+
+    <!-- Images & Rich Text & Documents Section -->
+    {% if category.images.all or category.rich_text or category.documents.all %}
+    <div class="row align-items-start mb-5">
+      <!-- Carousel Section (Left on desktop, top on mobile) -->
+      {% if category.images.all %}
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div id="categoryCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" style="position: relative;">
+          <div class="carousel-inner rounded-lg shadow-lg overflow-hidden">
             {% for image in category.images.all %}
-              <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="category-banner">
-              </div>
+            <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="5000">
+              <img
+                src="{{ image.image.url }}"
+                class="d-block w-100"
+                alt="{{ image.alt_text|default:category.name }}"
+                style="aspect-ratio: 1/1; object-fit: contain; min-height: 400px;"
+              >
+            </div>
             {% endfor %}
           </div>
-          {% if category.images.all|length > 1 %}
-            <button class="carousel-control-prev" type="button" data-bs-target="#categoryImageCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">{% trans "Önceki" %}</span>
+          {% if category.images.count > 1 %}
+          <button class="carousel-control-prev carousel-control-custom" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev" style="background: none; border: none; width: 40px; height: 40px; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">
+            <i class="bi bi-chevron-left" style="font-size: 1.5rem; color: #333; transition: color 0.2s;"></i>
+            <span class="visually-hidden">{% trans "Önceki" %}</span>
+          </button>
+          <button class="carousel-control-next carousel-control-custom" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next" style="background: none; border: none; width: 40px; height: 40px; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">
+            <i class="bi bi-chevron-right" style="font-size: 1.5rem; color: #333; transition: color 0.2s;"></i>
+            <span class="visually-hidden">{% trans "Sonraki" %}</span>
+          </button>
+          {% endif %}
+
+          <!-- Thumbnail Previews -->
+          {% if category.images.count > 1 %}
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.1), transparent); padding: 12px 8px 8px 8px; overflow-x: auto; overflow-y: hidden; display: flex; gap: 0.5rem; scroll-behavior: smooth;">
+            {% for image in category.images.all %}
+            <button 
+              type="button" 
+              data-bs-target="#categoryCarousel" 
+              data-bs-slide-to="{{ forloop.counter0 }}"
+              class="thumbnail-button flex-shrink-0 border-0 p-0 {% if forloop.first %}active{% endif %}"
+              aria-label="Slide {{ forloop.counter }}"
+              style="cursor: pointer; width: 60px; height: 60px; min-width: 60px; border-radius: 4px; overflow: hidden; border: 2px solid transparent; transition: all 0.2s; background: white;"
+            >
+              <img
+                src="{{ image.image.url }}"
+                alt="{{ image.alt_text|default:category.name }}"
+                style="width: 100%; height: 100%; object-fit: contain; padding: 3px;"
+              >
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#categoryImageCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">{% trans "Sonraki" %}</span>
-            </button>
+            {% endfor %}
+          </div>
           {% endif %}
         </div>
-        <div class="row g-2">
-          {% for image in category.images.all %}
-            <div class="col-4 col-md-3">
-              <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="img-thumbnail cursor-pointer thumbnail-square" data-bs-target="#categoryImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}">
-            </div>
-          {% endfor %}
-        </div>
       </div>
-    </div>
-  {% endif %}
+      {% endif %}
 
-  <!-- Rich Text Content -->
-  {% if category.rich_text %}
-    <div class="row mb-5">
-      <div class="col-12 col-lg-8 mx-auto">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body">
-            {{ category.rich_text|safe }}
-          </div>
+      <!-- Rich Text & Documents Section (Right on desktop, bottom on mobile) -->
+      {% if category.rich_text or category.documents.all %}
+      <div class="col-lg-6 d-flex flex-column">
+        {% if category.rich_text %}
+        <div class="rich-text-content flex-grow-1 bg-white p-3 rounded mb-3" style="overflow: auto;">
+          {{ category.rich_text|safe }}
         </div>
-      </div>
-    </div>
-  {% endif %}
+        {% endif %}
 
-  <!-- Documents Section -->
-  {% if category.documents.all %}
-    <div class="row mb-5">
-      <div class="col-12">
-        <h3 class="mb-3">{% trans "Dökümanlar" %}</h3>
-        <div class="row g-3">
-          {% for document in category.documents.all %}
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body">
-                  <h6 class="card-title">{{ document.title }}</h6>
-                </div>
-                <div class="card-footer bg-transparent border-top-0">
-                  <a href="{{ document.file.url }}" class="btn btn-sm btn-outline-primary" download>
-                    <i class="bi bi-download"></i> {% trans "İndir" %}
-                  </a>
-                </div>
+        {% if category.documents.all %}
+        {% if category.rich_text %}
+        <hr class="my-3">
+        {% endif %}
+        <div class="category-documents">
+          <h3 class="h5 mb-3">{% trans "Belgeler" %}</h3>
+          <div class="row g-2">
+            {% for document in category.documents.all %}
+            <div class="col-12 col-lg-6">
+              <div class="d-flex align-items-center gap-2 p-3 border rounded" style="background-color: #f8f9fa;">
+                <i class="bi {{ document.icon_name }} flex-shrink-0" style="font-size: 1.5rem;"></i>
+                <span class="flex-grow-1 text-truncate" style="font-size: 0.9rem;">{{ document.title }}</span>
+                <a href="{{ document.file.url }}" download class="btn btn-link p-0 flex-shrink-0" title="{% trans 'İndir' %}">
+                  <i class="bi bi-download"></i>
+                </a>
               </div>
             </div>
-          {% endfor %}
+            {% endfor %}
+          </div>
         </div>
+        {% endif %}
       </div>
+      {% endif %}
     </div>
-  {% endif %}
+    {% endif %}
+  </section>
 
   <!-- Products Section -->
-  {% if category.products.all %}
-    <div class="row mb-5">
-      <div class="col-12">
-        <h3 class="mb-3">{% trans "Ürünler" %}</h3>
-        <div class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead class="table-light">
-              <tr>
-                <th>{% trans "Ürün Adı" %}</th>
-                <th>{% trans "Kod" %}</th>
-                <th>{% trans "Renk" %}</th>
-                <th>{% trans "Ölçü" %}</th>
-                <th>{% trans "Paket ağırlığı" %}</th>
-                <th>{% trans "Paket Ölçüsü" %}</th>
-                <th>{% trans "Paket İçi" %}</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for product in category.products.all %}
-                <tr>
-                  <td>
-                    <a href="{{ product.get_absolute_url }}" class="text-decoration-none">
-                      <strong>{{ product.name }}</strong>
-                    </a>
-                  </td>
-                  <td>
-                    <code>{{ product.code }}</code>
-                  </td>
-                  <td>{{ product.color|default:"-" }}</td>
-                  <td>{{ product.size|default:"-" }}</td>
-                  <td>{{ product.package_weight|default:"-" }}</td>
-                  <td>{{ product.package_size|default:"-" }}</td>
-                  <td>{{ product.package_quantity|default:"-" }}</td>
-                  <td>
-                    <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-primary">
-                      {% trans "Detay" %}
-                    </a>
-                  </td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+  {% if products %}
+  <hr class="my-5">
+  <section class="category-products mb-5">
+    <h2 class="h3 mb-4">{% trans "Ürünler" %}</h2>
+
+    <!-- Desktop Table View -->
+    <div class="table-responsive d-none d-lg-block">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th scope="col" style="width: 80px;">{% trans "Görüntü" %}</th>
+            <th scope="col">{% trans "Ürün Adı" %}</th>
+            <th scope="col">{% trans "SKU" %}</th>
+            <th scope="col">{% trans "Paket Boyutu" %}</th>
+            <th scope="col">{% trans "Miktar" %}</th>
+            <th scope="col">{% trans "Ağırlık" %}</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          {% for variant in product.variants.all %}
+          <tr>
+            <td>
+              {% with primary_image=product.images.first %}
+              {% if primary_image %}
+              <img
+                src="{{ primary_image.image.url }}"
+                alt="{{ primary_image.alt_text|default:product.name }}"
+                style="width: 60px; height: 60px; object-fit: contain; border-radius: 4px;"
+              >
+              {% else %}
+              <div style="width: 60px; height: 60px; background-color: #e9ecef; border-radius: 4px;"></div>
+              {% endif %}
+              {% endwith %}
+            </td>
+            <td>
+              <a href="{{ product.get_absolute_url }}" class="text-decoration-none fw-semibold">
+                {{ product.name }}
+              </a>
+              {% if variant.size %}<br><small class="text-muted">{{ variant.size }}</small>{% endif %}
+            </td>
+            <td>
+              {{ variant.code }}
+            </td>
+            <td>
+              {{ variant.package_size|default:"-" }}
+            </td>
+            <td>
+              {{ variant.package_quantity|default:"-" }}
+            </td>
+            <td>
+              {{ variant.package_weight|default:"-" }}
+            </td>
+            <td class="text-end">
+              <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile Card View -->
+    <div class="d-lg-none">
+      <div class="row g-3">
+        {% for product in products %}
+        {% for variant in product.variants.all %}
+        <div class="col-12">
+          <a href="{{ product.get_absolute_url }}" class="text-decoration-none">
+            <div class="card h-100" style="transition: transform 0.2s, box-shadow 0.2s;">
+              <div class="card-body">
+                <div class="mb-3 d-flex justify-content-center" style="min-height: 140px; background-color: #f8f9fa; border-radius: 6px;">
+                  {% with primary_image=product.images.first %}
+                  {% if primary_image %}
+                  <img
+                    src="{{ primary_image.image.url }}"
+                    alt="{{ primary_image.alt_text|default:product.name }}"
+                    style="max-width: 100%; max-height: 140px; object-fit: contain; padding: 0.5rem;"
+                  >
+                  {% else %}
+                  <div class="d-flex align-items-center justify-content-center w-100">
+                    <i class="bi bi-box-seam text-muted" style="font-size: 3rem; opacity: 0.2;"></i>
+                  </div>
+                  {% endif %}
+                  {% endwith %}
+                </div>
+                <h5 class="card-title text-primary mb-1">
+                  {{ product.name }}
+                </h5>
+                {% if variant.size %}<small class="text-muted d-block mb-3">{{ variant.size }}</small>{% endif %}
+                <dl class="row mb-0 small">
+                  <dt class="col-6">{% trans "SKU" %}:</dt>
+                  <dd class="col-6 text-muted">{{ variant.code }}</dd>
+                  <dt class="col-6">{% trans "Paket Boyutu" %}:</dt>
+                  <dd class="col-6 text-muted">{{ variant.package_size|default:"-" }}</dd>
+                  <dt class="col-6">{% trans "Miktar" %}:</dt>
+                  <dd class="col-6 text-muted">{{ variant.package_quantity|default:"-" }}</dd>
+                  <dt class="col-6">{% trans "Ağırlık" %}:</dt>
+                  <dd class="col-6 text-muted">{{ variant.package_weight|default:"-" }}</dd>
+                </dl>
+              </div>
+            </div>
+          </a>
         </div>
+        {% endfor %}
+        {% endfor %}
       </div>
     </div>
+  </section>
   {% endif %}
-
-  <!-- Back Button -->
-  <div class="row mb-5">
-    <div class="col-12">
-      <a href="javascript:history.back()" class="btn btn-outline-secondary">
-        <i class="bi bi-arrow-left"></i> {% trans "Geri Dön" %}
-      </a>
-    </div>
-  </div>
 
 {% endblock content %}
