@@ -20,18 +20,74 @@ dependencies = [
     "boto3>=1.34",
     "django-modeltranslation>=0.19",
     "Pillow>=10.0",
-    "whitenoise"
+    "whitenoise",
+    "django-ckeditor-5>=0.2.19"
 ]
 
 [project.optional-dependencies]
 dev = [
     "djlint>=1.36",
+    "ruff>=0.1.0",
 ]
 
+# --- djLint Configuration ---
 [tool.djlint]
 profile = "django"
 max_line_length = 120
 indent = 4
+ignore = "H021,H006"
+
+# --- Ruff Configuration ---
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "migrations",
+]
+
+line-length = 120
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "F",  # Pyflakes
+    "W",  # pycodestyle warnings
+    "I",  # isort (import sorting)
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade (upgrades syntax to newer python versions)
+    "DJ", # flake8-django (specific django rules)
+]
+ignore = []
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["config", "atadizayn_website"]

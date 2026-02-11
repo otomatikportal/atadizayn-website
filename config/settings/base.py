@@ -27,6 +27,7 @@ INSTALLED_APPS = [
 	"django.contrib.sites",
     "django.contrib.postgres",
     "cookie_consent",
+	"django_ckeditor_5"
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,39 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SITE_ID = env.int("SITE_ID")
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
+
+MODELTRANSLATION_CUSTOM_FIELDS = ('CKEditor5Field',)
+
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'link', '|',
+            'bulletedList', 'numberedList', 'todoList', '|',
+            'outdent', 'indent', '|',  # Required for nesting lists
+            'insertTable', '|',
+            'undo', 'redo'
+        ],
+        'table': {
+            'contentToolbar': [
+                'tableColumn', 'tableRow', 'mergeTableCells',
+                'tableProperties', 'tableCellProperties'
+            ],
+        },
+        'list': {
+            'properties': {
+                'styles': True,      # Allows different bullet styles (circle, square, etc.)
+                'startIndex': True,  # Allows starting ordered lists at a specific number
+                'reversed': True,    # Allows reversed ordered lists
+            }
+        },
+        'heading': {
+            'options': [
+                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
+                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
+                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
+                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
+            ]
+        }
+    }
+}

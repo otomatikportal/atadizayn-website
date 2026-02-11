@@ -28,6 +28,7 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path("admin/", admin.site.urls),
+	path("ckeditor5/", include('django_ckeditor_5.urls')),
     path("", include("atadizayn_website.products.urls")),
     path("", include("atadizayn_website.core.urls")),
 )

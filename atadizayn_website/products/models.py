@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-
+from django_ckeditor_5.fields import CKEditor5Field
 
 class Category(models.Model):
     COLLECTION_CHOICES = [
@@ -32,7 +32,7 @@ class Category(models.Model):
         blank=True,
         verbose_name=_("Açıklama"),
     )
-    rich_text = models.TextField(
+    rich_text = CKEditor5Field(
         blank=True,
         verbose_name=_("Zengin metin"),
     )
@@ -115,7 +115,7 @@ class Product(models.Model):
         blank=True,
         verbose_name=_("Açıklama"),
     )
-    rich_text = models.TextField(
+    rich_text = CKEditor5Field(
         blank=True,
         verbose_name=_("Zengin metin"),
     )
