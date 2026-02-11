@@ -24,12 +24,12 @@ msgstr ""
 
 #: .\atadizayn_website\products\models.py:14
 msgid "Parçalar"
-msgstr ""
+msgstr "Parts"
 
 #: .\atadizayn_website\products\models.py:19
 #: .\atadizayn_website\products\models.py:99
 msgid "Ad"
-msgstr ""
+msgstr "Name"
 
 #: .\atadizayn_website\products\models.py:25
 msgid "Slug (url uç kısmı)"
@@ -37,36 +37,36 @@ msgstr ""
 
 #: .\atadizayn_website\products\models.py:30
 msgid "Koleksiyon"
-msgstr ""
+msgstr "Collection"
 
 #: .\atadizayn_website\products\models.py:34
 #: .\atadizayn_website\products\models.py:113
 msgid "Açıklama"
-msgstr ""
+msgstr "Description"
 
 #: .\atadizayn_website\products\models.py:38
 #: .\atadizayn_website\products\models.py:117
 msgid "Zengin metin"
-msgstr ""
+msgstr "Rich text"
 
 #: .\atadizayn_website\products\models.py:44
 msgid "Kanonik URL"
-msgstr ""
+msgstr "Canonical URL"
 
 #: .\atadizayn_website\products\models.py:48
 #: .\atadizayn_website\products\models.py:109
 msgid "Yayım tarihi"
-msgstr ""
+msgstr "Publish date"
 
 #: .\atadizayn_website\products\models.py:51
 #: .\atadizayn_website\products\models.py:120
 msgid "Oluşturulma tarihi"
-msgstr ""
+msgstr "Date created"
 
 #: .\atadizayn_website\products\models.py:52
 #: .\atadizayn_website\products\models.py:121
 msgid "Güncellenme tarihi"
-msgstr ""
+msgstr "Modified"
 
 #: .\atadizayn_website\products\models.py:56
 #: .\atadizayn_website\products\models.py:95
@@ -74,11 +74,11 @@ msgstr ""
 #: .\atadizayn_website\products\models.py:199
 #: .\templates\core\search_results.html:151
 msgid "Kategori"
-msgstr ""
+msgstr "Category"
 
 #: .\atadizayn_website\products\models.py:57
 msgid "Kategoriler"
-msgstr ""
+msgstr "Categories"
 
 #: .\atadizayn_website\products\models.py:82
 #: .\atadizayn_website\products\models.py:133
@@ -100,12 +100,12 @@ msgstr ""
 #: .\atadizayn_website\products\models.py:337
 #: .\templates\core\search_results.html:155
 msgid "Ürün"
-msgstr ""
+msgstr "Product"
 
 #: .\atadizayn_website\products\models.py:126
 #: .\templates\products\category_detail.html:153
 msgid "Ürünler"
-msgstr ""
+msgstr "Products"
 
 #: .\atadizayn_website\products\models.py:169
 #: .\atadizayn_website\products\models.py:255
@@ -178,7 +178,7 @@ msgstr ""
 #: .\atadizayn_website\products\models.py:347
 #: .\templates\products\product_detail.html:138
 msgid "Ölçü"
-msgstr ""
+msgstr "Size"
 
 #: .\atadizayn_website\products\models.py:352
 msgid "Paket ağırlığı"
@@ -204,64 +204,46 @@ msgstr ""
 msgid "Ürün Varyantları"
 msgstr ""
 
-#: .\templates\base.html:8
-msgid ""
-"Ata Dizayn enjeksiyon kalıbı ve POS pazarlama ürünlerini endüstriyel ölçekte "
-"üretebilen bir ürün geliştirme şirketidir"
-msgstr ""
-
-#: .\templates\core\policy_detail.html:13
-msgid "Ana Sayfa"
-msgstr ""
-
-#: .\templates\core\policy_detail.html:20
-msgid "Son Güncelleme:"
-msgstr ""
-
-#: .\templates\core\search_results.html:4
-msgid "Arama Sonuçları"
-msgstr ""
-
 #: .\templates\core\search_results.html:15
 msgid "Ürün, kategori veya kod ara..."
-msgstr ""
+msgstr "Search products, categories or codes..."
 
 #: .\templates\core\search_results.html:16 .\templates\partials\_navbar.html:55
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: .\templates\core\search_results.html:19
 msgid "Ara"
-msgstr ""
+msgstr "Search"
 
 #: .\templates\core\search_results.html:24
 #, python-format
 msgid "%(count)s sonuç bulundu."
-msgstr ""
+msgstr "%(count)s results found."
 
 #: .\templates\core\search_results.html:35
 msgid "Üzgünüz, aramanızla eşleşen bir sonuç bulunamadı."
-msgstr ""
+msgstr "Sorry, no results were found matching your search."
 
 #: .\templates\core\search_results.html:37
 msgid "Lütfen bir arama terimi girin."
-msgstr ""
+msgstr "Please enter a search term."
 
 #: .\templates\core\search_results.html:44
 msgid "Anasayfaya Dön"
-msgstr ""
+msgstr "Back to Home"
 
 #: .\templates\core\search_results.html:53
 #: .\templates\core\search_results.html:56 .\templates\home.html:228
 #: .\templates\home.html:232
 msgid "POS Standlar"
-msgstr ""
+msgstr "POS Displays"
 
 #: .\templates\core\search_results.html:58
 #: .\templates\core\search_results.html:76 .\templates\home.html:233
 #: .\templates\home.html:249
 msgid "İncele"
-msgstr ""
+msgstr "View"
 
 #: .\templates\core\search_results.html:71
 #: .\templates\core\search_results.html:74 .\templates\home.html:245
@@ -270,47 +252,47 @@ msgstr ""
 #: .\templates\part_index.html:45 .\templates\partials\_navbar.html:40
 #: .\templates\products\category_detail.html:34
 msgid "Bağlantı ve Mağaza Ekipmanları"
-msgstr ""
+msgstr "Fasteners and Store Equipment"
 
 #: .\templates\core\search_results.html:153
 msgid "Varyant"
-msgstr ""
+msgstr "Variant"
 
 #: .\templates\core\search_results.html:164
 msgid "Detay"
-msgstr ""
+msgstr "Details"
 
 #: .\templates\core\search_results.html:180
 #: .\templates\products\category_detail.html:80
 #: .\templates\products\product_detail.html:66
 msgid "Önceki"
-msgstr ""
+msgstr "Previous"
 
 #: .\templates\core\search_results.html:198
 #: .\templates\products\category_detail.html:84
 #: .\templates\products\product_detail.html:70
 msgid "Sonraki"
-msgstr ""
+msgstr "Next"
 
 #: .\templates\home.html:38
 msgid "Fiziksel pazarlama çözümleri"
-msgstr ""
+msgstr "Physical marketing solutions"
 
 #: .\templates\home.html:42
 msgid "Fikirden"
-msgstr ""
+msgstr "From Idea"
 
 #: .\templates\home.html:42
 msgid "Gerçeğe"
-msgstr ""
+msgstr "to Reality"
 
 #: .\templates\home.html:43
 msgid "Sürdürülebilir "
-msgstr ""
+msgstr "Sustainable "
 
 #: .\templates\home.html:43
 msgid "Üretim."
-msgstr ""
+msgstr "Manufacturing."
 
 #: .\templates\home.html:47
 msgid ""
@@ -318,226 +300,239 @@ msgid ""
 "parça üretiminde stratejik partneriniz. Tasarımdan lojistiğe uçtan uca "
 "hizmet."
 msgstr ""
+"Your strategic partner in POS materials, injection molding, and industrial "
+"part production with 20 years of experience. End-to-end service from design "
+"to logistics."
 
 #: .\templates\home.html:52
 msgid "Keşfet"
-msgstr ""
+msgstr "Discover"
 
 #: .\templates\home.html:55
 msgid "İletişim"
-msgstr ""
+msgstr "Contact"
 
 #: .\templates\home.html:72
 msgid "Yıl Tecrübe"
-msgstr ""
+msgstr "Years of Experience"
 
 #: .\templates\home.html:80
 msgid "Üretilen Kalıp"
-msgstr ""
+msgstr "Molds Produced"
 
 #: .\templates\home.html:88
 msgid "Mutlu Müşteri"
-msgstr ""
+msgstr "Happy Clients"
 
 #: .\templates\home.html:96
 msgid "Tamamlanmış Proje"
-msgstr ""
+msgstr "Completed Projects"
 
 #: .\templates\home.html:108
 msgid "BİZE GÜVENEN MARKALAR"
-msgstr ""
+msgstr "BRANDS THAT TRUST US"
 
 #: .\templates\home.html:143
 msgid "Hizmetlerimiz"
-msgstr ""
+msgstr "Our Services"
 
 #: .\templates\home.html:144
 msgid "Değer Katan Çözümler"
-msgstr ""
+msgstr "Value-Added Solutions"
 
 #: .\templates\home.html:145
 msgid ""
 "Modern makine parkurumuz ve uzman mühendis kadromuzla, projenizin her "
 "aşamasında kalite ve hızı garanti ediyoruz."
 msgstr ""
+"With our modern machinery and expert engineering team, we guarantee quality "
+"and speed at every stage of your project."
 
 #: .\templates\home.html:156
 msgid "Tasarım & Ar-Ge"
-msgstr ""
+msgstr "Design & R&D"
 
 #: .\templates\home.html:157
 msgid ""
 "Fikirlerinizi üretime uygun, optimize edilmiş 3D modellere ve teknik "
 "çizimlere dönüştürüyoruz."
 msgstr ""
+"We transform your ideas into production-ready, optimized 3D models and "
+"technical drawings."
 
 #: .\templates\home.html:160 .\templates\home.html:175
 #: .\templates\home.html:190 .\templates\home.html:205
 msgid "Detaylar"
-msgstr ""
+msgstr "Details"
 
 #: .\templates\home.html:171
 msgid "Kalıp Üretimi"
-msgstr ""
+msgstr "Mold Production"
 
 #: .\templates\home.html:172
 msgid ""
 "Yüksek hassasiyetli CNC parkurumuzda çelik ve alüminyum enjeksiyon "
 "kalıplarını işliyoruz."
 msgstr ""
+"We process steel and aluminum injection molds in our high-precision CNC "
+"machining center."
 
 #: .\templates\home.html:186
 msgid "Enjeksiyon"
-msgstr ""
+msgstr "Injection Molding"
 
 #: .\templates\home.html:187
 msgid ""
 "Farklı tonajlardaki enjeksiyon hattımız ile seri üretim plastik parça basımı "
 "yapıyoruz."
 msgstr ""
+"We perform mass production of plastic parts with our injection molding lines "
+"of various tonnages."
 
 #: .\templates\home.html:201
 msgid "Montaj & Lojistik"
-msgstr ""
+msgstr "Assembly & Logistics"
 
 #: .\templates\home.html:202
 msgid ""
 "Üretilen parçaları birleştiriyor, paketliyor ve sevkiyata hazır hale "
 "getiriyoruz."
 msgstr ""
+"We assemble, package, and prepare the manufactured parts for shipment."
 
 #: .\templates\home.html:216
 msgid "Ürünlerimiz"
-msgstr ""
+msgstr "Our Products"
 
 #: .\templates\home.html:217
 msgid "Kalite ve Çeşitlilik"
-msgstr ""
+msgstr "Quality and Diversity"
 
 #: .\templates\home.html:218
 msgid "Sektörün ihtiyaçlarına yönelik geniş ürün gamımızla hizmetinizdeyiz."
-msgstr ""
+msgstr "We are at your service with our wide product range catering to industry needs."
 
 #: .\templates\part_index.html:6 .\templates\part_index.html:21
 #: .\templates\part_index.html:32 .\templates\part_index.html:43
 #: .\templates\partials\_navbar.html:24
 #: .\templates\products\category_detail.html:39
 msgid "POS Stand Çözümleri"
-msgstr ""
+msgstr "POS Display Solutions"
 
 #: .\templates\part_index.html:50
 msgid "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları."
-msgstr ""
+msgstr "Creative and durable display designs that make your brand stand out."
 
 #: .\templates\part_index.html:52
 msgid ""
 "Endüstriyel bağlantı çözümleri, mağaza ekipmanları ve geniş ürün yelpazemiz."
 msgstr ""
+"Industrial fastening solutions, store equipment, and our extensive product range."
 
 #: .\templates\part_index.html:86
 msgid "Çeşit"
-msgstr ""
+msgstr "Types"
 
 #: .\templates\part_index.html:103
 msgid "Bu kategori için açıklama bulunmamaktadır."
-msgstr ""
+msgstr "No description available for this category."
 
 #: .\templates\part_index.html:108
 msgid "Kategoriyi incele"
-msgstr ""
+msgstr "View category"
 
 #: .\templates\part_index.html:119
 msgid "Henüz bu koleksiyonda kategori bulunmamaktadır."
-msgstr ""
+msgstr "There are no categories in this collection yet."
 
 #: .\templates\partials\_footer.html:18
 msgid "Kategori bulunamadı."
-msgstr ""
+msgstr "No categories found."
 
 #: .\templates\partials\_footer.html:23
 msgid "Kurumsal"
-msgstr ""
+msgstr "Corporate"
 
 #: .\templates\partials\_footer.html:27
 msgid "Politikalarımız"
-msgstr ""
+msgstr "Our Policies"
 
 #: .\templates\partials\_footer.html:37
 msgid "Politika bulunamadı."
-msgstr ""
+msgstr "No policies found."
 
 #: .\templates\partials\_footer.html:43
 msgid "© 2026 Atadizayn. Tüm Hakları Saklıdır."
-msgstr ""
+msgstr "© 2026 Atadizayn. All Rights Reserved."
 
 #: .\templates\partials\_footer.html:47 .\templates\partials\_navbar.html:8
 msgid "Atadizayn"
-msgstr ""
+msgstr "Atadizayn"
 
 #: .\templates\partials\_footer.html:51
 msgid "Made in Türkiye"
-msgstr ""
+msgstr "Made in Türkiye"
 
 #: .\templates\partials\_navbar.html:17
 msgid "Ana sayfa"
-msgstr ""
+msgstr "Home"
 
 #: .\templates\partials\_navbar.html:32 .\templates\partials\_navbar.html:48
 msgid "Kategori yok"
-msgstr ""
+msgstr "No category"
 
 #: .\templates\partials\_navbar.html:55
 msgid "Arama..."
-msgstr ""
+msgstr "Search..."
 
 #: .\templates\partials\_navbar.html:59
 msgid "Language"
-msgstr ""
+msgstr "Language"
 
 #: .\templates\partials\_navbar.html:71
 msgid "Seçili"
-msgstr ""
+msgstr "Selected"
 
 #: .\templates\products\category_detail.html:34
 #: .\templates\products\category_detail.html:39
 #: .\templates\products\product_detail.html:34
 msgid "Geri dön"
-msgstr ""
+msgstr "Go back"
 
 #: .\templates\products\category_detail.html:127
 #: .\templates\products\product_detail.html:106
 msgid "Belgeler"
-msgstr ""
+msgstr "Documents"
 
 #: .\templates\products\category_detail.html:134
 #: .\templates\products\product_detail.html:113
 msgid "İndir"
-msgstr ""
+msgstr "Download"
 
 #: .\templates\products\product_detail.html:130
 msgid "Modeller / Varyantlar"
-msgstr ""
+msgstr "Models / Variants"
 
 #: .\templates\products\product_detail.html:137
 msgid "SKU / Kod"
-msgstr ""
+msgstr "SKU / Code"
 
 #: .\templates\products\product_detail.html:139
 #: .\templates\products\product_detail.html:174
 msgid "Paket Boyutu"
-msgstr ""
+msgstr "Package Size"
 
 #: .\templates\products\product_detail.html:140
 #: .\templates\products\product_detail.html:177
 msgid "Paket İçi Adet"
-msgstr ""
+msgstr "Quantity per Pack"
 
 #: .\templates\products\product_detail.html:141
 #: .\templates\products\product_detail.html:180
 msgid "Ağırlık"
-msgstr ""
+msgstr "Weight"
 
 #: .\templates\products\product_detail.html:142
 #: .\templates\products\product_detail.html:183
 msgid "Min. Sipariş"
-msgstr ""
+msgstr "Min. Order"
