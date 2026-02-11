@@ -150,145 +150,40 @@
   {% if products %}
   <hr class="my-5">
   <section class="category-products mb-5">
-    <h2 class="h3 mb-4">{% trans "Ürünler" %}</h2>
+    <h2 class="h4 mb-4 fw-bold">{% trans "Ürünler" %}</h2>
 
-    <!-- Desktop Table View -->
-    <div class="table-responsive d-none d-lg-block">
-      <table class="table align-middle">
-        <thead class="table-light">
-          <tr>
-            <th scope="col" style="width: 80px;">{% trans "Görüntü" %}</th>
-            <th scope="col" style="width: 200px;">{% trans "Ürün Adı" %}</th>
-            <th scope="col">{% trans "Varyantlar" %}</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for product in products %}
-          <tr>
-            <td>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      {% for product in products %}
+      <div class="col">
+        <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark h-100 d-block">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="bg-white p-3 d-flex align-items-center justify-content-center border-bottom rounded-top" style="aspect-ratio: 1/1;">
               {% with primary_image=product.images.first %}
               {% if primary_image %}
               <img
                 src="{{ primary_image.image.url }}"
                 alt="{{ primary_image.alt_text|default:product.name }}"
-                style="width: 60px; height: 60px; object-fit: contain; border-radius: 4px;"
+                class="img-fluid"
+                style="max-height: 100%; object-fit: contain;"
               >
               {% else %}
-              <div style="width: 60px; height: 60px; background-color: #e9ecef; border-radius: 4px;"></div>
+              <div class="d-flex align-items-center justify-content-center bg-light w-100 h-100 rounded">
+                <i class="bi bi-box-seam text-muted" style="font-size: 2rem; opacity: 0.3;"></i>
+              </div>
               {% endif %}
               {% endwith %}
-            </td>
-            <td>
-              <a href="{{ product.get_absolute_url }}" class="text-decoration-none fw-semibold">
-                {{ product.name }}
-              </a>
-            </td>
-            <td class="p-0">
-                <table class="table table-sm table-borderless mb-0">
-                    <thead>
-                        <tr class="text-muted small border-bottom">
-                            <th scope="col">{% trans "SKU" %}</th>
-                            <th scope="col">{% trans "Ölçü" %}</th>
-                            <th scope="col">{% trans "Paket" %}</th>
-                            <th scope="col">{% trans "Miktar" %}</th>
-                            <th scope="col">{% trans "Ağırlık" %}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for variant in product.variants.all %}
-                        <tr>
-                            <td class="fw-medium">{{ variant.code }}</td>
-                            <td>{{ variant.size|default:"-" }}</td>
-                            <td>{{ variant.package_size|default:"-" }}</td>
-                            <td>{{ variant.package_quantity|default:"-" }}</td>
-                            <td>{{ variant.package_weight|default:"-" }}</td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="5" class="text-muted fst-italic">{% trans "Varyant bulunmuyor" %}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </td>
-            <td class="text-end">
-              <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-outline-secondary">
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Mobile Card View -->
-    <div class="d-lg-none">
-      <div class="row g-4">
-        {% for product in products %}
-        <div class="col-12">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-3">
-                     <div class="flex-shrink-0 me-3" style="width: 80px; height: 80px; background-color: #f8f9fa; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                        {% with primary_image=product.images.first %}
-                        {% if primary_image %}
-                        <img
-                            src="{{ primary_image.image.url }}"
-                            alt="{{ primary_image.alt_text|default:product.name }}"
-                            style="max-width: 100%; max-height: 100%; object-fit: contain; padding: 4px;"
-                        >
-                        {% else %}
-                        <i class="bi bi-box-seam text-muted" style="font-size: 2rem; opacity: 0.3;"></i>
-                        {% endif %}
-                        {% endwith %}
-                     </div>
-                     <div>
-                        <h5 class="card-title mb-1">
-                            <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark stretched-link">
-                                {{ product.name }}
-                            </a>
-                        </h5>
-                        {% if product.description %}
-                        <small class="text-muted">{{ product.description|truncatechars:80 }}</small>
-                        {% endif %}
-                     </div>
-                </div>
-                
-                {% if product.variants.all %}
-                <div class="table-responsive bg-light rounded mt-3 p-2" style="position: relative; z-index: 2;">
-                    <table class="table table-sm table-borderless mb-0 small">
-                        <thead>
-                            <tr class="text-muted border-bottom">
-                                <th>{% trans "SKU" %}</th>
-                                <th>{% trans "Ölçü" %}</th>
-                                <th>{% trans "Miktar" %}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for variant in product.variants.all %}
-                            <tr>
-                                <td class="fw-medium">{{ variant.code }}</td>
-                                <td>{{ variant.size|default:"-" }}</td>
-                                <td>{{ variant.package_quantity|default:"-" }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {% endif %}
             </div>
-            <div class="card-footer bg-white border-top-0 text-end">
-                <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-outline-primary position-relative" style="z-index: 2;">{% trans "Detayları Gör" %}</a>
+            <div class="card-body text-center">
+              <h3 class="h6 mb-0 fw-bold">{{ product.name }}</h3>
             </div>
           </div>
-        </div>
-        {% endfor %}
+        </a>
       </div>
+      {% endfor %}
     </div>
   </section>
   {% endif %}
+
 
 {% endblock content %}
 

@@ -14,14 +14,16 @@ dependencies = [
     "gunicorn>=21.2",
     "django-environ",
     "psycopg[binary]>=3.1",
-    "django-cookie-consent>=0.5",
+    # "django-cookie-consent>=0.5",
     "django-cors-headers>=4.3",
     "django-storages>=1.14",
     "boto3>=1.34",
     "django-modeltranslation>=0.19",
     "Pillow>=10.0",
     "whitenoise",
-    "django-ckeditor-5>=0.2.19"
+    "django-ckeditor-5>=0.2.19",
+    "django-image-cropping",
+    "easy-thumbnails",
 ]
 
 [project.optional-dependencies]

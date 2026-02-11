@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}{{ policy.name }} - Ata Dizayn{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">{% trans "Ana Sayfa" %}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ policy.name }}</li>
+                    </ol>
+                </nav>
+
+                <h1 class="display-4 mb-3">{{ policy.name }}</h1>
+                <p class="text-muted mb-5">
+                    {% trans "Son Güncelleme:" %} {{ policy.updated_at|date:"d F Y" }}
+                </p>
+
+                <div class="policy-content">
+                    {{ policy.content|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

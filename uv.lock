@@ -24,11 +24,12 @@ dependencies = [
     { name = "django", version = "5.2.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "django", version = "6.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "django-ckeditor-5" },
-    { name = "django-cookie-consent" },
     { name = "django-cors-headers" },
     { name = "django-environ" },
+    { name = "django-image-cropping" },
     { name = "django-modeltranslation" },
     { name = "django-storages" },
+    { name = "easy-thumbnails" },
     { name = "gunicorn" },
     { name = "pillow" },
     { name = "psycopg", extra = ["binary"] },
@@ -46,12 +47,13 @@ requires-dist = [
     { name = "boto3", specifier = ">=1.34" },
     { name = "django", specifier = ">=5.0" },
     { name = "django-ckeditor-5", specifier = ">=0.2.19" },
-    { name = "django-cookie-consent", specifier = ">=0.5" },
     { name = "django-cors-headers", specifier = ">=4.3" },
     { name = "django-environ" },
+    { name = "django-image-cropping" },
     { name = "django-modeltranslation", specifier = ">=0.19" },
     { name = "django-storages", specifier = ">=1.14" },
     { name = "djlint", marker = "extra == 'dev'", specifier = ">=1.36" },
+    { name = "easy-thumbnails" },
     { name = "gunicorn", specifier = ">=21.2" },
     { name = "pillow", specifier = ">=10.0" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.1" },
@@ -185,20 +187,6 @@ wheels = [
 ]
 
 [[package]]
-name = "django-cookie-consent"
-version = "0.9.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django", version = "5.2.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "django", version = "6.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "django-appconf" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/81/5b/d11d40d69a58615a18a6684fca485d8f40e9b9a2c871dd1ab828d7190d18/django_cookie_consent-0.9.0.tar.gz", hash = "sha256:c26e57ec6dc671ffe035f9b4f319e58cfff23edf7d3d4ccfe9cbdbcb0d3f7918", size = 29214, upload-time = "2025-09-28T18:33:24.947Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/77/c1/2fb5cab1f9996432d6757459bac00a2eee06ae6872e5eef2a3b889a4ecef/django_cookie_consent-0.9.0-py3-none-any.whl", hash = "sha256:45e5eff53745ec26c6d009545f3827960e01994c1b55f0db97b846e2cef5da83", size = 27996, upload-time = "2025-09-28T18:33:23.42Z" },
-]
-
-[[package]]
 name = "django-cors-headers"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -219,6 +207,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d6/04/65d2521842c42f4716225f20d8443a50804920606aec018188bbee30a6b0/django_environ-0.12.0.tar.gz", hash = "sha256:227dc891453dd5bde769c3449cf4a74b6f2ee8f7ab2361c93a07068f4179041a", size = 56804, upload-time = "2025-01-13T17:03:37.74Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/83/b3/0a3bec4ecbfee960f39b1842c2f91e4754251e0a6ed443db9fe3f666ba8f/django_environ-0.12.0-py2.py3-none-any.whl", hash = "sha256:92fb346a158abda07ffe6eb23135ce92843af06ecf8753f43adf9d2366dcc0ca", size = 19957, upload-time = "2025-01-13T17:03:32.918Z" },
+]
+
+[[package]]
+name = "django-image-cropping"
+version = "1.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django-appconf" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/af/f1/fabd56516baf0efe5db723c61b0ede674367a13ce991568c1a4608eac9dc/django-image-cropping-1.7.tar.gz", hash = "sha256:971d1a92c9ef14f1bf95996dd4eeed0a00dbb2221bfa762290d9525696243232", size = 32945, upload-time = "2022-02-08T09:07:17.449Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/28/c2ce1794282fc7aee6118ac1b39057952a9b8dd17406dcd23d0b77ea3ca7/django_image_cropping-1.7-py3-none-any.whl", hash = "sha256:429ad2c3ccad5ddeb079fbee24dc1536105b3e9d30beb53d1446fd560da04d5b", size = 43884, upload-time = "2022-02-08T09:07:15.822Z" },
 ]
 
 [[package]]
@@ -278,6 +278,20 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ac/7a/cd851393291b12e7fe17cf5d4d8874b8ea133aebbe9235f5314aabc96a52/djlint-1.36.4-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:bda5014f295002363381969864addeb2db13955f1b26e772657c3b273ed7809f", size = 410972, upload-time = "2024-12-24T13:06:24.077Z" },
     { url = "https://files.pythonhosted.org/packages/6c/31/56469120394b970d4f079a552fde21ed27702ca729595ab0ed459eb6d240/djlint-1.36.4-cp313-cp313-win_amd64.whl", hash = "sha256:16ce37e085afe5a30953b2bd87cbe34c37843d94c701fc68a2dda06c1e428ff4", size = 362053, upload-time = "2024-12-24T13:06:25.432Z" },
     { url = "https://files.pythonhosted.org/packages/4b/67/f7aeea9be6fb3bd984487af8d0d80225a0b1e5f6f7126e3332d349fb13fe/djlint-1.36.4-py3-none-any.whl", hash = "sha256:e9699b8ac3057a6ed04fb90835b89bee954ed1959c01541ce4f8f729c938afdd", size = 52290, upload-time = "2024-12-24T13:06:33.76Z" },
+]
+
+[[package]]
+name = "easy-thumbnails"
+version = "2.10.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django", version = "5.2.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "django", version = "6.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "pillow" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/04/2f/71f17c3ce65b25dd8fc8e513738c8496eadbd8bab94f39509a511ff99704/easy_thumbnails-2.10.1.tar.gz", hash = "sha256:a50aa5f99387546c35ab5ba1ea9b3cbbc5658e65601cd34949f62137c32c222e", size = 81446, upload-time = "2025-08-17T20:49:11.308Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b0/90/be137d0592501ec08d4a00c8430121e95dfe6c8114a1d4436b5cdd6b9803/easy_thumbnails-2.10.1-py3-none-any.whl", hash = "sha256:24462d63dd31543ef1585538b2bfefe0db96d3409bb431c70b81548fb2cfc5be", size = 79695, upload-time = "2025-08-17T20:49:09.119Z" },
 ]
 
 [[package]]

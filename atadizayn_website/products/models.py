@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
+
 class Category(models.Model):
     COLLECTION_CHOICES = [
         ("stand", _("Standlar")),
@@ -47,12 +48,8 @@ class Category(models.Model):
         verbose_name=_("Yayım tarihi"),
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_("Oluşturulma tarihi")
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True, verbose_name=_("Güncellenme tarihi")
-    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Oluşturulma tarihi"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Güncellenme tarihi"))
 
     class Meta:
         ordering = ["name"]
@@ -104,7 +101,7 @@ class Product(models.Model):
     slug = models.SlugField(
         max_length=100,
         blank=True,
-        unique=True, # Recommended to add unique=True if using name-based slugs
+        unique=True,  # Recommended to add unique=True if using name-based slugs
         verbose_name=_("Slug"),
     )
     publish_date = models.DateField(
@@ -120,12 +117,8 @@ class Product(models.Model):
         verbose_name=_("Zengin metin"),
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_("Oluşturulma tarihi")
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True, verbose_name=_("Güncellenme tarihi")
-    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Oluşturulma tarihi"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Güncellenme tarihi"))
 
     class Meta:
         ordering = ["name"]
@@ -230,6 +223,7 @@ class CategoryDocument(models.Model):
     @property
     def icon_name(self):
         import os
+
         if not self.file:
             return "bi-file-earmark"
         name, ext = os.path.splitext(self.file.name)
@@ -315,6 +309,7 @@ class ProductDocument(models.Model):
     @property
     def icon_name(self):
         import os
+
         if not self.file:
             return "bi-file-earmark"
         name, ext = os.path.splitext(self.file.name)
@@ -332,7 +327,8 @@ class ProductDocument(models.Model):
         if ext == "txt":
             return "bi-file-text"
         return "bi-file-earmark"
-    
+
+
 class ProductVariant(models.Model):
     product = models.ForeignKey(
         Product,
@@ -370,7 +366,7 @@ class ProductVariant(models.Model):
         blank=True,
         verbose_name=_("Minimum sipariş"),
     )
-    
+
     class Meta:
         verbose_name = _("Ürün Varyantı")
         verbose_name_plural = _("Ürün Varyantları")
@@ -382,7 +378,7 @@ class ProductVariant(models.Model):
     @property
     def name(self):
         return f"{self.product.name} - {self.code}"
-        
+
     @property
     def description(self):
         parts = []

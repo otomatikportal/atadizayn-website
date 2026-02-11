@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% load i18n core_tags %}
+{% block page_title %}
+    {% trans "Arama Sonuçları" %} - Ata Dizayn
+{% endblock %}
+{% block content %}
+    <div class="row mb-5">
+        <div class="col-md-8 col-lg-6 mx-auto">
+            <form action="{% url 'global_search' %}"
+                  method="get"
+                  class="d-flex gap-2 p-1 border rounded-pill bg-white shadow-sm">
+                <input class="form-control form-control-lg border-0 rounded-pill ps-4 focus-ring-none"
+                       type="search"
+                       name="q"
+                       placeholder="{% trans 'Ürün, kategori veya kod ara...' %}"
+                       aria-label="{% trans 'Search' %}"
+                       value="{{ query|default:'' }}"
+                       style="box-shadow: none">
+                <button class="btn btn-primary rounded-pill px-4 m-1 fw-bold" type="submit">{% trans "Ara" %}</button>
+            </form>
+            {% if query and page_obj.paginator.count > 0 %}
+                <div class="text-center mt-3 text-muted small">
+                    <i class="bi bi-check-circle-fill text-success me-1"></i>
+                    {% blocktrans with count=page_obj.paginator.count %}{{ count }} sonuç bulundu.{% endblocktrans %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+            {% if not page_obj %}
+                <div class="row justify-content-center mt-5">
+                    <div class="col-12 text-center mb-5">
+                        <i class="bi bi-search text-muted opacity-25" style="font-size: 4rem;"></i>
+                        <p class="text-muted mt-3">
+                            {% if query %}
+                                {% trans "Üzgünüz, aramanızla eşleşen bir sonuç bulunamadı." %}
+                            {% else %}
+                                {% trans "Lütfen bir arama terimi girin." %}
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-12 text-center mb-5">
+                        <a href="{% url 'home' %}"
+                           class="btn btn-outline-dark rounded-pill px-4 hover-lift">
+                            <i class="bi bi-house-door-fill me-2"></i>{% trans "Anasayfaya Dön" %}
+                        </a>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <a href="{% url 'stand_index' %}"
+                           class="text-decoration-none product-category-card">
+                            <div class="card border-0 shadow-lg overflow-hidden text-white h-100 rounded-4">
+                                <div class="card-img-wrapper position-relative" style="padding-top: 100%;">
+                                    <img src="{% asset_url 'stands_banner' %}"
+                                         alt="{% trans 'POS Standlar' %}"
+                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end p-4 gradient-overlay">
+                                        <h3 class="display-6 fw-bold mb-1">{% trans "POS Standlar" %}</h3>
+                                        <p class="mb-0 text-white-50 fs-5">
+                                            <i class="bi bi-arrow-right-circle me-2"></i>{% trans "İncele" %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <a href="{% url 'part_index' %}"
+                           class="text-decoration-none product-category-card">
+                            <div class="card border-0 shadow-lg overflow-hidden text-white h-100 rounded-4">
+                                <div class="card-img-wrapper position-relative" style="padding-top: 100%;">
+                                    <img src="{% asset_url 'fixings_banner' %}"
+                                         alt="{% trans 'Bağlantı ve Mağaza Ekipmanları' %}"
+                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end p-4 gradient-overlay">
+                                        <h3 class="display-6 fw-bold mb-1">{% trans "Bağlantı ve Mağaza Ekipmanları" %}</h3>
+                                        <p class="mb-0 text-white-50 fs-5">
+                                            <i class="bi bi-arrow-right-circle me-2"></i>{% trans "İncele" %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row g-4">
+                    {% for item in page_obj %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow transition-all">
+                                <div class="row g-0 h-100">
+                                    {# Card Image Column #}
+                                    <div class="col-4 bg-light d-flex align-items-center justify-content-center overflow-hidden rounded-start">
+                                        <div class="ratio ratio-1x1">
+                                            {% if item.collection %}
+                                                {# Category #}
+                                                {% with img=item.images.all.0 %}
+                                                    {% if img %}
+                                                        <img src="{{ img.image.url }}"
+                                                             alt="{{ item.name }}"
+                                                             class="object-fit-cover">
+                                                    {% else %}
+                                                        <div class="d-flex align-items-center justify-content-center text-muted opacity-25">
+                                                            <i class="bi bi-folder" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% elif item.code %}
+                                                {# Variant #}
+                                                {% with img=item.product.images.all.0 %}
+                                                    {% if img %}
+                                                        <img src="{{ img.image.url }}"
+                                                             alt="{{ item.product.name }}"
+                                                             class="object-fit-cover">
+                                                    {% else %}
+                                                        <div class="d-flex align-items-center justify-content-center text-muted opacity-25">
+                                                            <i class="bi bi-box-seam" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                {# Product #}
+                                                {% with img=item.images.all.0 %}
+                                                    {% if img %}
+                                                        <img src="{{ img.image.url }}"
+                                                             alt="{{ item.name }}"
+                                                             class="object-fit-cover">
+                                                    {% else %}
+                                                        <div class="d-flex align-items-center justify-content-center text-muted opacity-25">
+                                                            <i class="bi bi-box" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {# Card Content Column #}
+                                    <div class="col-8">
+                                        <div class="card-body h-100 d-flex flex-column">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <h6 class="card-title fw-bold mb-0">
+                                                    <a href="{{ item.get_absolute_url }}"
+                                                       class="text-decoration-none text-dark stretched-link">
+                                                        {% if item.code %}
+                                                            {{ item.product.name }} ({{ item.code }})
+                                                        {% else %}
+                                                            {{ item.name }}
+                                                        {% endif %}
+                                                    </a>
+                                                </h6>
+                                            </div>
+                                            {% if item.collection %}
+                                                <span class="badge bg-light text-secondary border align-self-start mb-2">{% trans "Kategori" %}</span>
+                                            {% elif item.code %}
+                                                <span class="badge bg-info-subtle text-info border border-info-subtle align-self-start mb-2">{% trans "Varyant" %}</span>
+                                            {% else %}
+                                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle align-self-start mb-2">{% trans "Ürün" %}</span>
+                                            {% endif %}
+                                            {% if item.description %}
+                                                <p class="card-text text-muted x-small mb-0 multi-line-truncate-2">
+                                                    {{ item.description|striptags|truncatewords:12 }}
+                                                </p>
+                                            {% endif %}
+                                            <div class="mt-auto pt-2">
+                                                <small class="text-primary fw-medium small">
+                                                    {% trans "Detay" %} <i class="bi bi-chevron-right small"></i>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if page_obj.has_other_pages %}
+                    <nav aria-label="Page navigation" class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link rounded-pill px-3 me-2"
+                                       href="?q={{ query }}&page={{ page_obj.previous_page_number }}">{% trans "Önceki" %}</a>
+                                </li>
+                            {% endif %}
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active">
+                                        <span class="page-link rounded-pill px-3 mx-1">{{ num }}</span>
+                                    </li>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                    <li class="page-item">
+                                        <a class="page-link rounded-pill px-3 mx-1"
+                                           href="?q={{ query }}&page={{ num }}">{{ num }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link rounded-pill px-3 ms-2"
+                                       href="?q={{ query }}&page={{ page_obj.next_page_number }}">{% trans "Sonraki" %}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            {% endif %}
+{% endblock content %}
+
+{% block scripts %}
+{{ block.super }}
+<style>
+    .multi-line-truncate-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .x-small {
+        font-size: 0.75rem;
+    }
+    /* Product Category Cards & Overlays */
+    .product-category-card .card-img-wrapper {
+        overflow: hidden;
+    }
+    .product-category-card img {
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .product-category-card:hover img {
+        transform: scale(1.05);
+    }
+    .gradient-overlay {
+        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, transparent 100%);
+    }
+</style>
+{% endblock scripts %}
