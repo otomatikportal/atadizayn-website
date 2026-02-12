@@ -22,7 +22,7 @@ class BlogPost(models.Model):
     COLLECTION_CHOICES = (
         ('policy', _('Politikalar')),
         ('announcement', _('Duyurular')),
-        ('blog', _('Blog paylaşımları')),
+        ('post', _('Blog paylaşımları')),
         ('corporate', _('Kurumsal')),
     )
 
@@ -69,7 +69,7 @@ class BlogPost(models.Model):
     collection = models.CharField(
         max_length=20,
         choices=COLLECTION_CHOICES,
-        default='blog',
+        default='post',
         verbose_name=_("Koleksiyon"),
     )
 

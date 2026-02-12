@@ -1,10 +1,13 @@
-from .models import Policy
+from django.utils import timezone
+
+from atadizayn_website.blog.models import BlogPost
 
 
-def active_policies(request):
-    """Context processor to provide active policies to all templates (e.g., for footer)"""
+def footer_blog_collections(request):
+    published_posts = BlogPost.objects.filter(status="published", publish_date__lte=timezone.now())
     return {
-        "active_policies": Policy.objects.filter(is_active=True)
+        "footer_policy_posts": published_posts.filter(collection="policy"),
+        "footer_corporate_posts": published_posts.filter(collection="corporate"),
     }
 
 

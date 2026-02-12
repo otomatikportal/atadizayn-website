@@ -1,0 +1,21 @@
+{% load i18n %}
+<section class="container my-5 py-4" id="search-cta">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8">
+            <div class="text-start mb-4">
+                <span class="badge text-bg-primary text-white rounded-pill px-3 fs-4 py-2 mb-2 shadow-sm">{% trans "Arama" %}</span>
+                <h2 class="h2 fw-bold mb-2">{% trans "Aradığınızı bulamadınız mı?" %}</h2>
+                <p class="text-muted mb-0">{% trans "Güçlü arama özelliğimizi deneyin." %}</p>
+            </div>
+
+            <form action="{% url 'global_search' %}" method="get" class="d-flex gap-2 p-1 border rounded-pill bg-white shadow-sm">
+                <input class="form-control form-control-lg border-0 rounded-pill ps-4 focus-ring-none"
+                       type="search"
+                       name="q"
+                       placeholder="{% trans "Ürün, kategori, kod veya paylaşımların içinde ara..." %}"
+                       aria-label="{% trans "Search" %}">
+                <button class="btn btn-primary rounded-pill px-4 m-1 fw-bold" type="submit">{% trans "Ara" %}</button>
+            </form>
+        </div>
+    </div>
+</section>

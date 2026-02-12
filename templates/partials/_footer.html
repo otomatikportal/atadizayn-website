@@ -21,15 +21,25 @@
       {% endfor %}
       <div class="col-12 col-lg-3">
         <div class="text-body-secondary mb-2">{% trans "Kurumsal" %}</div>
-        <!-- Empty for now -->
-      </div>
-            <div class="col-12 col-lg-3">
-        <div class="text-body-secondary mb-2">{% trans "Politikalarımız" %}</div>
-        {% if active_policies %}
+        {% if footer_corporate_posts %}
           <ul class="list-unstyled small mb-0 d-grid gap-1">
-            {% for policy in active_policies %}
+            {% for post in footer_corporate_posts %}
               <li>
-                <a class="link" href="{% url 'policy_detail' policy.slug %}">{{ policy.name }}</a>
+                <a class="link" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted small mb-0">{% trans "Kurumsal içerik bulunamadı." %}</p>
+        {% endif %}
+      </div>
+      <div class="col-12 col-lg-3">
+        <div class="text-body-secondary mb-2">{% trans "Politikalarımız" %}</div>
+        {% if footer_policy_posts %}
+          <ul class="list-unstyled small mb-0 d-grid gap-1">
+            {% for post in footer_policy_posts %}
+              <li>
+                <a class="link" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
               </li>
             {% endfor %}
           </ul>
@@ -42,13 +52,16 @@
       <div class="col-12 col-md-4">
         <div class="text-body-secondary">{% trans "© 2026 Atadizayn. Tüm Hakları Saklıdır." %}</div>
       </div>
-      <div class="col-12 col-md-4 text-center my-2 my-md-0">
-        <a href="{% url 'admin:index' %}">
-          <img src="{% static 'svg/ata_logo_no_text.svg' %}" alt="{% trans "Atadizayn" %}" style="width:64px; height:auto;">
-        </a>
-      </div>
       <div class="col-12 col-md-4 text-md-end">
         <div class="text-body-secondary">{% trans "Made in Türkiye" %}</div>
+      </div>
+      <div class="col-12 col-md-4 text-center my-2 my-md-0">
+        <a href="{% url 'admin:index' %}">
+          <img src="{% static 'svg/ata_logo_no_text.svg' %}"
+               alt="{% trans "Atadizayn" %}"
+               style="width:64px;
+                      height:auto">
+        </a>
       </div>
     </div>
   </div>

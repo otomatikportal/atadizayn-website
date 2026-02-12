@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block page_title %}{% trans "Blog" %}{% endblock page_title %}
+{% block page_title %}
+  {% if page_title_text %}
+    {{ page_title_text }}
+  {% else %}
+    {% trans "Blog" %}
+  {% endif %}
+{% endblock page_title %}
 
 {% block page_description %}
   {% trans "Atadizayn blog yazılarını keşfedin." %}
@@ -24,11 +30,25 @@
 
 {% block content %}
   <section class="container py-4 py-md-5">
-    <header class="mb-4 mb-md-5 text-center text-md-start">
-      <span class="badge text-bg-primary text-white rounded-pill px-3 fs-4 py-2 mb-3 shadow-sm">{% trans "Blog" %}</span>
-      <h1 class="display-5 fw-bold mb-2">{% trans "Güncel içerikler ve duyurular" %}</h1>
-      <p class="text-muted mb-0">{% trans "Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar." %}</p>
+    <header class="mb-4 mb-md-5 text-start">
+      <span class="badge text-bg-primary text-white rounded-pill px-3 fs-4 py-2 mb-3 shadow-sm">{% trans "Paylaşımlar" %}</span>
+      <h1 class="display-5 fw-bold mb-2">
+        {% if page_title_text %}
+          {{ page_title_text }}
+        {% else %}
+          {% trans "Blog" %}
+        {% endif %}
+      </h1>
+      <p class="text-muted mb-0">
+        {% if page_subtitle_text %}
+          {{ page_subtitle_text }}
+        {% else %}
+          {% trans "Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar." %}
+        {% endif %}
+      </p>
     </header>
+
+    <hr class="mb-4 mb-md-5">
 
     {% if page_obj %}
       <div class="row row-cols-1 row-cols-lg-2 g-4">

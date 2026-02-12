@@ -12,7 +12,7 @@
                 <input class="form-control form-control-lg border-0 rounded-pill ps-4 focus-ring-none"
                        type="search"
                        name="q"
-                       placeholder="{% trans 'Ürün, kategori veya kod ara...' %}"
+                      placeholder="{% trans 'Ürün, kategori, kod veya paylaşım ara...' %}"
                        aria-label="{% trans 'Search' %}"
                        value="{{ query|default:'' }}"
                        style="box-shadow: none">
@@ -90,20 +90,7 @@
                                     {# Card Image Column #}
                                     <div class="col-4 bg-light d-flex align-items-center justify-content-center overflow-hidden rounded-start">
                                         <div class="ratio ratio-1x1">
-                                            {% if item.collection %}
-                                                {# Category #}
-                                                {% with img=item.images.all.0 %}
-                                                    {% if img %}
-                                                        <img src="{{ img.image.url }}"
-                                                             alt="{{ item.name }}"
-                                                             class="object-fit-cover">
-                                                    {% else %}
-                                                        <div class="d-flex align-items-center justify-content-center text-muted opacity-25">
-                                                            <i class="bi bi-folder" style="font-size: 2rem;"></i>
-                                                        </div>
-                                                    {% endif %}
-                                                {% endwith %}
-                                            {% elif item.code %}
+                                            {% if item.code %}
                                                 {# Variant #}
                                                 {% with img=item.product.images.all.0 %}
                                                     {% if img %}
@@ -113,6 +100,29 @@
                                                     {% else %}
                                                         <div class="d-flex align-items-center justify-content-center text-muted opacity-25">
                                                             <i class="bi bi-box-seam" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% elif item.cover_image %}
+                                                {# Blog / Announcement #}
+                                                <img src="{{ item.cover_image.url }}"
+                                                     alt="{{ item.cover_image_alt|default:item.title }}"
+                                                     class="object-fit-cover">
+                                            {% elif item.meta_description %}
+                                                {# Blog / Announcement without image #}
+                                                <div class="d-flex align-items-center justify-content-center text-muted opacity-25">
+                                                    <i class="bi bi-journal-richtext" style="font-size: 2rem;"></i>
+                                                </div>
+                                            {% elif item.collection %}
+                                                {# Category #}
+                                                {% with img=item.images.all.0 %}
+                                                    {% if img %}
+                                                        <img src="{{ img.image.url }}"
+                                                             alt="{{ item.name }}"
+                                                             class="object-fit-cover">
+                                                    {% else %}
+                                                        <div class="d-flex align-items-center justify-content-center text-muted opacity-25">
+                                                            <i class="bi bi-folder" style="font-size: 2rem;"></i>
                                                         </div>
                                                     {% endif %}
                                                 {% endwith %}
@@ -141,20 +151,32 @@
                                                        class="text-decoration-none text-dark stretched-link">
                                                         {% if item.code %}
                                                             {{ item.product.name }} ({{ item.code }})
+                                                        {% elif item.title %}
+                                                            {{ item.title }}
                                                         {% else %}
                                                             {{ item.name }}
                                                         {% endif %}
                                                     </a>
                                                 </h6>
                                             </div>
-                                            {% if item.collection %}
-                                                <span class="badge bg-light text-secondary border align-self-start mb-2">{% trans "Kategori" %}</span>
-                                            {% elif item.code %}
+                                            {% if item.code %}
                                                 <span class="badge bg-info-subtle text-info border border-info-subtle align-self-start mb-2">{% trans "Varyant" %}</span>
+                                            {% elif item.meta_description %}
+                                                {% if item.collection == 'announcement' %}
+                                                    <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle align-self-start mb-2">{% trans "Duyuru" %}</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle align-self-start mb-2">{% trans "Paylaşım" %}</span>
+                                                {% endif %}
+                                            {% elif item.collection %}
+                                                <span class="badge bg-light text-secondary border align-self-start mb-2">{% trans "Kategori" %}</span>
                                             {% else %}
                                                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle align-self-start mb-2">{% trans "Ürün" %}</span>
                                             {% endif %}
-                                            {% if item.description %}
+                                            {% if item.meta_description %}
+                                                <p class="card-text text-muted x-small mb-0 multi-line-truncate-2">
+                                                    {{ item.meta_description|striptags|truncatewords:12 }}
+                                                </p>
+                                            {% elif item.description %}
                                                 <p class="card-text text-muted x-small mb-0 multi-line-truncate-2">
                                                     {{ item.description|striptags|truncatewords:12 }}
                                                 </p>

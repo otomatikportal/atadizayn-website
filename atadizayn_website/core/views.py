@@ -2,10 +2,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
 from django.utils import timezone
-from django.views.generic import DetailView
 
 from atadizayn_website.blog.models import BlogPost
-from atadizayn_website.core.models import BrandCarouselImage, Policy
+from atadizayn_website.core.models import BrandCarouselImage
 from atadizayn_website.products.models import Category, Product, ProductVariant
 
 
@@ -56,7 +55,22 @@ def global_search(request):
             .prefetch_related("product__images")
         )
 
-        results = list(categories) + list(products) + list(variants)
+        blog_posts = BlogPost.objects.filter(
+            Q(title__icontains=query)
+            | Q(title_en__icontains=query)
+            | Q(title_tr__icontains=query)
+            | Q(meta_description__icontains=query)
+            | Q(meta_description_en__icontains=query)
+            | Q(meta_description_tr__icontains=query)
+            | Q(content__icontains=query)
+            | Q(content_en__icontains=query)
+            | Q(content_tr__icontains=query),
+            status="published",
+            publish_date__lte=timezone.now(),
+            collection__in=["post", "announcement"],
+        ).distinct()
+
+        results = list(categories) + list(products) + list(variants) + list(blog_posts)
 
     # Pagination
     paginator = Paginator(results, 12)
@@ -80,21 +94,22 @@ def home(request):
 
     # Get brand carousel images
     brands = BrandCarouselImage.objects.filter(is_active=True)
-    latest_blog_posts = BlogPost.objects.filter(status="published", publish_date__lte=timezone.now()).order_by("-publish_date")[:2]
+    latest_blog_post = BlogPost.objects.filter(
+        status="published",
+        publish_date__lte=timezone.now(),
+        collection="post",
+    ).order_by("-publish_date").first()
+    latest_announcement_post = BlogPost.objects.filter(
+        status="published",
+        publish_date__lte=timezone.now(),
+        collection="announcement",
+    ).order_by("-publish_date").first()
 
     context = {
         "categories": categories,
         "carousel_categories": carousel_categories,
         "brands": brands,
-        "latest_blog_posts": latest_blog_posts,
+        "latest_blog_post": latest_blog_post,
+        "latest_announcement_post": latest_announcement_post,
     }
     return render(request, "home.html", context)
-
-
-class PolicyDetailView(DetailView):
-    model = Policy
-    template_name = "core/policy_detail.html"
-    context_object_name = "policy"
-
-    def get_queryset(self):
-        return Policy.objects.filter(is_active=True)

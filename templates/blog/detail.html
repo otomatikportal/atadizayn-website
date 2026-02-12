@@ -75,12 +75,21 @@
 {% endblock head_extra %}
 
 {% block content %}
-  <nav aria-label="breadcrumb" class="mb-4">
-    <a href="{% url 'blog-index' %}" class="text-decoration-none d-inline-flex align-items-center">
-      <i class="bi bi-arrow-left me-2"></i>
-      {% trans "Geri dön" %}: {% trans "Blog" %}
-    </a>
-  </nav>
+  {% if post.collection != "corporate" and post.collection != "policy" %}
+    <nav aria-label="breadcrumb" class="mb-4">
+      {% if post.collection == "announcement" %}
+        <a href="{% url 'blog-announcements' %}" class="text-decoration-none d-inline-flex align-items-center">
+          <i class="bi bi-arrow-left me-2"></i>
+          {% trans "Geri dön" %}: {% trans "Duyurular" %}
+        </a>
+      {% else %}
+        <a href="{% url 'blog-index' %}" class="text-decoration-none d-inline-flex align-items-center">
+          <i class="bi bi-arrow-left me-2"></i>
+          {% trans "Geri dön" %}: {% trans "Blog" %}
+        </a>
+      {% endif %}
+    </nav>
+  {% endif %}
 
   <article class="pb-4 pb-md-5">
     <header class="mb-4">

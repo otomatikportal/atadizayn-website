@@ -2,21 +2,13 @@ from django.contrib import admin
 from django.utils.html import format_html, format_html_join
 from modeltranslation.admin import TranslationAdmin
 
-from .models import BrandCarouselImage, Policy, SiteAsset, SiteConfiguration
+from .models import BrandCarouselImage, SiteAsset, SiteConfiguration
 
 
 @admin.register(SiteConfiguration)
 class SiteConfigurationAdmin(TranslationAdmin):
     list_display = ("key", "value", "description")
     search_fields = ("key", "value", "description")
-
-
-@admin.register(Policy)
-class PolicyAdmin(TranslationAdmin):
-    list_display = ("name", "slug", "order", "is_active", "updated_at")
-    prepopulated_fields = {"slug": ("name",)}
-    list_editable = ("order", "is_active", "updated_at")
-    search_fields = ("name", "slug")
 
 
 @admin.register(SiteAsset)

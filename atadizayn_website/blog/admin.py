@@ -8,8 +8,8 @@ from .models import BlogPost
 
 @admin.register(BlogPost)
 class BlogPostAdmin(TranslationAdmin):
-    list_display = ("status", "title", "publish_date", "cover_preview")
-    list_filter = ("status", "publish_date", "created_at")
+    list_display = ("status", "collection", "title", "publish_date", "cover_preview")
+    list_filter = ("status", "collection", "publish_date", "created_at")
     search_fields = ("title", "meta_description", "content")
     readonly_fields = ("created_at", "updated_at")
     radio_fields = {"status": admin.HORIZONTAL}
@@ -21,7 +21,7 @@ class BlogPostAdmin(TranslationAdmin):
 
     fieldsets = (
         (_("Yayın Durumu"), {
-            "fields": ("status", "publish_date"),
+            "fields": ("status", "collection", "publish_date"),
             "classes": ("wide",),
         }),
         (_("Temel Bilgiler & SEO"), {

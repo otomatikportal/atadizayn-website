@@ -59,7 +59,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "atadizayn_website.products.context_processors.footer_categories",
-                "atadizayn_website.core.context_processors.active_policies",
+                "atadizayn_website.core.context_processors.footer_blog_collections",
                 "atadizayn_website.core.context_processors.canonical_url",
             ],
         },

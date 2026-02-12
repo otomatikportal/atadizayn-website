@@ -1,8 +1,5 @@
 from django.db import models
-from django.utils import timezone
-from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
-from django_ckeditor_5.fields import CKEditor5Field
 
 
 class BrandCarouselImage(models.Model):
@@ -38,40 +35,6 @@ class SiteAsset(models.Model):
 
     def __str__(self):
         return self.key
-
-
-class Policy(models.Model):
-    """Model for legal policies (e.g., Privacy Policy, Terms of Service)"""
-
-    name = models.CharField(max_length=255, help_text="Policy name (e.g., 'Gizlilik Politikası')")
-    slug = models.SlugField(max_length=255, unique=True, help_text="URL friendly name (e.g., 'gizlilik-politikasi')")
-    content = CKEditor5Field(blank=True, help_text="The full text of the policy")
-    is_active = models.BooleanField(default=True, help_text="Show/hide this policy in the footer")
-    order = models.PositiveIntegerField(default=0, help_text="Order of appearance in the footer")
-    updated_at = models.DateField(default=timezone.localdate, help_text="Last modified date (editable, defaults to today)")
-
-    class Meta:
-        verbose_name = _("Politika")
-        verbose_name_plural = _("Politikalar")
-        ordering = ["order", "name"]
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        for field_name in ("content", "content_en", "content_tr"):
-            if not hasattr(self, field_name):
-                continue
-            field_value = getattr(self, field_name, "") or ""
-            if not self._has_visible_text(field_value):
-                setattr(self, field_name, "")
-
-        super().save(*args, **kwargs)
-
-    @staticmethod
-    def _has_visible_text(value: str) -> bool:
-        plain_value = strip_tags(value or "").replace("\xa0", " ").strip()
-        return bool(plain_value)
 
 
 class SiteConfiguration(models.Model):

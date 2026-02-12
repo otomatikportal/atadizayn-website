@@ -20,7 +20,7 @@ msgstr ""
 
 #: .\atadizayn_website\products\models.py:13
 msgid "Standlar"
-msgstr ""
+msgstr "Stands"
 
 #: .\atadizayn_website\products\models.py:14
 msgid "Parçalar"
@@ -33,7 +33,7 @@ msgstr "Name"
 
 #: .\atadizayn_website\products\models.py:25
 msgid "Slug (url uç kısmı)"
-msgstr ""
+msgstr "Slug (URL suffix)"
 
 #: .\atadizayn_website\products\models.py:30
 msgid "Koleksiyon"
@@ -83,16 +83,16 @@ msgstr "Categories"
 #: .\atadizayn_website\products\models.py:82
 #: .\atadizayn_website\products\models.py:133
 msgid "İngilizce ad zorunludur."
-msgstr ""
+msgstr "English name is required."
 
 #: .\atadizayn_website\products\models.py:87
 #: .\atadizayn_website\products\models.py:138
 msgid "Türkçe ad zorunludur."
-msgstr ""
+msgstr "Turkish name is required."
 
 #: .\atadizayn_website\products\models.py:105
 msgid "Slug"
-msgstr ""
+msgstr "Slug"
 
 #: .\atadizayn_website\products\models.py:125
 #: .\atadizayn_website\products\models.py:251
@@ -110,70 +110,70 @@ msgstr "Products"
 #: .\atadizayn_website\products\models.py:169
 #: .\atadizayn_website\products\models.py:255
 msgid "Görsel"
-msgstr ""
+msgstr "Image"
 
 #: .\atadizayn_website\products\models.py:174
 #: .\atadizayn_website\products\models.py:260
 msgid "Alternatif metin"
-msgstr ""
+msgstr "Alternative text"
 
 #: .\atadizayn_website\products\models.py:178
 #: .\atadizayn_website\products\models.py:264
 msgid "Birincil"
-msgstr ""
+msgstr "Primary"
 
 #: .\atadizayn_website\products\models.py:182
 #: .\atadizayn_website\products\models.py:212
 #: .\atadizayn_website\products\models.py:268
 #: .\atadizayn_website\products\models.py:298
 msgid "Sıralama"
-msgstr ""
+msgstr "Sort order"
 
 #: .\atadizayn_website\products\models.py:187
 msgid "Kategori görseli"
-msgstr ""
+msgstr "Category image"
 
 #: .\atadizayn_website\products\models.py:188
 msgid "Kategori görselleri"
-msgstr ""
+msgstr "Category images"
 
 #: .\atadizayn_website\products\models.py:204
 #: .\atadizayn_website\products\models.py:290
 msgid "Başlık"
-msgstr ""
+msgstr "Title"
 
 #: .\atadizayn_website\products\models.py:208
 #: .\atadizayn_website\products\models.py:294
 msgid "Dosya"
-msgstr ""
+msgstr "File"
 
 #: .\atadizayn_website\products\models.py:217
 msgid "Kategori dokümanı"
-msgstr ""
+msgstr "Category document"
 
 #: .\atadizayn_website\products\models.py:218
 msgid "Kategori dokümanları"
-msgstr ""
+msgstr "Category documents"
 
 #: .\atadizayn_website\products\models.py:273
 msgid "Ürün görseli"
-msgstr ""
+msgstr "Product image"
 
 #: .\atadizayn_website\products\models.py:274
 msgid "Ürün görselleri"
-msgstr ""
+msgstr "Product images"
 
 #: .\atadizayn_website\products\models.py:303
 msgid "Ürün dokümanı"
-msgstr ""
+msgstr "Product document"
 
 #: .\atadizayn_website\products\models.py:304
 msgid "Ürün dokümanları"
-msgstr ""
+msgstr "Product documents"
 
 #: .\atadizayn_website\products\models.py:342
 msgid "Kod (SKU)"
-msgstr ""
+msgstr "Code (SKU)"
 
 #: .\atadizayn_website\products\models.py:347
 #: .\templates\products\product_detail.html:138
@@ -182,27 +182,27 @@ msgstr "Size"
 
 #: .\atadizayn_website\products\models.py:352
 msgid "Paket ağırlığı"
-msgstr ""
+msgstr "Package weight"
 
 #: .\atadizayn_website\products\models.py:357
 msgid "Paket ölçüsü"
-msgstr ""
+msgstr "Package size"
 
 #: .\atadizayn_website\products\models.py:362
 msgid "Paket içi adet"
-msgstr ""
+msgstr "Quantity per pack"
 
 #: .\atadizayn_website\products\models.py:367
 msgid "Minimum sipariş"
-msgstr ""
+msgstr "Minimum order"
 
 #: .\atadizayn_website\products\models.py:371
 msgid "Ürün Varyantı"
-msgstr ""
+msgstr "Product Variant"
 
 #: .\atadizayn_website\products\models.py:372
 msgid "Ürün Varyantları"
-msgstr ""
+msgstr "Product Variants"
 
 #: .\templates\core\search_results.html:15
 msgid "Ürün, kategori veya kod ara..."

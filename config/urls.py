@@ -24,12 +24,11 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 
 from atadizayn_website.blog.sitemaps import BlogPostSitemap
-from atadizayn_website.core.sitemaps import PolicySitemap, StaticViewSitemap
+from atadizayn_website.core.sitemaps import StaticViewSitemap
 from atadizayn_website.products.sitemaps import CategorySitemap, ProductSitemap
 
 sitemaps = {
     "static": StaticViewSitemap,
-    "policies": PolicySitemap,
     "categories": CategorySitemap,
     "products": ProductSitemap,
     "blog": BlogPostSitemap,
