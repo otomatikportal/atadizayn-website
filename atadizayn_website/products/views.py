@@ -1,6 +1,8 @@
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 
+from atadizayn_website.core.slug_utils import build_active_language_slug_lookup_q
+
 from .models import Category, Product
 
 
@@ -23,7 +25,7 @@ def stand_index(request):
 
 
 def category_detail(request, category_slug: str):
-    category = get_object_or_404(Category, slug=category_slug)
+    category = get_object_or_404(Category, build_active_language_slug_lookup_q(category_slug))
     products = category.products.all()
     other_categories = Category.objects.exclude(pk=category.pk).order_by("name")[:6]
 
@@ -37,8 +39,8 @@ def category_detail(request, category_slug: str):
 
 
 def product_detail(request, category_slug: str, product_code: str):
-    category = get_object_or_404(Category, slug=category_slug)
-    product = get_object_or_404(Product, category=category, slug=product_code)
+    category = get_object_or_404(Category, build_active_language_slug_lookup_q(category_slug))
+    product = get_object_or_404(Product, build_active_language_slug_lookup_q(product_code), category=category)
 
     context = {
         "category": category,

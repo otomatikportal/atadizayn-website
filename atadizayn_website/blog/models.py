@@ -1,39 +1,18 @@
-from django.conf import settings
+from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Q
 from django.urls import reverse
+from django.utils.html import strip_tags
 from django.utils import timezone
-from django.utils.text import slugify
-from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
-
-def _build_unique_slug(instance, field_name: str, source_text: str) -> str:
-    base_slug = slugify(source_text or "", allow_unicode=False)
-    if not base_slug:
-        return ""
-
-    candidate = base_slug
-    suffix = 2
-    queryset = type(instance).objects.all()
-    if instance.pk:
-        queryset = queryset.exclude(pk=instance.pk)
-
-    while queryset.filter(**{field_name: candidate}).exists():
-        candidate = f"{base_slug}-{suffix}"
-        suffix += 1
-    return candidate
-
-
-def _get_lang_code() -> str:
-    return (get_language() or settings.LANGUAGE_CODE).split("-")[0]
-
-
-def _get_default_lang_code() -> str:
-    default_lang = getattr(settings, "MODELTRANSLATION_DEFAULT_LANGUAGE", settings.LANGUAGE_CODE)
-    return (default_lang or settings.LANGUAGE_CODE).split("-")[0]
+from atadizayn_website.core.slug_utils import (
+    build_slug_lookup_q,
+    build_unique_slug,
+    get_default_lang_code,
+    get_translated_slug,
+)
 
 
 class BlogPost(models.Model):
@@ -48,21 +27,25 @@ class BlogPost(models.Model):
         verbose_name=_("Sayfa Başlığı"),
         help_text=_("Sayfanın H1 başlığı ve tarayıcı sekmesinde görünen isim.")
     )
-    slug = models.SlugField(
+    slug = AutoSlugField(
+        populate_from="title",
         max_length=255,
         unique=True,
         blank=True,
+        editable=True,
         verbose_name=_("Slug"),
-        help_text=_("Lütfen gerek görülmediği sürece değiştirmeyiniz! SEO performansını düşürür!"),
+        help_text=_("Lütfen gerekmedikçe değiştirmeyin."),
     )
     # Merged logic: This serves as both the SEO description and the short summary
     meta_description = models.TextField(
         max_length=160,
+        blank=True,
         verbose_name=_("Meta / Kısa Açıklama"),
         help_text=_("Girilmediyse içerikten çekilir, daha güçlü SEO için giriniz ancak zorunlu değildir."),
     )
     content = CKEditor5Field(
         verbose_name=_("Sayfa İçeriği"),
+        blank=True,
         config_name='page_design',
     )
 
@@ -108,20 +91,17 @@ class BlogPost(models.Model):
         if self.cover_image and not self.cover_image_alt:
             self.cover_image_alt = self.title
 
+        if not (self.meta_description or "").strip():
+            plain_content = strip_tags(self.content or "").strip()
+            if plain_content:
+                self.meta_description = plain_content[:160]
+
         self._assign_missing_slugs()
 
         super().save(*args, **kwargs)
 
     def get_absolute_url(self) -> str:
-        lang_code = _get_lang_code()
-        default_lang = _get_default_lang_code()
-
-        current_slug = (
-            (getattr(self, f"slug_{lang_code}", "") or "").strip()
-            or (getattr(self, f"slug_{default_lang}", "") or "").strip()
-            or self.slug
-        )
-
+        current_slug = get_translated_slug(self)
         return reverse("blog-detail", kwargs={"slug": current_slug})
 
     def clean(self):
@@ -133,6 +113,16 @@ class BlogPost(models.Model):
         turkish_title = (getattr(self, "title_tr", None) or "").strip()
         if not turkish_title:
             raise ValidationError({"title_tr": _("Türkçe başlık zorunludur.")})
+
+        description_value = (self.meta_description or "").strip()
+        content_value = strip_tags(self.content or "").strip()
+        if not description_value and not content_value:
+            raise ValidationError(
+                {
+                    "meta_description": _("Açıklama veya içerik alanlarından en az biri doldurulmalıdır."),
+                    "content": _("Açıklama veya içerik alanlarından en az biri doldurulmalıdır."),
+                }
+            )
 
         slug_values = {
             "slug": (self.slug or "").strip(),
@@ -147,7 +137,7 @@ class BlogPost(models.Model):
         for field_name, slug_value in slug_values.items():
             if not slug_value:
                 continue
-            if queryset.filter(Q(slug=slug_value) | Q(slug_en=slug_value) | Q(slug_tr=slug_value)).exists():
+            if queryset.filter(build_slug_lookup_q(slug_value)).exists():
                 errors[field_name] = _("Bu slug başka bir blog yazısında kullanılıyor.")
 
         if errors:
@@ -161,9 +151,9 @@ class BlogPost(models.Model):
 
             slug_field = f"slug_{lang_code}"
             if not (getattr(self, slug_field, "") or "").strip():
-                setattr(self, slug_field, _build_unique_slug(self, slug_field, title_value))
+                setattr(self, slug_field, build_unique_slug(self, slug_field, title_value))
 
         if not (self.slug or "").strip():
-            default_slug = (getattr(self, f"slug_{_get_default_lang_code()}", "") or "").strip()
+            default_slug = (getattr(self, f"slug_{get_default_lang_code()}", "") or "").strip()
             if default_slug:
                 self.slug = default_slug

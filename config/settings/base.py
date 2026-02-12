@@ -92,8 +92,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "tr"
 
 LANGUAGES = [
-    ("en", "English"),
     ("tr", "Türkçe"),
+    ("en", "English"),
 ]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "tr"

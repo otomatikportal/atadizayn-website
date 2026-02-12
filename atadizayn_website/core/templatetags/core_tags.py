@@ -5,6 +5,8 @@ from django.urls import reverse, translate_url
 from django.utils.safestring import mark_safe
 from django.utils.translation import override
 
+from atadizayn_website.core.slug_utils import get_translated_slug
+
 from ..models import SiteAsset, SiteConfiguration
 
 register = template.Library()
@@ -26,9 +28,9 @@ def get_language_switch_url(context, language_code):
             category = getattr(product, "category", None)
 
         if product is not None and category is not None:
-            category_slug = (getattr(category, f"slug_{language_code}", "") or "").strip() or category.slug
-            product_slug = (getattr(product, f"slug_{language_code}", "") or "").strip() or product.slug
             with override(language_code):
+                category_slug = get_translated_slug(category)
+                product_slug = get_translated_slug(product)
                 return reverse(
                     "product-detail",
                     kwargs={
@@ -40,9 +42,16 @@ def get_language_switch_url(context, language_code):
     if url_name == "category-detail":
         category = context.get("category")
         if category is not None:
-            category_slug = (getattr(category, f"slug_{language_code}", "") or "").strip() or category.slug
             with override(language_code):
+                category_slug = get_translated_slug(category)
                 return reverse("category-detail", kwargs={"category_slug": category_slug})
+
+    if url_name == "blog-detail":
+        post = context.get("post") or context.get("object")
+        if post is not None:
+            with override(language_code):
+                post_slug = get_translated_slug(post)
+                return reverse("blog-detail", kwargs={"slug": post_slug})
 
     return translate_url(request.get_full_path(), language_code)
 

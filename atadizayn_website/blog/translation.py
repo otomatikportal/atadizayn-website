@@ -6,8 +6,8 @@ from .models import BlogPost
 @register(BlogPost)
 class BlogPostTranslationOptions(TranslationOptions):
     required_languages = {
-        "en": ("title",),
         "tr": ("title",),
+        "en": ("title",),
     }
     fields = (
         "title",

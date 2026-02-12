@@ -24,6 +24,7 @@ dependencies = [
     "django-ckeditor-5>=0.2.19",
     "django-image-cropping",
     "easy-thumbnails",
+    "django-autoslug"
 ]
 
 [project.optional-dependencies]

@@ -6,8 +6,8 @@ from .models import Category, Product, ProductVariant
 @register(Category)
 class CategoryTranslationOptions(TranslationOptions):
     required_languages = {
-        "en": ("name",),
         "tr": ("name",),
+        "en": ("name",),
     }
     fields = (
         "name",
@@ -20,8 +20,8 @@ class CategoryTranslationOptions(TranslationOptions):
 @register(Product)
 class ProductTranslationOptions(TranslationOptions):
     required_languages = {
-        "en": ("name",),
         "tr": ("name",),
+        "en": ("name",),
     }
     fields = (
         "name",
@@ -33,5 +33,5 @@ class ProductTranslationOptions(TranslationOptions):
 
 @register(ProductVariant)
 class ProductVariantTranslationOptions(TranslationOptions):
-    required_languages = ("en", "tr")
+    required_languages = ("tr", "en")
     fields = ("size",)  # Translate size (Small/Küçük)
