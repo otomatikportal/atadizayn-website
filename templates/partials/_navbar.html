@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static core_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_language_info_list for LANGUAGES as languages %}
@@ -61,10 +61,11 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end p-2 border-0 shadow-lg mt-2" style="min-width: 12rem;">
             {% for language in languages %}
+              {% get_language_switch_url language.code as switch_url %}
               <li>
                 <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center justify-content-between gap-2">
                   {% csrf_token %}
-                  <input name="next" type="hidden" value="{{ request.path }}">
+                  <input name="next" type="hidden" value="{{ switch_url }}">
                   <input name="language" type="hidden" value="{{ language.code }}">
                   <button type="submit" class="dropdown-item d-flex justify-content-between align-items-center{% if language.code == LANGUAGE_CODE %} active{% endif %}">
                     <span>{{ language.name_local }}</span>

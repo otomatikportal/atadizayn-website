@@ -41,7 +41,7 @@ class CategoryDocumentInline(admin.TabularInline):
 class CategoryAdmin(TranslationAdmin):
     list_display = ["name", "collection", "publish_date"]
     exclude = ["seo_canonical"]
-    prepopulated_fields = {"slug": ("name",)}
+    readonly_fields = ("slug", "slug_en", "slug_tr")
     inlines = [CategoryImageInline, CategoryDocumentInline]
 
     class Media:
@@ -93,7 +93,7 @@ class ProductDocumentInline(admin.TabularInline):
 class ProductAdmin(TranslationAdmin):
     # 'code' is removed from list_display because it is now in the Variant
     list_display = ["name", "category", "get_variants_count", "publish_date"]
-    prepopulated_fields = {"slug": ("name",)}
+    readonly_fields = ("slug", "slug_en", "slug_tr")
 
     # Combined inlines: Variant + Images + Documents
     inlines = [ProductVariantInline, ProductImageInline, ProductDocumentInline]

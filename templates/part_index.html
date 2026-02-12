@@ -2,11 +2,7 @@
 {% load i18n static core_tags %}
 
 {% block page_title %}
-    {% if collection_type == 'stand' %}
-        {% trans "POS Stand Çözümleri" %}
-    {% else %}
-        {% trans "Bağlantı ve Mağaza Ekipmanları" %}
-    {% endif %}
+    {% trans "Bağlantı ve Mağaza Ekipmanları" %}
     | Ata Dizayn
 {% endblock page_title %}
 
@@ -17,40 +13,24 @@
     {# Desktop Banner (16:9) #}
     <div class="d-none d-lg-block position-relative w-100">
         <div style="padding-top: 40%;" class="position-relative">
-             {% if collection_type == 'stand' %}
-                <img src="{% asset_url 'stand_index_banner_desktop' %}" alt="{% trans 'POS Stand Çözümleri' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
-             {% else %}
                 <img src="{% asset_url 'part_index_banner_desktop' %}" alt="{% trans 'Bağlantı ve Mağaza Ekipmanları' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
-             {% endif %}
         </div>
     </div>
 
     {# Mobile Banner (1:1) #}
     <div class="d-lg-none position-relative w-100">
          <div style="padding-top: 100%;" class="position-relative">
-             {% if collection_type == 'stand' %}
-                <img src="{% asset_url 'stand_index_banner_mobile' %}" alt="{% trans 'POS Stand Çözümleri' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
-             {% else %}
                 <img src="{% asset_url 'part_index_banner_mobile' %}" alt="{% trans 'Bağlantı ve Mağaza Ekipmanları' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
-             {% endif %}
          </div>
     </div>
     
     {# Overlay Content #}
     <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white z-1 px-3">
         <h1 class="display-4 fw-bold mb-2 text-shadow">
-            {% if collection_type == 'stand' %}
-                {% trans "POS Stand Çözümleri" %}
-            {% else %}
-                {% trans "Bağlantı ve Mağaza Ekipmanları" %}
-            {% endif %}
+            {% trans "Bağlantı ve Mağaza Ekipmanları" %}
         </h1>
         <p class="lead w-75 mx-auto text-shadow d-none d-md-block">
-            {% if collection_type == 'stand' %}
-                {% trans "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları." %}
-            {% else %}
-                {% trans "Endüstriyel bağlantı çözümleri, mağaza ekipmanları ve geniş ürün yelpazemiz." %}
-            {% endif %}
+            {% trans "Endüstriyel bağlantı çözümleri, mağaza ekipmanları ve geniş ürün yelpazemiz." %}
         </p>
     </div>
 </div>

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block page_title %}{{ product.name }} - {{ category.name }} - Atadizayn{% endblock page_title %}
+{% block page_title %}{{ product.name }} - {{ category.name }} - {{ category.collection }} | Ata Dizayn{% endblock page_title %}
 {% block page_description %}{{ product.description|striptags|truncatechars:160 }}{% endblock page_description %}
 
 {% block head_extra %}

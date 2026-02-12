@@ -1,9 +1,8 @@
 from django.apps import AppConfig
+from django.utils.translation import gettext_lazy as _
 
 
 class ProductsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "atadizayn_website.products"
-
-    def ready(self):
-        from . import translation  # noqa: F401
+    verbose_name = _("Ürün yönetimi")

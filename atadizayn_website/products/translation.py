@@ -1,13 +1,17 @@
 from modeltranslation.translator import TranslationOptions, register
+
 from .models import Category, Product, ProductVariant
 
 
 @register(Category)
 class CategoryTranslationOptions(TranslationOptions):
-    # This enforces validation in the Admin panel and Forms
-    required_languages = ("en", "tr")
+    required_languages = {
+        "en": ("name",),
+        "tr": ("name",),
+    }
     fields = (
         "name",
+        "slug",
         "description",
         "rich_text",
     )
@@ -15,10 +19,13 @@ class CategoryTranslationOptions(TranslationOptions):
 
 @register(Product)
 class ProductTranslationOptions(TranslationOptions):
-    # This enforces validation in the Admin panel and Forms
-    required_languages = ("en", "tr")
+    required_languages = {
+        "en": ("name",),
+        "tr": ("name",),
+    }
     fields = (
         "name",
+        "slug",
         "description",
         "rich_text",
     )

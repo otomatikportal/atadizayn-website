@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "django_ckeditor_5",
     "atadizayn_website.products",
     "atadizayn_website.core",
+    "atadizayn_website.blog",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "django.contrib.sitemaps",
     "django.contrib.postgres",
     # "cookie_consent",
 ]
@@ -58,6 +60,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "atadizayn_website.products.context_processors.footer_categories",
                 "atadizayn_website.core.context_processors.active_policies",
+                "atadizayn_website.core.context_processors.canonical_url",
             ],
         },
     },
@@ -94,6 +97,18 @@ LANGUAGES = [
 ]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "tr"
+
+RESERVED_CATEGORY_SLUGS = [
+    "blog",
+    "admin",
+    "search",
+    "politikalar",
+    "i18n",
+    "ckeditor5",
+    "kitchen_sink",
+    "injection-products",
+    "pos-display-stands",
+]
 
 TIME_ZONE = env("TIME_ZONE")
 
@@ -194,5 +209,49 @@ CKEDITOR_5_CONFIGS = {
                 {"model": "heading3", "view": "h3", "title": "Heading 3", "class": "ck-heading_heading3"},
             ]
         },
+    },
+    "page_design": {
+        # A robust toolbar for layout and design
+        "toolbar": [
+            "heading", "|",
+            "fontFamily", "fontSize", "fontColor", "fontBackgroundColor", "|",
+            "bold", "italic", "underline", "strikethrough", "subscript", "superscript", "removeFormat", "|",
+            "alignment", "|",  # Crucial for design (Left, Center, Right, Justify)
+            "bulletedList", "numberedList", "todoList", "outdent", "indent", "|",
+            "link", "blockQuote", "insertTable", "imageUpload", "mediaEmbed", "horizontalLine", "|",
+            "sourceEditing", "|", # Allows editing raw HTML for fine-tuning
+            "undo", "redo"
+        ],
+        "heading": {
+            "options": [
+                {"model": "paragraph", "title": "Paragraph", "class": "ck-heading_paragraph"},
+                {"model": "heading2", "view": "h2", "title": "Heading 2", "class": "ck-heading_heading2"},
+                {"model": "heading3", "view": "h3", "title": "Heading 3", "class": "ck-heading_heading3"},
+                {"model": "heading4", "view": "h4", "title": "Heading 4", "class": "ck-heading_heading4"},
+                {"model": "heading5", "view": "h5", "title": "Heading 5", "class": "ck-heading_heading5"},
+                {"model": "heading6", "view": "h6", "title": "Heading 6", "class": "ck-heading_heading6"},
+            ]
+        },
+        "image": {
+            "toolbar": [
+                "imageTextAlternative", "toggleImageCaption",
+                "imageStyle:inline", "imageStyle:block", "imageStyle:side",
+                "linkImage" # Allows clicking image to go to a URL
+            ]
+        },
+        "table": {
+            "contentToolbar": [
+                "tableColumn", "tableRow", "mergeTableCells",
+                "tableProperties", "tableCellProperties"
+            ]
+        },
+        # Allow defining custom styles (e.g., for div wrappers) if needed
+        "htmlSupport": {
+            "allow": [
+                {"name": "/^.*$/", "styles": True, "attributes": True, "classes": True}
+            ]
+        }
     }
 }
+
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"

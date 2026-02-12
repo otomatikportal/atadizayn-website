@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+  {{ post.title }}
+{% endblock page_title %}
+
+{% block page_description %}
+  {% if post.meta_description %}
+    {{ post.meta_description|striptags|truncatechars:160 }}
+  {% else %}
+    {{ post.content|striptags|truncatechars:160 }}
+  {% endif %}
+{% endblock page_description %}
+
+{% block content %}
+  <article class="py-4 py-md-5">
+    <header class="mb-4">
+      <h1 class="mb-3">{{ post.title }}</h1>
+
+      {% if post.cover_image %}
+        <img src="{{ post.cover_image.url }}"
+             alt="{{ post.cover_image_alt|default:post.title }}"
+             class="img-fluid rounded w-100 mb-3">
+      {% endif %}
+
+      <p class="text-muted mb-0">
+        <small>{% trans "Yayın Tarihi" %}: {{ post.publish_date|date:"d.m.Y" }}</small>
+      </p>
+    </header>
+
+    <hr class="my-4">
+
+    <section>
+      {{ post.content|safe }}
+    </section>
+  </article>
+{% endblock content %}

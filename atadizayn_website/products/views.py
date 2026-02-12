@@ -1,7 +1,7 @@
-from django.core.paginator import Paginator
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
-from django.db.models import Count, Q
-from .models import Category, Product, ProductVariant
+
+from .models import Category, Product
 
 
 def part_index(request):
@@ -9,7 +9,6 @@ def part_index(request):
     categories = Category.objects.filter(collection="part").annotate(items_count=Count("products__variants"))
     context = {
         "categories": categories,
-        "collection_type": "part",
     }
     return render(request, "part_index.html", context)
 
@@ -19,10 +18,8 @@ def stand_index(request):
     categories = Category.objects.filter(collection="stand").annotate(items_count=Count("products__variants"))
     context = {
         "categories": categories,
-        "collection_type": "stand",
     }
-    # Reusing the same template as it is generic enough now
-    return render(request, "part_index.html", context)
+    return render(request, "stand_index.html", context)
 
 
 def category_detail(request, category_slug: str):
@@ -34,7 +31,7 @@ def category_detail(request, category_slug: str):
         "category": category,
         "products": products,
         "other_categories": other_categories,
-        "canonical_url": category.seo_canonical,
+        "canonical_url": request.build_absolute_uri(category.get_absolute_url()),
     }
     return render(request, "products/category_detail.html", context)
 
@@ -46,6 +43,6 @@ def product_detail(request, category_slug: str, product_code: str):
     context = {
         "category": category,
         "product": product,
-        "canonical_url": product.get_absolute_url(),
+        "canonical_url": request.build_absolute_uri(product.get_absolute_url()),
     }
     return render(request, "products/product_detail.html", context)

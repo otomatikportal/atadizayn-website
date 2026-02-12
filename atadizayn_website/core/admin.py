@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.utils.html import format_html, format_html_join
-from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TranslationAdmin
-from .models import BrandCarouselImage, SiteAsset, Policy, SiteConfiguration
+
+from .models import BrandCarouselImage, Policy, SiteAsset, SiteConfiguration
 
 
 @admin.register(SiteConfiguration)

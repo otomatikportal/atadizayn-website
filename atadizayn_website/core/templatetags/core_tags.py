@@ -1,9 +1,50 @@
-from django import template
-from django.utils.safestring import mark_safe
-from ..models import SiteAsset, SiteConfiguration
 import os
 
+from django import template
+from django.urls import reverse, translate_url
+from django.utils.safestring import mark_safe
+from django.utils.translation import override
+
+from ..models import SiteAsset, SiteConfiguration
+
 register = template.Library()
+
+
+@register.simple_tag(takes_context=True)
+def get_language_switch_url(context, language_code):
+    request = context.get("request")
+    if request is None:
+        return "/"
+
+    resolver_match = getattr(request, "resolver_match", None)
+    url_name = getattr(resolver_match, "url_name", None)
+
+    if url_name == "product-detail":
+        product = context.get("product")
+        category = context.get("category")
+        if product is not None and category is None:
+            category = getattr(product, "category", None)
+
+        if product is not None and category is not None:
+            category_slug = (getattr(category, f"slug_{language_code}", "") or "").strip() or category.slug
+            product_slug = (getattr(product, f"slug_{language_code}", "") or "").strip() or product.slug
+            with override(language_code):
+                return reverse(
+                    "product-detail",
+                    kwargs={
+                        "category_slug": category_slug,
+                        "product_code": product_slug,
+                    },
+                )
+
+    if url_name == "category-detail":
+        category = context.get("category")
+        if category is not None:
+            category_slug = (getattr(category, f"slug_{language_code}", "") or "").strip() or category.slug
+            with override(language_code):
+                return reverse("category-detail", kwargs={"category_slug": category_slug})
+
+    return translate_url(request.get_full_path(), language_code)
 
 
 @register.simple_tag
