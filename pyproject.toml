@@ -37,7 +37,7 @@ dev = [
 profile = "django"
 max_line_length = 120
 indent = 4
-ignore = "H021,H006"
+ignore = "H006"
 
 # --- Ruff Configuration ---
 [tool.ruff]

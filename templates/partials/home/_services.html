@@ -1,0 +1,135 @@
+{% load i18n static %}
+<style>
+    .service-icon {
+        width: 55px;
+        height: 55px;
+        flex-shrink: 0;
+    }
+    .service-icon-svg {
+        width: 32px;
+        height: 32px;
+        background-color: currentColor;
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        -webkit-mask-position: center;
+        display: inline-block;
+    }
+    .icon-cad {
+        mask-image: url('{% static "svg/cad_icon.svg" %}');
+        -webkit-mask-image: url('{% static "svg/cad_icon.svg" %}');
+    }
+    .icon-mold {
+        mask-image: url('{% static "svg/kalip_ikon.svg" %}');
+        -webkit-mask-image: url('{% static "svg/kalip_ikon.svg" %}');
+    }
+    .icon-robot {
+        mask-image: url('{% static "svg/robot_icon.svg" %}');
+        -webkit-mask-image: url('{% static "svg/robot_icon.svg" %}');
+    }
+    .service-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.07) !important;
+        background-color: #fff !important;
+    }
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1) !important;
+        border-color: rgba(13, 202, 240, 0.3) !important; /* lightened info color */
+    }
+    @media (max-width: 768px) {
+        #services p.text-muted {
+            width: 100% !important;
+        }
+    }
+</style>
+{# --- SERVICES SECTION --- #}
+<section class="container my-4 py-4" id="services">
+    <div class="text-center mb-4">
+        <span class="badge text-bg-info text-white rounded-pill px-3 fs-2 py-2 mb-2 shadow-sm">{% trans "Hizmetlerimiz" %}</span>
+        <h2 class="display-5 fw-bold mb-2">{% trans "Değer Katan Çözümler" %}</h2>
+        <p class="text-muted w-75 mx-auto">
+            {% trans "Modern makine parkurumuz ve uzman mühendis kadromuzla, projenizin her aşamasında kalite ve hızı garanti ediyoruz." %}
+        </p>
+    </div>
+    <div class="row g-3">
+        {# Card 1 #}
+        <article class="col-lg-6">
+            <div class="card h-100 service-card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon bg-white text-info shadow-sm rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="service-icon-svg icon-cad"></div>
+                        </div>
+                        <h3 class="h5 fw-bold mb-0">{% trans "Tasarım & Ar-Ge" %}</h3>
+                        <a href="#" class="link ms-auto text-decoration-none">
+                            {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="text-muted mb-0">
+                        {% trans "Fikirlerinizi üretime uygun, optimize edilmiş 3D modellere ve teknik çizimlere dönüştürüyoruz." %}
+                    </p>
+                </div>
+            </div>
+        </article>
+        {# Card 2 #}
+        <article class="col-lg-6">
+            <div class="card h-100 service-card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon bg-white text-info shadow-sm rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="service-icon-svg icon-mold"></div>
+                        </div>
+                        <h3 class="h5 fw-bold mb-0">{% trans "Kalıp Üretimi" %}</h3>
+                        <a href="#" class="link ms-auto text-decoration-none">
+                            {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="text-muted mb-0">
+                        {% trans "Yüksek hassasiyetli CNC parkurumuzda çelik ve alüminyum enjeksiyon kalıplarını işliyoruz." %}
+                    </p>
+                </div>
+            </div>
+        </article>
+        {# Card 3 #}
+        <article class="col-lg-6">
+            <div class="card h-100 service-card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon bg-white text-info shadow-sm rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="service-icon-svg icon-robot"></div>
+                        </div>
+                        <h3 class="h5 fw-bold mb-0">{% trans "Enjeksiyon" %}</h3>
+                        <a href="#" class="link ms-auto text-decoration-none">
+                            {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="text-muted mb-0">
+                        {% trans "Farklı tonajlardaki enjeksiyon hattımız ile seri üretim plastik parça basımı yapıyoruz." %}
+                    </p>
+                </div>
+            </div>
+        </article>
+        {# Card 4 #}
+        <article class="col-lg-6">
+            <div class="card h-100 service-card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon bg-white text-info shadow-sm rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-tools fs-2"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-0">{% trans "Montaj & Lojistik" %}</h3>
+                        <a href="#" class="link ms-auto text-decoration-none">
+                            {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="text-muted mb-0">
+                        {% trans "Üretilen parçaları birleştiriyor, paketliyor ve sevkiyata hazır hale getiriyoruz." %}
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

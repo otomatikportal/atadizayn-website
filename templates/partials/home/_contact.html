@@ -1,0 +1,72 @@
+{% load i18n core_tags %}
+<style>
+    .map-frame {
+        border: 0;
+    }
+</style>
+{# --- CONTACT SECTION --- #}
+<section class="container py-5" id="contact">
+    <div class="text-center mb-5">
+        <span class="badge text-bg-warning text-dark rounded-pill px-3 fs-3 py-2 mb-3 shadow-sm">{% trans "İletişim" %}</span>
+        <h2 class="fw-bold">{% trans "Bize Ulaşın" %}</h2>
+    </div>
+    <div class="row">
+        {# Map Section #}
+        <div class="col-md-6 mb-4 mb-md-0">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center bg-light py-3">
+                    <h3 class="h5 mb-0">{% trans "Neredeyiz?" %}</h3>
+                    <a href="https://www.google.com/maps?q=41.0564005,28.6433119"
+                       target="_blank"
+                       class="btn btn-sm btn-primary">
+                        <i class="bi bi-map me-1"></i> {% trans "Haritada Aç" %}
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.9947434982055!2d28.643311976664364!3d41.05640051645929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa58993faccf3%3A0x620ac778508ba848!2sATA%20Dizayn!5e1!3m2!1str!2str!4v1770885930960!5m2!1str!2str"
+                                class="map-frame"
+                                title="{% trans "Ata Dizayn Konum" %}"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# Contact Info Section #}
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-light py-3">
+                    <h3 class="h5 mb-0">{% trans "İletişim Bilgileri" %}</h3>
+                </div>
+                <div class="card-body d-flex flex-column p-0">
+                    <div class="flex-grow-1 border-bottom px-4 d-flex flex-column justify-content-center py-3">
+                        <h4 class="h6 fw-bold text-primary mb-1">
+                            <i class="bi bi-geo-alt me-2"></i>{% trans "Adres" %}
+                        </h4>
+                        <p class="text-muted mb-0">{% get_config 'address_text' %}</p>
+                    </div>
+                    <div class="flex-grow-1 border-bottom px-4 d-flex flex-column justify-content-center py-3">
+                        <h4 class="h6 fw-bold text-info mb-1">
+                            <i class="bi bi-telephone me-2"></i>{% trans "Telefon" %}
+                        </h4>
+                        <p class="mb-0">
+                            <a href="tel:{% get_config 'company_phone' %}"
+                               class="text-decoration-none text-muted">{% get_config 'company_phone' %}</a>
+                        </p>
+                    </div>
+                    <div class="flex-grow-1 px-4 d-flex flex-column justify-content-center py-3">
+                        <h4 class="h6 fw-bold text-danger mb-1">
+                            <i class="bi bi-envelope me-2"></i>{% trans "E-posta" %}
+                        </h4>
+                        <p class="mb-0">
+                            <a href="mailto:{% get_config 'company_email' %}"
+                               class="text-decoration-none text-muted">{% get_config 'company_email' %}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

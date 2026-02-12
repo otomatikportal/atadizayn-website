@@ -4,15 +4,27 @@
 {% block page_title %}{{ category.name }} - Atadizayn{% endblock page_title %}
 {% block page_description %}{{ category.description }}{% endblock page_description %}
 
+{% block head_extra %}
 <style>
+  .carousel-image {
+    aspect-ratio: 1/1;
+    min-height: 400px;
+  }
   .carousel-control-custom {
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     transition: color 0.2s ease;
   }
   .carousel-control-custom:hover i {
-    color: #0d6efd !important;
+    color: var(--bs-primary) !important;
   }
-  
   .thumbnail-button {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
     transition: all 0.2s ease;
   }
   .thumbnail-button:hover {
@@ -20,10 +32,11 @@
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
   }
   .thumbnail-button.active {
-    border-color: #0d6efd !important;
+    border-color: var(--bs-primary) !important;
     box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.5) !important;
   }
 </style>
+{% endblock head_extra %}
 
 {% block content %}
   <!-- Breadcrumb / Back Navigation -->
@@ -61,26 +74,25 @@
       <!-- Carousel Section (Left on desktop, top on mobile) -->
       {% if category.images.all %}
       <div class="col-lg-6 mb-4 mb-lg-0">
-        <div id="categoryCarousel" class="carousel slide carousel-fade" data-bs-interval="false" style="position: relative;">
+        <div id="categoryCarousel" class="carousel slide carousel-fade position-relative" data-bs-interval="false">
           <div class="carousel-inner shadow-lg overflow-hidden">
             {% for image in category.images.all %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
               <img
                 src="{{ image.image.url }}"
-                class="d-block w-100"
+                class="d-block w-100 carousel-image object-fit-contain bg-white"
                 alt="{{ image.alt_text|default:category.name }}"
-                style="aspect-ratio: 1/1; object-fit: contain; min-height: 400px; background-color: white;"
               >
             </div>
             {% endfor %}
           </div>
           {% if category.images.count > 1 %}
-          <button class="carousel-control-prev carousel-control-custom" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev" style="background: none; border: none; width: 40px; height: 40px; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">
-            <i class="bi bi-chevron-left" style="font-size: 1.5rem; color: #333; transition: color 0.2s;"></i>
+          <button class="carousel-control-prev carousel-control-custom bg-transparent border-0 start-0 ms-2 position-absolute" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
+            <i class="bi bi-chevron-left fs-3 text-dark"></i>
             <span class="visually-hidden">{% trans "Önceki" %}</span>
           </button>
-          <button class="carousel-control-next carousel-control-custom" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next" style="background: none; border: none; width: 40px; height: 40px; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">
-            <i class="bi bi-chevron-right" style="font-size: 1.5rem; color: #333; transition: color 0.2s;"></i>
+          <button class="carousel-control-next carousel-control-custom bg-transparent border-0 end-0 me-2 position-absolute" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
+            <i class="bi bi-chevron-right fs-3 text-dark"></i>
             <span class="visually-hidden">{% trans "Sonraki" %}</span>
           </button>
           {% endif %}
@@ -94,14 +106,13 @@
             type="button" 
             data-bs-target="#categoryCarousel" 
             data-bs-slide-to="{{ forloop.counter0 }}"
-            class="thumbnail-button flex-shrink-0 border-0 p-0 {% if forloop.first %}active{% endif %}"
+            class="thumbnail-button flex-shrink-0 border p-0 rounded bg-white overflow-hidden {% if forloop.first %}active{% endif %}"
             aria-label="Slide {{ forloop.counter }}"
-            style="cursor: pointer; width: 60px; height: 60px; min-width: 60px; border-radius: 4px; overflow: hidden; border: 2px solid transparent; transition: all 0.2s; background: white;"
           >
             <img
               src="{{ image.image.url }}"
+              class="w-100 h-100 object-fit-contain p-1"
               alt="{{ image.alt_text|default:category.name }}"
-              style="width: 100%; height: 100%; object-fit: contain; padding: 3px;"
             >
           </button>
           {% endfor %}
@@ -114,7 +125,7 @@
       {% if category.rich_text or category.documents.all %}
       <div class="col-lg-6 d-flex flex-column">
         {% if category.rich_text %}
-        <div class="rich-text-content flex-grow-1 bg-white p-3 rounded mb-3" style="overflow: auto;">
+        <div class="rich-text-content flex-grow-1 bg-white p-3 rounded mb-3 overflow-auto">
           {{ category.rich_text|safe }}
         </div>
         {% endif %}
@@ -128,9 +139,9 @@
           <div class="row g-2">
             {% for document in category.documents.all %}
             <div class="col-12 col-lg-6">
-              <div class="d-flex align-items-center gap-2 p-3 border rounded" style="background-color: #f8f9fa;">
-                <i class="bi {{ document.icon_name }} flex-shrink-0" style="font-size: 1.5rem;"></i>
-                <span class="flex-grow-1 text-truncate" style="font-size: 0.9rem;">{{ document.title }}</span>
+              <div class="d-flex align-items-center gap-2 p-3 border rounded bg-light">
+                <i class="bi {{ document.icon_name }} flex-shrink-0 fs-3"></i>
+                <span class="flex-grow-1 text-truncate small">{{ document.title }}</span>
                 <a href="{{ document.file.url }}" download class="btn btn-link p-0 flex-shrink-0" title="{% trans "İndir" %}">
                   <i class="bi bi-download"></i>
                 </a>
@@ -157,18 +168,17 @@
       <div class="col">
         <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-dark h-100 d-block">
           <div class="card h-100 border-0 shadow-sm">
-            <div class="bg-white p-3 d-flex align-items-center justify-content-center border-bottom rounded-top" style="aspect-ratio: 1/1;">
+            <div class="bg-white p-3 d-flex align-items-center justify-content-center border-bottom rounded-top ratio ratio-1x1">
               {% with primary_image=product.images.first %}
               {% if primary_image %}
               <img
                 src="{{ primary_image.image.url }}"
                 alt="{{ primary_image.alt_text|default:product.name }}"
-                class="img-fluid"
-                style="max-height: 100%; object-fit: contain;"
+                class="img-fluid h-100 object-fit-contain"
               >
               {% else %}
               <div class="d-flex align-items-center justify-content-center bg-light w-100 h-100 rounded">
-                <i class="bi bi-box-seam text-muted" style="font-size: 2rem; opacity: 0.3;"></i>
+                <i class="bi bi-box-seam text-muted fs-1 opacity-25"></i>
               </div>
               {% endif %}
               {% endwith %}
@@ -183,8 +193,6 @@
     </div>
   </section>
   {% endif %}
-
-
 {% endblock content %}
 
 {% block scripts %}

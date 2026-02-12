@@ -1,0 +1,104 @@
+{% load i18n static %}
+<style>
+    .brand-strip-container { 
+        overflow: hidden; 
+        background-color: #ffffff; /* Clean white often looks better for colored logos */
+    }
+    
+    .marquee-viewport {
+        display: flex;
+        overflow: hidden;
+        user-select: none;
+        /* Creates a soft fade-in/out effect on the edges */
+        mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
+
+    .marquee-content {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-around;
+        min-width: 100%;
+        /* Adjust 30s to make it faster or slower */
+        animation: scroll-strip 30s linear infinite;
+    }
+
+    .marquee-content:hover {
+        animation-play-state: paused;
+    }
+
+    .brand-item {
+        flex: 0 0 auto;
+        padding: 0 50px; /* Generous spacing for a premium feel */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+    }
+    
+    .brand-item img {
+        height: 60px; /* Increased height for better visibility */
+        width: auto;
+        max-width: 180px;
+        object-fit: contain;
+        /* No filters here - full color enabled */
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .brand-item:hover img {
+        transform: scale(1.05); /* Subtle pop on hover */
+    }
+
+    @keyframes scroll-strip {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+        .brand-item { padding: 0 25px; }
+        .brand-item img { height: 40px; }
+        .marquee-content { animation-duration: 10s; }
+    }
+</style>
+{# --- PARTNERS: INFINITE STRIP CAROUSEL --- #}
+<section class="brand-strip-container py-2 border-bottom bg-light">
+    <h2 class="visually-hidden">{% trans "Referanslarımız ve Partnerlerimiz" %}</h2>
+    <div class="container mb-3 text-center">
+        <span class="badge text-bg-danger rounded-pill px-3 py-2 mb-2 shadow-sm">{% trans "BİZE GÜVENEN MARKALAR" %}</span>
+    </div>
+    <div class="marquee-viewport">
+        <div class="marquee-content">
+            {% for brand in brands %}
+                {% if brand.website_url %}
+                    <a href="{{ brand.website_url }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="brand-item">
+                        <img src="{{ brand.image.url }}" alt="{{ brand.alt_text }}">
+                    </a>
+                {% else %}
+                    <div class="brand-item">
+                        <img src="{{ brand.image.url }}" alt="{{ brand.alt_text }}">
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {# Duplicate loop once for seamless infinite effect #}
+            {% for brand in brands %}
+                {% if brand.website_url %}
+                    <a href="{{ brand.website_url }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="brand-item">
+                        <img src="{{ brand.image.url }}" alt="{{ brand.alt_text }}">
+                    </a>
+                {% else %}
+                    <div class="brand-item">
+                        <img src="{{ brand.image.url }}" alt="{{ brand.alt_text }}">
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,138 @@
+{% load i18n static core_tags %}
+<style>
+    /* Hero Overlay - Simple and clean */
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.4); /* Slight overlay only */
+    }
+
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+        /* 1. Scale down the Hero Logo */
+        .hero-logo {
+            width: 140px !important; /* Significantly smaller for mobile */
+            margin-bottom: 1rem;
+        }
+
+        /* 2. Shrink Hero Text to prevent pushing content down */
+        .display-4 {
+            font-size: 1.8rem !important;
+        }
+        .lead {
+            font-size: 0.9rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* 3. Redesign the Stats Bar for compactness */
+        .bg-primary.position-absolute.bottom-0 {
+            background: rgba(var(--bs-primary-rgb), 0.9) !important; /* Slight transparency to see video behind */
+            backdrop-filter: blur(5px);
+        }
+
+        .py-3 {
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+        }
+
+        .h4.fw-black {
+            font-size: 1rem !important; /* Smaller numbers */
+            margin-bottom: -2px !important;
+        }
+
+        .small-text {
+            font-size: 0.6rem !important; /* Tiny labels */
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* Reduce button sizes slightly */
+        .btn-lg {
+            padding: 0.5rem 1.5rem !important;
+            font-size: 0.9rem !important;
+        }
+    }
+</style>
+{# --- HERO SECTION --- #}
+<header class="position-relative vh-100 w-100 bg-black d-flex align-items-center justify-content-center overflow-hidden">
+    {# 1. Background Video #}
+    <video autoplay
+           loop
+           muted
+           playsinline
+           class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover z-0">
+        <source src="{% asset_url 'landing_video' %}" type="video/mp4">
+    </video>
+    {# 2. Overlay: Gradient for depth (Better than flat opacity) #}
+    <div class="position-absolute top-0 start-0 w-100 h-100 z-1 hero-overlay"></div>
+    {# 3. Content: Rich Details Restored #}
+    <div class="container position-relative z-3 pb-5">
+        <div class="row align-items-center h-100">
+            {# --- LEFT COLUMN: LOGO --- #}
+            <div class="col-lg-5 text-center text-lg-end mb-5 mb-lg-0">
+                <img src="{% static 'svg/ata_logo_white_text.svg' %}"
+                     alt="Ata Dizayn"
+                     class="img-fluid hero-logo">
+            </div>
+            {# --- RIGHT COLUMN: DETAILED CONTENT --- #}
+            {# Added border-start for desktop separation #}
+            <div class="col-lg-7 text-center text-lg-start ps-lg-5 border-start-lg border-light border-opacity-25">
+                {# Brand Badge / Tagline #}
+                <div class="d-inline-flex align-items-center border bg-info border-info rounded-pill px-3 py-1 mb-4">
+                    <span class="text-white small fw-bold tracking-wide">{% trans "Fiziksel pazarlama çözümleri" %}</span>
+                </div>
+                <h1 class="display-4 fw-bold text-white mb-4">
+                    {% trans "Fikirden" %} <span class="text-primary fw-bold">{% trans "Gerçeğe" %}</span>
+                    <br>
+                    <span class="text-primary fw-bold">{% trans "Sürdürülebilir " %}</span>{% trans "Üretim." %}
+                </h1>
+                <p class="lead text-white mb-4 w-100 w-lg-85">
+                    {% trans "20 yılı aşkın tecrübesiyle POS materyalleri, enjeksiyon kalıplama ve endüstriyel parça üretiminde stratejik partneriniz. Tasarımdan lojistiğe uçtan uca hizmet." %}
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+                    <a href="#services"
+                       class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-lg hover-lift">
+                        <i class="bi bi-columns-gap me-2"></i> {% trans "Keşfet" %}
+                    </a>
+                    <a href="#contact"
+                       class="btn btn-info btn-lg rounded-pill px-5 fw-bold hover-fill">
+                        <i class="bi bi-chat-dots me-2"></i> {% trans "İletişim" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# 4. FOOTER STATS: Pinned Bottom --- #}
+    <div class="position-absolute bottom-0 start-0 w-100 bg-primary border-top border-info border-opacity-50 z-3">
+        <div class="container">
+            <div class="row g-0 text-white text-center">
+                {# Stat 1 #}
+                <div class="col-6 col-md-3 border-end border-bottom border-md-bottom-0 border-info border-opacity-25">
+                    <div class="py-3">
+                        <span class="h4 fw-black d-block mb-0">20+</span>
+                        <small class="text small-text">{% trans "Yıl Tecrübe" %}</small>
+                    </div>
+                </div>
+                {# Stat 2 #}
+                <div class="col-6 col-md-3 border-md-end border-bottom border-md-bottom-0 border-info border-opacity-25">
+                    <div class="py-3">
+                        <span class="h4 fw-black d-block mb-0">500+</span>
+                        <small class="text small-text">{% trans "Üretilen Kalıp" %}</small>
+                    </div>
+                </div>
+                {# Stat 3 #}
+                <div class="col-6 col-md-3 border-end border-info border-opacity-25">
+                    <div class="py-3">
+                        <span class="h4 fw-black d-block mb-0">{% trans "650'den fazla" %}</span>
+                        <small class="text small-text">{% trans "Mutlu Müşteri" %}</small>
+                    </div>
+                </div>
+                {# Stat 4 #}
+                <div class="col-6 col-md-3">
+                    <div class="py-3">
+                        <span class="h4 fw-black d-block mb-0">4500+</span>
+                        <small class="text small-text">{% trans "Tamamlanmış Proje" %}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
