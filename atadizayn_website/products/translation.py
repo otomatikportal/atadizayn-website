@@ -15,6 +15,11 @@ class CategoryTranslationOptions(TranslationOptions):
         "description",
         "rich_text",
     )
+    fallback_languages = {"default": ("tr",), "en": ("tr",)}
+    fallback_undefined = {
+        "description": "",
+        "rich_text": "<p>&nbsp;</p>",
+    }
 
 
 @register(Product)
@@ -29,9 +34,17 @@ class ProductTranslationOptions(TranslationOptions):
         "description",
         "rich_text",
     )
+    fallback_languages = {"default": ("tr",), "en": ("tr",)}
+    fallback_undefined = {
+        "description": "",
+        "rich_text": "<p>&nbsp;</p>",
+    }
 
 
 @register(ProductVariant)
 class ProductVariantTranslationOptions(TranslationOptions):
-    required_languages = ("tr", "en")
+    required_languages = {
+        "tr": ("size",),
+        "en": ("size",),
+    }
     fields = ("size",)  # Translate size (Small/Küçük)

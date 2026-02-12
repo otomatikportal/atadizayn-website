@@ -21,6 +21,8 @@
       .nav-visible { transform: translateY(0); }
       .main-spacing { padding-top: 6rem; }
     </style>
+    {% block head_extra %}
+    {% endblock head_extra %}
   </head>
   <body class="d-flex flex-column min-vh-100"
         data-landing-nav="{% if request.resolver_match and request.resolver_match.url_name == 'home' %}1{% endif %}">

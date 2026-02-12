@@ -2,14 +2,13 @@ from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from django.utils.html import strip_tags
 from django.utils import timezone
+from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
 from atadizayn_website.core.slug_utils import (
     build_slug_lookup_q,
-    build_unique_slug,
     get_default_lang_code,
     get_translated_slug,
 )
@@ -19,6 +18,12 @@ class BlogPost(models.Model):
     STATUS_CHOICES = (
         ('draft', _('Taslak')),
         ('published', _('Yayında')),
+    )
+    COLLECTION_CHOICES = (
+        ('policy', _('Politikalar')),
+        ('announcement', _('Duyurular')),
+        ('blog', _('Blog paylaşımları')),
+        ('corporate', _('Kurumsal')),
     )
 
     # --- Core Page Data ---
@@ -61,6 +66,12 @@ class BlogPost(models.Model):
         blank=True,
         verbose_name=_("Kapak Görseli Alt Metni"),
     )
+    collection = models.CharField(
+        max_length=20,
+        choices=COLLECTION_CHOICES,
+        default='blog',
+        verbose_name=_("Koleksiyon"),
+    )
 
     # --- Publication ---
     status = models.CharField(
@@ -96,8 +107,6 @@ class BlogPost(models.Model):
             if plain_content:
                 self.meta_description = plain_content[:160]
 
-        self._assign_missing_slugs()
-
         super().save(*args, **kwargs)
 
     def get_absolute_url(self) -> str:
@@ -106,23 +115,21 @@ class BlogPost(models.Model):
 
     def clean(self):
         super().clean()
-        english_title = (getattr(self, "title_en", None) or "").strip()
-        if not english_title:
-            raise ValidationError({"title_en": _("İngilizce başlık zorunludur.")})
+        default_lang = get_default_lang_code()
+        description_field = f"meta_description_{default_lang}"
+        content_field = f"content_{default_lang}"
 
-        turkish_title = (getattr(self, "title_tr", None) or "").strip()
-        if not turkish_title:
-            raise ValidationError({"title_tr": _("Türkçe başlık zorunludur.")})
+        description_value = (getattr(self, description_field, None) or self.meta_description or "").strip()
+        content_value = getattr(self, content_field, None) or self.content or ""
 
-        description_value = (self.meta_description or "").strip()
-        content_value = strip_tags(self.content or "").strip()
-        if not description_value and not content_value:
-            raise ValidationError(
-                {
-                    "meta_description": _("Açıklama veya içerik alanlarından en az biri doldurulmalıdır."),
-                    "content": _("Açıklama veya içerik alanlarından en az biri doldurulmalıdır."),
-                }
-            )
+        errors = {}
+        if not description_value:
+            errors[description_field] = _("Varsayılan dilde açıklama zorunludur.")
+        if not self._has_visible_text(content_value):
+            errors[content_field] = _("Varsayılan dilde içerik zorunludur.")
+
+        if errors:
+            raise ValidationError(errors)
 
         slug_values = {
             "slug": (self.slug or "").strip(),
@@ -143,17 +150,13 @@ class BlogPost(models.Model):
         if errors:
             raise ValidationError(errors)
 
-    def _assign_missing_slugs(self):
-        for lang_code in ["en", "tr"]:
-            title_value = (getattr(self, f"title_{lang_code}", "") or "").strip()
-            if not title_value:
-                continue
+        if self.cover_image:
+            width = getattr(self.cover_image, "width", None)
+            height = getattr(self.cover_image, "height", None)
+            if width and height and (width != height * 3):
+                raise ValidationError({"cover_image": _("Kapak görseli 3:1 oranında olmalıdır.")})
 
-            slug_field = f"slug_{lang_code}"
-            if not (getattr(self, slug_field, "") or "").strip():
-                setattr(self, slug_field, build_unique_slug(self, slug_field, title_value))
-
-        if not (self.slug or "").strip():
-            default_slug = (getattr(self, f"slug_{get_default_lang_code()}", "") or "").strip()
-            if default_slug:
-                self.slug = default_slug
+    @staticmethod
+    def _has_visible_text(value: str) -> bool:
+        plain_value = strip_tags(value or "").replace("\xa0", " ").strip()
+        return bool(plain_value)

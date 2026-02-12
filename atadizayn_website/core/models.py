@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.html import strip_tags
+from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
 
@@ -49,12 +51,27 @@ class Policy(models.Model):
     updated_at = models.DateField(default=timezone.localdate, help_text="Last modified date (editable, defaults to today)")
 
     class Meta:
-        verbose_name = "Policy"
-        verbose_name_plural = "Policies"
+        verbose_name = _("Politika")
+        verbose_name_plural = _("Politikalar")
         ordering = ["order", "name"]
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        for field_name in ("content", "content_en", "content_tr"):
+            if not hasattr(self, field_name):
+                continue
+            field_value = getattr(self, field_name, "") or ""
+            if not self._has_visible_text(field_value):
+                setattr(self, field_name, "")
+
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def _has_visible_text(value: str) -> bool:
+        plain_value = strip_tags(value or "").replace("\xa0", " ").strip()
+        return bool(plain_value)
 
 
 class SiteConfiguration(models.Model):
@@ -65,8 +82,8 @@ class SiteConfiguration(models.Model):
     description = models.CharField(max_length=255, blank=True, help_text="Internal note about what this setting does")
 
     class Meta:
-        verbose_name = "Site Configuration"
-        verbose_name_plural = "Site Configurations"
+        verbose_name = _("Site konfigürasyonu")
+        verbose_name_plural = _("Site konfigürasyonları")
 
     def __str__(self):
         return self.key

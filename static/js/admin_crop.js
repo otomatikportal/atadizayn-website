@@ -5,12 +5,15 @@
         let cropper;
         let currentFileInput;
         let $modal;
+        let currentAspectRatio = 1;
+        let currentOutputWidth = 1200;
+        let currentOutputHeight = 1200;
 
         // Create a simple modal structure for cropping
         const modalHtml = `
             <div id="cropper-modal" style="display:none; position:fixed; z-index:10001; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8);">
                 <div style="background:#fff; margin:2% auto; padding:20px; width:80%; max-width:800px; border-radius:5px; position:relative; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-                    <h3 style="margin-top:0;">Görseli Kırp (1:1)</h3>
+                    <h3 id="cropper-modal-title" style="margin-top:0;">Görseli Kırp (1:1)</h3>
                     <div style="max-height:500px; overflow:hidden; background:#eee;">
                         <img id="cropper-image" src="" style="max-width:100%; display:block;">
                     </div>
@@ -24,6 +27,7 @@
         $('body').append(modalHtml);
         $modal = $('#cropper-modal');
         const $image = $('#cropper-image');
+        const $modalTitle = $('#cropper-modal-title');
 
         // Watch for file input changes (works for inlines too)
         $(document).on('change', 'input[type="file"]', function(e) {
@@ -33,6 +37,26 @@
                 currentFileInput = input;
                 const reader = new FileReader();
                 reader.onload = function(event) {
+                    const aspectAttr = (input.dataset.cropAspect || '').trim();
+                    let parsedAspect = NaN;
+                    if (aspectAttr.includes('/')) {
+                        const parts = aspectAttr.split('/').map((part) => parseFloat(part));
+                        if (parts.length === 2 && Number.isFinite(parts[0]) && Number.isFinite(parts[1]) && parts[1] > 0) {
+                            parsedAspect = parts[0] / parts[1];
+                        }
+                    } else {
+                        parsedAspect = parseFloat(aspectAttr);
+                    }
+                    currentAspectRatio = Number.isFinite(parsedAspect) && parsedAspect > 0 ? parsedAspect : 1;
+
+                    const widthAttr = parseInt(input.dataset.cropWidth, 10);
+                    const heightAttr = parseInt(input.dataset.cropHeight, 10);
+                    currentOutputWidth = Number.isFinite(widthAttr) && widthAttr > 0 ? widthAttr : 1200;
+                    currentOutputHeight = Number.isFinite(heightAttr) && heightAttr > 0 ? heightAttr : Math.round(currentOutputWidth / currentAspectRatio);
+
+                    const titleAttr = input.dataset.cropTitle;
+                    $modalTitle.text(titleAttr || `Görseli Kırp (${currentAspectRatio.toFixed(2)}:1)`);
+
                     $image.attr('src', event.target.result);
                     $modal.show();
                     
@@ -41,7 +65,7 @@
                     }
 
                     cropper = new Cropper($image[0], {
-                        aspectRatio: 1, // Change this to null if you want free cropping
+                        aspectRatio: currentAspectRatio,
                         viewMode: 1,
                         autoCropArea: 1,
                     });
@@ -59,8 +83,8 @@
 
         $('#cropper-save').on('click', function() {
             const canvas = cropper.getCroppedCanvas({
-                width: 1200, // Reasonable max size
-                height: 1200,
+                width: currentOutputWidth,
+                height: currentOutputHeight,
                 imageSmoothingEnabled: true,
                 imageSmoothingQuality: 'high',
             });

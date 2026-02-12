@@ -12,7 +12,7 @@ class StaticViewSitemap(Sitemap):
     x_default = True
 
     def items(self):
-        return ["home", "part_index", "stand_index"]
+        return ["home", "part_index", "stand_index", "blog-index"]
 
     def location(self, item):
         return reverse(item)

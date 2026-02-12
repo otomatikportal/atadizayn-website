@@ -13,20 +13,96 @@
   {% endif %}
 {% endblock page_description %}
 
+{% block head_extra %}
+  <style>
+    .blog-detail-hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      isolation: isolate;
+    }
+    .blog-detail-hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.05) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .blog-detail-hero-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .blog-detail-hero-meta {
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .blog-detail-hero-title {
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    }
+    .blog-detail-hero-date {
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+      white-space: nowrap;
+      margin: 0;
+    }
+    .blog-detail-hero-ratio {
+      --bs-aspect-ratio: 33.3333%;
+    }
+    @media (max-width: 767.98px) {
+      .blog-detail-hero-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .blog-detail-hero-date {
+        white-space: normal;
+      }
+    }
+    @media (min-width: 768px) {
+      .blog-detail-hero-overlay {
+        padding: 2.25rem;
+      }
+    }
+  </style>
+{% endblock head_extra %}
+
 {% block content %}
-  <article class="py-4 py-md-5">
+  <nav aria-label="breadcrumb" class="mb-4">
+    <a href="{% url 'blog-index' %}" class="text-decoration-none d-inline-flex align-items-center">
+      <i class="bi bi-arrow-left me-2"></i>
+      {% trans "Geri dön" %}: {% trans "Blog" %}
+    </a>
+  </nav>
+
+  <article class="pb-4 pb-md-5">
     <header class="mb-4">
-      <h1 class="mb-3">{{ post.title }}</h1>
-
       {% if post.cover_image %}
-        <img src="{{ post.cover_image.url }}"
-             alt="{{ post.cover_image_alt|default:post.title }}"
-             class="img-fluid rounded w-100 mb-3">
+        <div class="blog-detail-hero ratio blog-detail-hero-ratio mb-3">
+          <img src="{{ post.cover_image.url }}"
+               alt="{{ post.cover_image_alt|default:post.title }}"
+               class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+          <div class="blog-detail-hero-gradient"></div>
+          <div class="blog-detail-hero-overlay">
+            <div class="blog-detail-hero-meta">
+              <h1 class="display-6 fw-bold mb-0 blog-detail-hero-title">{{ post.title }}</h1>
+              <p class="small blog-detail-hero-date">{% trans "Yayın Tarihi" %}: {{ post.publish_date|date:"d.m.Y" }}</p>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <h1 class="mb-3">{{ post.title }}</h1>
+        <p class="text-muted mb-0">
+          <small>{% trans "Yayın Tarihi" %}: {{ post.publish_date|date:"d.m.Y" }}</small>
+        </p>
       {% endif %}
-
-      <p class="text-muted mb-0">
-        <small>{% trans "Yayın Tarihi" %}: {{ post.publish_date|date:"d.m.Y" }}</small>
-      </p>
     </header>
 
     <hr class="my-4">

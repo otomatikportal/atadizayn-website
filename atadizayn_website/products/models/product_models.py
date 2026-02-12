@@ -2,12 +2,13 @@ from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from django.utils.html import strip_tags
 from django.utils import timezone
+from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
-from atadizayn_website.core.slug_utils import build_slug_lookup_q, build_unique_slug, get_default_lang_code, get_translated_slug
+from atadizayn_website.core.slug_utils import build_slug_lookup_q, get_default_lang_code, get_translated_slug
+
 
 class Product(models.Model):
     category = models.ForeignKey(
@@ -54,10 +55,8 @@ class Product(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self._assign_missing_translated_slugs()
-
         if not (self.description or "").strip():
-            plain_content = strip_tags((self.rich_text or "")).strip()
+            plain_content = strip_tags(self.rich_text or "").strip()
             if plain_content:
                 self.description = plain_content
 
@@ -76,25 +75,21 @@ class Product(models.Model):
 
     def clean(self):
         super().clean()
-        # Check English
-        english_name = (getattr(self, "name_en", None) or "").strip()
-        if not english_name:
-            raise ValidationError({"name_en": _("İngilizce ad zorunludur.")})
+        default_lang = get_default_lang_code()
+        description_field = f"description_{default_lang}"
+        content_field = f"rich_text_{default_lang}"
 
-        # Check Turkish
-        turkish_name = (getattr(self, "name_tr", None) or "").strip()
-        if not turkish_name:
-            raise ValidationError({"name_tr": _("Türkçe ad zorunludur.")})
+        description_value = (getattr(self, description_field, None) or self.description or "").strip()
+        content_value = getattr(self, content_field, None) or self.rich_text or ""
 
-        description_value = (self.description or "").strip()
-        content_value = strip_tags((self.rich_text or "")).strip()
-        if not description_value and not content_value:
-            raise ValidationError(
-                {
-                    "description": _("Açıklama veya içerik alanlarından en az biri doldurulmalıdır."),
-                    "rich_text": _("Açıklama veya içerik alanlarından en az biri doldurulmalıdır."),
-                }
-            )
+        errors = {}
+        if not description_value:
+            errors[description_field] = _("Varsayılan dilde açıklama zorunludur.")
+        if not self._has_visible_text(content_value):
+            errors[content_field] = _("Varsayılan dilde içerik zorunludur.")
+
+        if errors:
+            raise ValidationError(errors)
 
         slug_values = {
             "slug": (self.slug or "").strip(),
@@ -115,18 +110,10 @@ class Product(models.Model):
         if errors:
             raise ValidationError(errors)
 
-    def _assign_missing_translated_slugs(self):
-        for lang_code in ["en", "tr"]:
-            name_value = (getattr(self, f"name_{lang_code}", "") or "").strip()
-            if not name_value:
-                continue
-            slug_field = f"slug_{lang_code}"
-            if not (getattr(self, slug_field, "") or "").strip():
-                setattr(self, slug_field, build_unique_slug(self, slug_field, name_value))
-
-        default_slug = (getattr(self, f"slug_{get_default_lang_code()}", "") or "").strip()
-        if default_slug and not (self.slug or "").strip():
-            self.slug = default_slug
+    @staticmethod
+    def _has_visible_text(value: str) -> bool:
+        plain_value = strip_tags(value or "").replace("\xa0", " ").strip()
+        return bool(plain_value)
 
 
 class ProductImage(models.Model):

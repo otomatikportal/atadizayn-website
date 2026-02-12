@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Blog" %}{% endblock page_title %}
+
+{% block page_description %}
+  {% trans "Atadizayn blog yazılarını keşfedin." %}
+{% endblock page_description %}
+
+{% block head_extra %}
+  <style>
+    .blog-index-card {
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .blog-index-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--bs-box-shadow-lg) !important;
+    }
+    .blog-cover-ratio {
+      --bs-aspect-ratio: 33.3333%;
+    }
+  </style>
+{% endblock head_extra %}
+
+{% block content %}
+  <section class="container py-4 py-md-5">
+    <header class="mb-4 mb-md-5 text-center text-md-start">
+      <span class="badge text-bg-primary text-white rounded-pill px-3 fs-4 py-2 mb-3 shadow-sm">{% trans "Blog" %}</span>
+      <h1 class="display-5 fw-bold mb-2">{% trans "Güncel içerikler ve duyurular" %}</h1>
+      <p class="text-muted mb-0">{% trans "Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar." %}</p>
+    </header>
+
+    {% if page_obj %}
+      <div class="row row-cols-1 row-cols-lg-2 g-4">
+        {% for post in page_obj %}
+          <article class="col">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden blog-index-card">
+              {% if post.cover_image %}
+                <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
+                  <div class="ratio blog-cover-ratio border-bottom">
+                    <img src="{{ post.cover_image.url }}"
+                         alt="{{ post.cover_image_alt|default:post.title }}"
+                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+                  </div>
+                </a>
+              {% else %}
+                <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
+                  <div class="ratio blog-cover-ratio border-bottom">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-light">
+                      <i class="bi bi-journal-richtext text-muted fs-1 opacity-50"></i>
+                    </div>
+                  </div>
+                </a>
+              {% endif %}
+              <div class="card-body d-flex flex-column">
+                <p class="text-muted small mb-2">
+                  <i class="bi bi-calendar-event me-1"></i>{{ post.publish_date|date:"d.m.Y" }}
+                </p>
+                <h2 class="h5 card-title mb-3">
+                  <a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">{{ post.title }}</a>
+                </h2>
+                <p class="card-text text-muted mb-4">{{ post.meta_description|default:post.content|striptags|truncatechars:160 }}</p>
+                <div class="mt-auto">
+                  <a href="{{ post.get_absolute_url }}" class="btn btn-outline-primary">{% trans "Devamını Oku" %} <i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      {% if page_obj.has_other_pages %}
+        <nav class="mt-5" aria-label="{% trans "Blog sayfalama" %}">
+          <ul class="pagination justify-content-center mb-0">
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{% trans "Önceki" %}</a>
+              </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+              {% if page_obj.number == num %}
+                <li class="page-item active" aria-current="page"><span class="page-link">{{ num }}</span></li>
+              {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+              {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">{% trans "Sonraki" %}</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+      {% endif %}
+    {% else %}
+      <div class="alert alert-light border" role="status">
+        {% trans "Henüz yayınlanmış blog yazısı bulunmuyor." %}
+      </div>
+    {% endif %}
+  </section>
+{% endblock content %}

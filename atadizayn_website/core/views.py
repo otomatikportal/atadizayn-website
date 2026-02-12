@@ -1,8 +1,10 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic import DetailView
 
+from atadizayn_website.blog.models import BlogPost
 from atadizayn_website.core.models import BrandCarouselImage, Policy
 from atadizayn_website.products.models import Category, Product, ProductVariant
 
@@ -78,11 +80,13 @@ def home(request):
 
     # Get brand carousel images
     brands = BrandCarouselImage.objects.filter(is_active=True)
+    latest_blog_posts = BlogPost.objects.filter(status="published", publish_date__lte=timezone.now()).order_by("-publish_date")[:2]
 
     context = {
         "categories": categories,
         "carousel_categories": carousel_categories,
         "brands": brands,
+        "latest_blog_posts": latest_blog_posts,
     }
     return render(request, "home.html", context)
 

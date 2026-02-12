@@ -16,3 +16,8 @@ class BlogPostTranslationOptions(TranslationOptions):
         "content",
         "cover_image_alt",
     )
+    fallback_languages = {"default": ("tr",), "en": ("tr",)}
+    fallback_undefined = {
+        "meta_description": "",
+        "content": "<p>&nbsp;</p>",
+    }

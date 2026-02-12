@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
     Category,
@@ -64,7 +64,7 @@ class CategoryAdmin(TranslationAdmin):
         }
 
 
-class ProductVariantInline(admin.TabularInline):
+class ProductVariantInline(TranslationTabularInline):
     model = ProductVariant
     extra = 1
     min_num = 1
