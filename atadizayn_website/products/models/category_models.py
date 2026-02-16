@@ -3,13 +3,14 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from django.utils.html import strip_tags
 from django.utils import timezone
+from django.utils.html import strip_tags
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
 from atadizayn_website.core.slug_utils import build_slug_lookup_q, get_default_lang_code, get_translated_slug
+
 
 class Category(models.Model):
     COLLECTION_CHOICES = [
@@ -65,14 +66,9 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
-    @staticmethod
-    def _has_visible_text(value: str) -> bool:
-        plain_value = strip_tags(value or "").replace("\xa0", " ").strip()
-        return bool(plain_value)
-
     def save(self, *args, **kwargs):
         if not (self.description or "").strip():
-            plain_content = strip_tags((self.rich_text or "")).strip()
+            plain_content = strip_tags(self.rich_text or "").strip()
             if plain_content:
                 self.description = plain_content
 
@@ -86,6 +82,11 @@ class Category(models.Model):
     def get_absolute_url(self) -> str:
         category_slug = get_translated_slug(self)
         return reverse("category-detail", kwargs={"category_slug": category_slug})
+
+    @staticmethod
+    def _has_visible_text(value: str) -> bool:
+        plain_value = strip_tags(value or "").replace("\xa0", " ").strip()
+        return bool(plain_value)
 
     def clean(self):
         super().clean()
@@ -126,12 +127,18 @@ class Category(models.Model):
         slug_candidates = {
             "slug": (self.slug or slugify((self.name or "").strip(), allow_unicode=False)).strip().lower(),
             "slug_en": (
-                (getattr(self, "slug_en", "") or slugify(((getattr(self, "name_en", None) or "").strip()), allow_unicode=False))
+                (
+                    getattr(self, "slug_en", "")
+                    or slugify(((getattr(self, "name_en", None) or "").strip()), allow_unicode=False)
+                )
                 .strip()
                 .lower()
             ),
             "slug_tr": (
-                (getattr(self, "slug_tr", "") or slugify(((getattr(self, "name_tr", None) or "").strip()), allow_unicode=False))
+                (
+                    getattr(self, "slug_tr", "")
+                    or slugify(((getattr(self, "name_tr", None) or "").strip()), allow_unicode=False)
+                )
                 .strip()
                 .lower()
             ),
@@ -154,6 +161,7 @@ class Category(models.Model):
 
         if errors:
             raise ValidationError(errors)
+
 
 class CategoryImage(models.Model):
     category = models.ForeignKey(
