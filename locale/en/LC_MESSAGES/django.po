@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-16 08:54+0300\n"
+"POT-Creation-Date: 2026-02-16 09:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,8 @@ msgstr "Package weight"
 
 #: .\atadizayn_website\blog\models.py:33
 msgid "Sayfanın H1 başlığı ve tarayıcı sekmesinde görünen isim."
-msgstr "Title and H1 of the page and the value that is displayed on browser tab"
+msgstr ""
+"Title and H1 of the page and the value that is displayed on browser tab"
 
 #: .\atadizayn_website\blog\models.py:41
 #: .\atadizayn_website\products\models\product_models.py:30
@@ -89,7 +90,7 @@ msgid "Slug"
 msgstr "Slug"
 
 #: .\atadizayn_website\blog\models.py:42
-#: .\atadizayn_website\products\models\category_models.py:31
+#: .\atadizayn_website\products\models\category_models.py:32
 #: .\atadizayn_website\products\models\product_models.py:31
 msgid "Lütfen gerekmedikçe değiştirmeyin."
 msgstr "Please don't change unless it's required."
@@ -104,7 +105,8 @@ msgstr "Description"
 msgid ""
 "Girilmediyse içerikten çekilir, daha güçlü SEO için giriniz ancak zorunlu "
 "değildir."
-msgstr "If not given it is derived from the content, but please enter for better SEO"
+msgstr ""
+"If not given it is derived from the content, but please enter for better SEO"
 
 #: .\atadizayn_website\blog\models.py:52
 msgid "Sayfa İçeriği"
@@ -121,7 +123,7 @@ msgid "Kapak Görseli Alt Metni"
 msgstr "Cover image alt description"
 
 #: .\atadizayn_website\blog\models.py:73
-#: .\atadizayn_website\products\models\category_models.py:36
+#: .\atadizayn_website\products\models\category_models.py:37
 msgid "Koleksiyon"
 msgstr "Collection"
 
@@ -158,13 +160,13 @@ msgid "Blog Yazıları"
 msgstr "Blog Posts"
 
 #: .\atadizayn_website\blog\models.py:127
-#: .\atadizayn_website\products\models\category_models.py:101
+#: .\atadizayn_website\products\models\category_models.py:102
 #: .\atadizayn_website\products\models\product_models.py:87
 msgid "Varsayılan dilde açıklama zorunludur."
 msgstr "Description for default language is required"
 
 #: .\atadizayn_website\blog\models.py:129
-#: .\atadizayn_website\products\models\category_models.py:103
+#: .\atadizayn_website\products\models\category_models.py:104
 #: .\atadizayn_website\products\models\product_models.py:89
 msgid "Varsayılan dilde içerik zorunludur."
 msgstr "Content for default language is required"
@@ -181,11 +183,79 @@ msgstr "Cover image must be 3:1"
 msgid "Temel Özellikler"
 msgstr "Core Features"
 
-#: .\atadizayn_website\core\models.py:48
+#: .\atadizayn_website\core\models.py:10
+msgid "Marka logo görseli (PNG, JPG, SVG vb.)"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:14
+msgid "Erişilebilirlik için alternatif metin"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:19
+msgid "Müşteri web sitesi URL'si (isteğe bağlı)"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:23
+msgid "Bu markayı kaydırıcıda göster/gizle"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:27
+#, fuzzy
+#| msgid "Kategori görseli"
+msgid "Marka Şerit Görseli"
+msgstr "Category image"
+
+#: .\atadizayn_website\core\models.py:28
+#, fuzzy
+#| msgid "Kategori görselleri"
+msgid "Marka Şerit Görselleri"
+msgstr "Category images"
+
+#: .\atadizayn_website\core\models.py:40
+msgid ""
+"Şablonlarda bu varlığa referans vermek için benzersiz anahtar (örn. "
+"'hero_video', 'footer_logo')"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:44
+msgid "Varlık dosyasını yükleyin (Resim, Video, PDF vb.)"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:49
+msgid "Bu varlığın nerede kullanıldığına dair dahili not"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:53
+#, fuzzy
+#| msgid "Paket ağırlığı"
+msgid "Site Varlığı"
+msgstr "Package weight"
+
+#: .\atadizayn_website\core\models.py:54
+#, fuzzy
+#| msgid "Sistem Kayıtları"
+msgid "Site Varlıkları"
+msgstr "System Records"
+
+#: .\atadizayn_website\core\models.py:66
+msgid "Konfigürasyon için benzersiz anahtar (örn. 'contact_email')"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:68
+#, fuzzy
+#| msgid "Site konfigürasyonu"
+msgid "Konfigürasyon değeri"
+msgstr "Site configuration"
+
+#: .\atadizayn_website\core\models.py:72
+msgid "Bu ayarın ne yaptığını anlatan dahili not"
+msgstr ""
+
+#: .\atadizayn_website\core\models.py:76
 msgid "Site konfigürasyonu"
 msgstr "Site configuration"
 
-#: .\atadizayn_website\core\models.py:49
+#: .\atadizayn_website\core\models.py:77
 msgid "Site konfigürasyonları"
 msgstr "Site configurations"
 
@@ -195,117 +265,117 @@ msgstr "Site configurations"
 msgid "Ürün yönetimi"
 msgstr "Product image"
 
-#: .\atadizayn_website\products\models\category_models.py:16
+#: .\atadizayn_website\products\models\category_models.py:17
 msgid "Standlar"
 msgstr "Stands"
 
-#: .\atadizayn_website\products\models\category_models.py:17
+#: .\atadizayn_website\products\models\category_models.py:18
 msgid "Parçalar"
 msgstr "Parts"
 
-#: .\atadizayn_website\products\models\category_models.py:22
+#: .\atadizayn_website\products\models\category_models.py:23
 #: .\atadizayn_website\products\models\product_models.py:22
 msgid "Ad"
 msgstr "Name"
 
-#: .\atadizayn_website\products\models\category_models.py:30
+#: .\atadizayn_website\products\models\category_models.py:31
 msgid "Slug (url uç kısmı)"
 msgstr "Slug (URL suffix)"
 
-#: .\atadizayn_website\products\models\category_models.py:40
+#: .\atadizayn_website\products\models\category_models.py:41
 #: .\atadizayn_website\products\models\product_models.py:39
 msgid "Açıklama"
 msgstr "Description"
 
-#: .\atadizayn_website\products\models\category_models.py:44
+#: .\atadizayn_website\products\models\category_models.py:45
 #: .\atadizayn_website\products\models\product_models.py:43
 msgid "Zengin metin"
 msgstr "Rich text"
 
-#: .\atadizayn_website\products\models\category_models.py:50
+#: .\atadizayn_website\products\models\category_models.py:51
 msgid "Kanonik URL"
 msgstr "Canonical URL"
 
-#: .\atadizayn_website\products\models\category_models.py:54
+#: .\atadizayn_website\products\models\category_models.py:55
 #: .\atadizayn_website\products\models\product_models.py:35
 msgid "Yayım tarihi"
 msgstr "Publish date"
 
-#: .\atadizayn_website\products\models\category_models.py:57
+#: .\atadizayn_website\products\models\category_models.py:58
 #: .\atadizayn_website\products\models\product_models.py:46
 msgid "Oluşturulma tarihi"
 msgstr "Date created"
 
-#: .\atadizayn_website\products\models\category_models.py:58
+#: .\atadizayn_website\products\models\category_models.py:59
 #: .\atadizayn_website\products\models\product_models.py:47
 msgid "Güncellenme tarihi"
 msgstr "Modified"
 
-#: .\atadizayn_website\products\models\category_models.py:62
-#: .\atadizayn_website\products\models\category_models.py:163
-#: .\atadizayn_website\products\models\category_models.py:202
+#: .\atadizayn_website\products\models\category_models.py:63
+#: .\atadizayn_website\products\models\category_models.py:171
+#: .\atadizayn_website\products\models\category_models.py:210
 #: .\atadizayn_website\products\models\product_models.py:18
 #: .\templates\core\search_results.html:171
 msgid "Kategori"
 msgstr "Category"
 
-#: .\atadizayn_website\products\models\category_models.py:63
+#: .\atadizayn_website\products\models\category_models.py:64
 msgid "Kategoriler"
 msgstr "Categories"
 
-#: .\atadizayn_website\products\models\category_models.py:143
+#: .\atadizayn_website\products\models\category_models.py:150
 msgid "Bu slug kullanılamaz."
 msgstr "This slug cannot be used"
 
-#: .\atadizayn_website\products\models\category_models.py:153
+#: .\atadizayn_website\products\models\category_models.py:160
 msgid "Bu slug başka bir kategoride kullanılıyor."
 msgstr "This slug is being used in another category"
 
-#: .\atadizayn_website\products\models\category_models.py:167
+#: .\atadizayn_website\products\models\category_models.py:175
 #: .\atadizayn_website\products\models\product_models.py:128
 msgid "Görsel"
 msgstr "Image"
 
-#: .\atadizayn_website\products\models\category_models.py:172
+#: .\atadizayn_website\products\models\category_models.py:180
 #: .\atadizayn_website\products\models\product_models.py:133
 msgid "Alternatif metin"
 msgstr "Alternative text"
 
-#: .\atadizayn_website\products\models\category_models.py:176
+#: .\atadizayn_website\products\models\category_models.py:184
 #: .\atadizayn_website\products\models\product_models.py:137
 msgid "Birincil"
 msgstr "Primary"
 
-#: .\atadizayn_website\products\models\category_models.py:180
-#: .\atadizayn_website\products\models\category_models.py:215
+#: .\atadizayn_website\products\models\category_models.py:188
+#: .\atadizayn_website\products\models\category_models.py:223
 #: .\atadizayn_website\products\models\product_models.py:141
 #: .\atadizayn_website\products\models\product_models.py:176
 msgid "Sıralama"
 msgstr "Sort order"
 
-#: .\atadizayn_website\products\models\category_models.py:185
+#: .\atadizayn_website\products\models\category_models.py:193
 msgid "Kategori görseli"
 msgstr "Category image"
 
-#: .\atadizayn_website\products\models\category_models.py:186
+#: .\atadizayn_website\products\models\category_models.py:194
 msgid "Kategori görselleri"
 msgstr "Category images"
 
-#: .\atadizayn_website\products\models\category_models.py:207
+#: .\atadizayn_website\products\models\category_models.py:215
 #: .\atadizayn_website\products\models\product_models.py:168
 msgid "Başlık"
 msgstr "Title"
 
-#: .\atadizayn_website\products\models\category_models.py:211
+#: .\atadizayn_website\products\models\category_models.py:219
 #: .\atadizayn_website\products\models\product_models.py:172
 msgid "Dosya"
 msgstr "File"
 
-#: .\atadizayn_website\products\models\category_models.py:220
+#: .\atadizayn_website\products\models\category_models.py:228
 msgid "Kategori dokümanı"
 msgstr "Category document"
 
-#: .\atadizayn_website\products\models\category_models.py:221
+#: .\atadizayn_website\products\models\category_models.py:229
 msgid "Kategori dokümanları"
 msgstr "Category documents"
 
@@ -380,8 +450,8 @@ msgid ""
 "Ata Dizayn enjeksiyon kalıbı ve POS pazarlama ürünlerini endüstriyel ölçekte "
 "üretebilen bir ürün geliştirme şirketidir"
 msgstr ""
-"Ata Dizayn is a product development company that can produce"
-"POS Marketing products on an industrial scale"
+"Ata Dizayn is a product development company that can producePOS Marketing "
+"products on an industrial scale"
 
 #: .\templates\blog\detail.html:83 .\templates\blog\detail.html:88
 #: .\templates\products\category_detail.html:47
@@ -701,7 +771,6 @@ msgid "Üretim."
 msgstr "Manufacturing."
 
 #: .\templates\partials\home\_hero.html:88
-#, fuzzy
 #| msgid ""
 #| "20 yıllık tecrübesiyle POS materyalleri, enjeksiyon kalıplama ve "
 #| "endüstriyel parça üretiminde stratejik partneriniz. Tasarımdan lojistiğe "
@@ -711,9 +780,9 @@ msgid ""
 "endüstriyel parça üretiminde stratejik partneriniz. Tasarımdan lojistiğe "
 "uçtan uca hizmet."
 msgstr ""
-"Your strategic partner in POS materials, injection molding, and industrial "
-"part production with 20 years of experience. End-to-end service from design "
-"to logistics."
+"With over 20 years of experience, we are your strategic partner for POS "
+"materials, injection molding, and industrial part manufacturing. We provide "
+"end-to-end services from design to logistics."
 
 #: .\templates\partials\home\_hero.html:93
 msgid "Keşfet"
