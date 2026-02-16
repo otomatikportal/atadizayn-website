@@ -20,39 +20,39 @@ msgstr ""
 
 #: .\atadizayn_website\blog\admin.py:23
 msgid "Yayın Durumu"
-msgstr ""
+msgstr "Publish Status"
 
 #: .\atadizayn_website\blog\admin.py:27
 msgid "Temel Bilgiler & SEO"
-msgstr ""
+msgstr "Fundemental Information & SEO"
 
 #: .\atadizayn_website\blog\admin.py:36
 msgid "İçerik"
-msgstr ""
+msgstr "Content"
 
 #: .\atadizayn_website\blog\admin.py:39
 msgid "Sistem Kayıtları"
-msgstr ""
+msgstr "System Records"
 
 #: .\atadizayn_website\blog\admin.py:50
 msgid "Kapak"
-msgstr ""
+msgstr "Cover"
 
 #: .\atadizayn_website\blog\admin.py:60
 msgid "Görseli Kırp (3:1)"
-msgstr ""
+msgstr "Crop (3:1)"
 
 #: .\atadizayn_website\blog\apps.py:8
 msgid "Blog uygulaması"
-msgstr ""
+msgstr "Blog app"
 
 #: .\atadizayn_website\blog\models.py:19
 msgid "Taslak"
-msgstr ""
+msgstr "Draft"
 
 #: .\atadizayn_website\blog\models.py:20
 msgid "Yayında"
-msgstr ""
+msgstr "Published"
 
 #: .\atadizayn_website\blog\models.py:23
 #, fuzzy
@@ -63,11 +63,11 @@ msgstr "Our Policies"
 #: .\atadizayn_website\blog\models.py:24 .\templates\blog\detail.html:83
 #: .\templates\partials\_navbar.html:82
 msgid "Duyurular"
-msgstr ""
+msgstr "Announcements"
 
 #: .\atadizayn_website\blog\models.py:25
 msgid "Blog paylaşımları"
-msgstr ""
+msgstr "Blog posts"
 
 #: .\atadizayn_website\blog\models.py:26 .\templates\partials\_footer.html:23
 msgid "Kurumsal"
@@ -81,7 +81,7 @@ msgstr "Package weight"
 
 #: .\atadizayn_website\blog\models.py:33
 msgid "Sayfanın H1 başlığı ve tarayıcı sekmesinde görünen isim."
-msgstr ""
+msgstr "Title and H1 of the page and the value that is displayed on browser tab"
 
 #: .\atadizayn_website\blog\models.py:41
 #: .\atadizayn_website\products\models\product_models.py:30
@@ -92,7 +92,7 @@ msgstr "Slug"
 #: .\atadizayn_website\products\models\category_models.py:31
 #: .\atadizayn_website\products\models\product_models.py:31
 msgid "Lütfen gerekmedikçe değiştirmeyin."
-msgstr ""
+msgstr "Please don't change unless it's required."
 
 #: .\atadizayn_website\blog\models.py:48
 #, fuzzy
@@ -104,11 +104,11 @@ msgstr "Description"
 msgid ""
 "Girilmediyse içerikten çekilir, daha güçlü SEO için giriniz ancak zorunlu "
 "değildir."
-msgstr ""
+msgstr "If not given it is derived from the content, but please enter for better SEO"
 
 #: .\atadizayn_website\blog\models.py:52
 msgid "Sayfa İçeriği"
-msgstr ""
+msgstr "Page Content"
 
 #: .\atadizayn_website\blog\models.py:62
 #, fuzzy
@@ -118,7 +118,7 @@ msgstr "Image"
 
 #: .\atadizayn_website\blog\models.py:67
 msgid "Kapak Görseli Alt Metni"
-msgstr ""
+msgstr "Cover image alt description"
 
 #: .\atadizayn_website\blog\models.py:73
 #: .\atadizayn_website\products\models\category_models.py:36
@@ -151,43 +151,43 @@ msgstr "Modified"
 
 #: .\atadizayn_website\blog\models.py:94
 msgid "Blog Yazısı"
-msgstr ""
+msgstr "Blog Post"
 
 #: .\atadizayn_website\blog\models.py:95
 msgid "Blog Yazıları"
-msgstr ""
+msgstr "Blog Posts"
 
 #: .\atadizayn_website\blog\models.py:127
 #: .\atadizayn_website\products\models\category_models.py:101
 #: .\atadizayn_website\products\models\product_models.py:87
 msgid "Varsayılan dilde açıklama zorunludur."
-msgstr ""
+msgstr "Description for default language is required"
 
 #: .\atadizayn_website\blog\models.py:129
 #: .\atadizayn_website\products\models\category_models.py:103
 #: .\atadizayn_website\products\models\product_models.py:89
 msgid "Varsayılan dilde içerik zorunludur."
-msgstr ""
+msgstr "Content for default language is required"
 
 #: .\atadizayn_website\blog\models.py:148
 msgid "Bu slug başka bir blog yazısında kullanılıyor."
-msgstr ""
+msgstr "This slug is used in another blog post"
 
 #: .\atadizayn_website\blog\models.py:157
 msgid "Kapak görseli 3:1 oranında olmalıdır."
-msgstr ""
+msgstr "Cover image must be 3:1"
 
 #: .\atadizayn_website\core\apps.py:7
 msgid "Temel Özellikler"
-msgstr ""
+msgstr "Core Features"
 
 #: .\atadizayn_website\core\models.py:48
 msgid "Site konfigürasyonu"
-msgstr ""
+msgstr "Site configuration"
 
 #: .\atadizayn_website\core\models.py:49
 msgid "Site konfigürasyonları"
-msgstr ""
+msgstr "Site configurations"
 
 #: .\atadizayn_website\products\apps.py:8
 #, fuzzy
@@ -255,11 +255,11 @@ msgstr "Categories"
 
 #: .\atadizayn_website\products\models\category_models.py:143
 msgid "Bu slug kullanılamaz."
-msgstr ""
+msgstr "This slug cannot be used"
 
 #: .\atadizayn_website\products\models\category_models.py:153
 msgid "Bu slug başka bir kategoride kullanılıyor."
-msgstr ""
+msgstr "This slug is being used in another category"
 
 #: .\atadizayn_website\products\models\category_models.py:167
 #: .\atadizayn_website\products\models\product_models.py:128
@@ -324,7 +324,7 @@ msgstr "Products"
 
 #: .\atadizayn_website\products\models\product_models.py:108
 msgid "Bu slug başka bir üründe kullanılıyor."
-msgstr ""
+msgstr "This slug is being used in another product"
 
 #: .\atadizayn_website\products\models\product_models.py:146
 msgid "Ürün görseli"
@@ -380,6 +380,8 @@ msgid ""
 "Ata Dizayn enjeksiyon kalıbı ve POS pazarlama ürünlerini endüstriyel ölçekte "
 "üretebilen bir ürün geliştirme şirketidir"
 msgstr ""
+"Ata Dizayn is a product development company that can produce"
+"POS Marketing products on an industrial scale"
 
 #: .\templates\blog\detail.html:83 .\templates\blog\detail.html:88
 #: .\templates\products\category_detail.html:47
@@ -391,7 +393,7 @@ msgstr "Go back"
 #: .\templates\blog\detail.html:88 .\templates\blog\index.html:8
 #: .\templates\blog\index.html:39 .\templates\partials\_navbar.html:76
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: .\templates\blog\detail.html:105 .\templates\blog\detail.html:112
 #, fuzzy
@@ -401,24 +403,24 @@ msgstr "Publish date"
 
 #: .\templates\blog\index.html:13
 msgid "Atadizayn blog yazılarını keşfedin."
-msgstr ""
+msgstr "Explore blog posts from Ata Dizayn"
 
 #: .\templates\blog\index.html:34 .\templates\partials\home\_blog.html:38
 msgid "Paylaşımlar"
-msgstr ""
+msgstr "Posts"
 
 #: .\templates\blog\index.html:46
 msgid "Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar."
-msgstr ""
+msgstr "News, ideas and product related posts from Ata Dizayn"
 
 #: .\templates\blog\index.html:84 .\templates\partials\home\_blog.html:75
 #: .\templates\partials\home\_blog.html:117
 msgid "Devamını Oku"
-msgstr ""
+msgstr "Read More"
 
 #: .\templates\blog\index.html:93
 msgid "Blog sayfalama"
-msgstr ""
+msgstr "Blog Pages"
 
 #: .\templates\blog\index.html:97 .\templates\core\search_results.html:202
 #: .\templates\products\category_detail.html:92
@@ -434,7 +436,7 @@ msgstr "Next"
 
 #: .\templates\blog\index.html:119
 msgid "Henüz yayınlanmış blog yazısı bulunmuyor."
-msgstr ""
+msgstr "No blog posts yet."
 
 #: .\templates\core\policy_detail.html:13
 #, fuzzy
@@ -450,7 +452,7 @@ msgstr "Modified"
 
 #: .\templates\core\search_results.html:4
 msgid "Arama Sonuçları"
-msgstr ""
+msgstr "Search Results"
 
 #: .\templates\core\search_results.html:15
 #, fuzzy
@@ -519,11 +521,11 @@ msgstr "Variant"
 
 #: .\templates\core\search_results.html:166
 msgid "Duyuru"
-msgstr ""
+msgstr "Announcement"
 
 #: .\templates\core\search_results.html:168
 msgid "Paylaşım"
-msgstr ""
+msgstr "Post"
 
 #: .\templates\core\search_results.html:186
 msgid "Detay"
@@ -611,31 +613,31 @@ msgstr "Selected"
 
 #: .\templates\partials\home\_blog.html:39
 msgid "Son Paylaşımlar"
-msgstr ""
+msgstr "Latest Posts"
 
 #: .\templates\partials\home\_blog.html:48
 msgid "Son Blog Paylaşımı"
-msgstr ""
+msgstr "Latest Blog Post"
 
 #: .\templates\partials\home\_blog.html:49
 msgid "Tüm Bloglar"
-msgstr ""
+msgstr "All Blogs"
 
 #: .\templates\partials\home\_blog.html:79
 msgid "Henüz yayınlanmış blog paylaşımı bulunmuyor."
-msgstr ""
+msgstr "No blog posts yet."
 
 #: .\templates\partials\home\_blog.html:90
 msgid "Son Duyuru"
-msgstr ""
+msgstr "Last Announcement"
 
 #: .\templates\partials\home\_blog.html:91
 msgid "Tüm Duyurular"
-msgstr ""
+msgstr "All Announcements"
 
 #: .\templates\partials\home\_blog.html:121
 msgid "Henüz yayınlanmış duyuru bulunmuyor."
-msgstr ""
+msgstr "No announcements yet."
 
 #: .\templates\partials\home\_contact.html:10
 #: .\templates\partials\home\_hero.html:97
@@ -644,15 +646,15 @@ msgstr "Contact"
 
 #: .\templates\partials\home\_contact.html:11
 msgid "Bize Ulaşın"
-msgstr ""
+msgstr "Contact Us"
 
 #: .\templates\partials\home\_contact.html:18
 msgid "Neredeyiz?"
-msgstr ""
+msgstr "Where are we?"
 
 #: .\templates\partials\home\_contact.html:22
 msgid "Haritada Aç"
-msgstr ""
+msgstr "Open in maps"
 
 #: .\templates\partials\home\_contact.html:29
 #, fuzzy
@@ -668,15 +670,15 @@ msgstr "Contact"
 
 #: .\templates\partials\home\_contact.html:46
 msgid "Adres"
-msgstr ""
+msgstr "Address"
 
 #: .\templates\partials\home\_contact.html:52
 msgid "Telefon"
-msgstr ""
+msgstr "Mobile"
 
 #: .\templates\partials\home\_contact.html:61
 msgid "E-posta"
-msgstr ""
+msgstr "E-mail"
 
 #: .\templates\partials\home\_hero.html:80
 msgid "Fiziksel pazarlama çözümleri"
@@ -727,7 +729,7 @@ msgstr "Molds Produced"
 
 #: .\templates\partials\home\_hero.html:124
 msgid "650'den fazla"
-msgstr ""
+msgstr "More than 650"
 
 #: .\templates\partials\home\_hero.html:125
 msgid "Mutlu Müşteri"
@@ -739,7 +741,7 @@ msgstr "Completed Projects"
 
 #: .\templates\partials\home\_partners.html:67
 msgid "Referanslarımız ve Partnerlerimiz"
-msgstr ""
+msgstr "Our References and Partners"
 
 #: .\templates\partials\home\_partners.html:69
 msgid "BİZE GÜVENEN MARKALAR"
@@ -767,11 +769,11 @@ msgstr "Search..."
 
 #: .\templates\partials\home\_search_cta.html:7
 msgid "Aradığınızı bulamadınız mı?"
-msgstr ""
+msgstr "Can't find what you are looking for?"
 
 #: .\templates\partials\home\_search_cta.html:8
 msgid "Güçlü arama özelliğimizi deneyin."
-msgstr ""
+msgstr "Try our strong search feature."
 
 #: .\templates\partials\home\_search_cta.html:15
 #, fuzzy
