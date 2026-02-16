@@ -1,9 +1,11 @@
 from autoslug import AutoSlugField
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import strip_tags
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -45,12 +47,14 @@ class BlogPost(models.Model):
     meta_description = models.TextField(
         max_length=160,
         blank=True,
+        null=True,
         verbose_name=_("Meta / Kısa Açıklama"),
         help_text=_("Girilmediyse içerikten çekilir, daha güçlü SEO için giriniz ancak zorunlu değildir."),
     )
     content = CKEditor5Field(
         verbose_name=_("Sayfa İçeriği"),
         blank=True,
+        null=True,
         config_name='page_design',
     )
 
@@ -64,12 +68,15 @@ class BlogPost(models.Model):
     cover_image_alt = models.CharField(
         max_length=255,
         blank=True,
+        null=True,
         verbose_name=_("Kapak Görseli Alt Metni"),
     )
     collection = models.CharField(
         max_length=20,
         choices=COLLECTION_CHOICES,
         default='post',
+        null=True,
+        blank=True,
         verbose_name=_("Koleksiyon"),
     )
 
@@ -78,10 +85,14 @@ class BlogPost(models.Model):
         max_length=10,
         choices=STATUS_CHOICES,
         default='draft',
+        null=True,
+        blank=True,
         verbose_name=_("Durum")
     )
     publish_date = models.DateTimeField(
         default=timezone.now,
+        null=True,
+        blank=True,
         verbose_name=_("Yayım Tarihi"),
         db_index=True
     )
@@ -131,17 +142,54 @@ class BlogPost(models.Model):
         if errors:
             raise ValidationError(errors)
 
-        slug_values = {
-            "slug": (self.slug or "").strip(),
-            "slug_en": (getattr(self, "slug_en", "") or "").strip(),
-            "slug_tr": (getattr(self, "slug_tr", "") or "").strip(),
+        reserved_slugs = {
+            slug.lower()
+            for slug in getattr(
+                settings,
+                "RESERVED_CATEGORY_SLUGS",
+                (
+                    "blog",
+                    "admin",
+                    "search",
+                    "politikalar",
+                    "i18n",
+                    "ckeditor5",
+                    "kitchen_sink",
+                    "injection-products",
+                    "pos-display-stands",
+                ),
+            )
         }
+        slug_candidates = {
+            "slug": (self.slug or slugify((self.title or "").strip(), allow_unicode=False)).strip().lower(),
+            "slug_en": (
+                (
+                    getattr(self, "slug_en", "")
+                    or slugify(((getattr(self, "title_en", None) or "").strip()), allow_unicode=False)
+                )
+                .strip()
+                .lower()
+            ),
+            "slug_tr": (
+                (
+                    getattr(self, "slug_tr", "")
+                    or slugify(((getattr(self, "title_tr", None) or "").strip()), allow_unicode=False)
+                )
+                .strip()
+                .lower()
+            ),
+        }
+
+        errors = {}
+        for field_name, slug_value in slug_candidates.items():
+            if slug_value and slug_value in reserved_slugs:
+                errors[field_name] = _("Bu slug kullanılamaz.")
+
         queryset = type(self).objects.all()
         if self.pk:
             queryset = queryset.exclude(pk=self.pk)
 
-        errors = {}
-        for field_name, slug_value in slug_values.items():
+        for field_name, slug_value in slug_candidates.items():
             if not slug_value:
                 continue
             if queryset.filter(build_slug_lookup_q(slug_value)).exists():

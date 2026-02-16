@@ -35,23 +35,23 @@ class Category(models.Model):
         max_length=10,
         choices=COLLECTION_CHOICES,
         verbose_name=_("Koleksiyon"),
+        null=True,
+        blank=True,
     )
     description = models.TextField(
         blank=True,
+        null=True,
         verbose_name=_("Açıklama"),
     )
     rich_text = CKEditor5Field(
         blank=True,
+        null=True,
         verbose_name=_("Zengin metin"),
-    )
-    seo_canonical = models.URLField(
-        blank=True,
-        default="",
-        editable=False,
-        verbose_name=_("Kanonik URL"),
     )
     publish_date = models.DateField(
         default=timezone.localdate,
+        null=True,
+        blank=True,
         verbose_name=_("Yayım tarihi"),
     )
 
@@ -73,11 +73,6 @@ class Category(models.Model):
                 self.description = plain_content
 
         super().save(*args, **kwargs)
-
-        # Canonical URL logic (usually points to default language)
-        canonical_url = self.get_absolute_url()
-        type(self).objects.filter(pk=self.pk).update(seo_canonical=canonical_url)
-        self.seo_canonical = canonical_url
 
     def get_absolute_url(self) -> str:
         category_slug = get_translated_slug(self)
@@ -173,10 +168,13 @@ class CategoryImage(models.Model):
     image = models.ImageField(
         upload_to="categories/images/",
         verbose_name=_("Görsel"),
+        null=True,
+        blank=True,
     )
     alt_text = models.CharField(
         max_length=255,
         blank=True,
+        null=True,
         verbose_name=_("Alternatif metin"),
     )
     is_primary = models.BooleanField(
@@ -212,11 +210,14 @@ class CategoryDocument(models.Model):
     title = models.CharField(
         max_length=255,
         blank=True,
+        null=True,
         verbose_name=_("Başlık"),
     )
     file = models.FileField(
         upload_to="categories/documents/",
         verbose_name=_("Dosya"),
+        null=True,
+        blank=True,
     )
     sort_order = models.PositiveIntegerField(
         default=0,

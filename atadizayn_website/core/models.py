@@ -8,6 +8,8 @@ class BrandCarouselImage(models.Model):
     image = models.FileField(
         upload_to="brands/carousel/",
         help_text=_("Marka logo görseli (PNG, JPG, SVG vb.)"),
+        null=True,
+        blank=True,
     )
     alt_text = models.CharField(
         max_length=255,
@@ -15,6 +17,7 @@ class BrandCarouselImage(models.Model):
     )
     website_url = models.URLField(
         blank=True,
+        null=True,
         default="",
         help_text=_("Müşteri web sitesi URL'si (isteğe bağlı)"),
     )
@@ -42,10 +45,13 @@ class SiteAsset(models.Model):
     file = models.FileField(
         upload_to="assets/",
         help_text=_("Varlık dosyasını yükleyin (Resim, Video, PDF vb.)"),
+        null=True,
+        blank=True,
     )
     description = models.CharField(
         max_length=255,
         blank=True,
+        null=True,
         help_text=_("Bu varlığın nerede kullanıldığına dair dahili not"),
     )
 
@@ -65,10 +71,15 @@ class SiteConfiguration(models.Model):
         unique=True,
         help_text=_("Konfigürasyon için benzersiz anahtar (örn. 'contact_email')"),
     )
-    value = models.TextField(help_text=_("Konfigürasyon değeri"))
+    value = models.TextField(
+        help_text=_("Konfigürasyon değeri"),
+        null=True,
+        blank=True,
+    )
     description = models.CharField(
         max_length=255,
         blank=True,
+        null=True,
         help_text=_("Bu ayarın ne yaptığını anlatan dahili not"),
     )
 

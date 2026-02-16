@@ -1,9 +1,11 @@
 from autoslug import AutoSlugField
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import strip_tags
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -32,14 +34,18 @@ class Product(models.Model):
     )
     publish_date = models.DateField(
         default=timezone.localdate,
+        null=True,
+        blank=True,
         verbose_name=_("Yayım tarihi"),
     )
     description = models.TextField(
         blank=True,
+        null=True,
         verbose_name=_("Açıklama"),
     )
     rich_text = CKEditor5Field(
         blank=True,
+        null=True,
         verbose_name=_("Zengin metin"),
     )
 
@@ -91,17 +97,54 @@ class Product(models.Model):
         if errors:
             raise ValidationError(errors)
 
-        slug_values = {
-            "slug": (self.slug or "").strip(),
-            "slug_en": (getattr(self, "slug_en", "") or "").strip(),
-            "slug_tr": (getattr(self, "slug_tr", "") or "").strip(),
+        reserved_slugs = {
+            slug.lower()
+            for slug in getattr(
+                settings,
+                "RESERVED_CATEGORY_SLUGS",
+                (
+                    "blog",
+                    "admin",
+                    "search",
+                    "politikalar",
+                    "i18n",
+                    "ckeditor5",
+                    "kitchen_sink",
+                    "injection-products",
+                    "pos-display-stands",
+                ),
+            )
         }
+        slug_candidates = {
+            "slug": (self.slug or slugify((self.name or "").strip(), allow_unicode=False)).strip().lower(),
+            "slug_en": (
+                (
+                    getattr(self, "slug_en", "")
+                    or slugify(((getattr(self, "name_en", None) or "").strip()), allow_unicode=False)
+                )
+                .strip()
+                .lower()
+            ),
+            "slug_tr": (
+                (
+                    getattr(self, "slug_tr", "")
+                    or slugify(((getattr(self, "name_tr", None) or "").strip()), allow_unicode=False)
+                )
+                .strip()
+                .lower()
+            ),
+        }
+
+        errors = {}
+        for field_name, slug_value in slug_candidates.items():
+            if slug_value and slug_value in reserved_slugs:
+                errors[field_name] = _("Bu slug kullanılamaz.")
+
         queryset = type(self).objects.all()
         if self.pk:
             queryset = queryset.exclude(pk=self.pk)
 
-        errors = {}
-        for field_name, slug_value in slug_values.items():
+        for field_name, slug_value in slug_candidates.items():
             if not slug_value:
                 continue
             if queryset.filter(build_slug_lookup_q(slug_value)).exists():
@@ -126,10 +169,13 @@ class ProductImage(models.Model):
     image = models.ImageField(
         upload_to="products/images/",
         verbose_name=_("Görsel"),
+        null=True,
+        blank=True,
     )
     alt_text = models.CharField(
         max_length=255,
         blank=True,
+        null=True,
         verbose_name=_("Alternatif metin"),
     )
     is_primary = models.BooleanField(
@@ -165,11 +211,14 @@ class ProductDocument(models.Model):
     title = models.CharField(
         max_length=255,
         blank=True,
+        null=True,
         verbose_name=_("Başlık"),
     )
     file = models.FileField(
         upload_to="products/documents/",
         verbose_name=_("Dosya"),
+        null=True,
+        blank=True,
     )
     sort_order = models.PositiveIntegerField(
         default=0,
@@ -222,26 +271,31 @@ class ProductVariant(models.Model):
     size = models.CharField(
         max_length=100,
         blank=True,
+        null=True,
         verbose_name=_("Ölçü"),
     )
     package_weight = models.CharField(
         max_length=100,
         blank=True,
+        null=True,
         verbose_name=_("Paket ağırlığı"),
     )
     package_size = models.CharField(
         max_length=100,
         blank=True,
+        null=True,
         verbose_name=_("Paket ölçüsü"),
     )
     package_quantity = models.CharField(
         max_length=100,
         blank=True,
+        null=True,
         verbose_name=_("Paket içi adet"),
     )
     minimum_order = models.CharField(
         max_length=100,
         blank=True,
+        null=True,
         verbose_name=_("Minimum sipariş"),
     )
 
