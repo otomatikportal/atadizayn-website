@@ -51,7 +51,7 @@
                     
                     {# Image Section #}
                     <div class="card-img-wrapper position-relative bg-light overflow-hidden">
-                        {% if category.images.first and category.images.first.image %}
+                        {% if category.images.first and category.images.first.image and category.images.first.image.url %}
                             <img src="{{ category.images.first.image.url }}" alt="{{ category.images.first.alt_text|default:category.name }}" class="w-100 h-100 object-fit-cover transition-transform">
                         {% else %}
                             <div class="d-flex w-100 h-100 align-items-center justify-content-center text-muted bg-secondary bg-opacity-10" style="height: 300px;">
