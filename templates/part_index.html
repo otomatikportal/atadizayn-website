@@ -23,7 +23,7 @@
                 <img src="{% asset_url 'part_index_banner_mobile' %}" alt="{% trans 'Bağlantı ve Mağaza Ekipmanları' %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
          </div>
     </div>
-    
+
     {# Overlay Content #}
     <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white z-1 px-3">
         <h1 class="display-4 fw-bold mb-2 text-shadow">
@@ -48,7 +48,7 @@
         <div class="col-md-6 col-lg-4">
             <a href="{{ category.get_absolute_url }}" class="text-decoration-none card-hover-effect d-block h-100">
                 <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden product-card">
-                    
+
                     {# Image Section #}
                     <div class="card-img-wrapper position-relative bg-light overflow-hidden">
                         {% if category.images.first and category.images.first.image and category.images.first.image.url %}
@@ -58,19 +58,19 @@
                                 <i class="bi bi-image fs-1 opacity-50"></i>
                             </div>
                         {% endif %}
-                        
+
                         {# Badge: Item Count #}
                         <div class="position-absolute top-0 end-0 m-3">
                             <span class="badge bg-white text-dark shadow-sm rounded-pill px-3 py-2 border border-light">
-                                <i class="bi bi-box-seam me-1 text-primary"></i> 
+                                <i class="bi bi-box-seam me-1 text-primary"></i>
                                 {{ category.items_count }} {% trans "Çeşit" %}
                             </span>
                         </div>
                     </div>
-                    
+
                     <div class="card-body p-4 text-center d-flex flex-column">
                         <h3 class="h4 fw-bold text-dark mb-2">{{ category.name }}</h3>
-                        
+
                         <div class="mb-3">
                             <div class="d-flex justify-content-center gap-2">
                                 <div class="h-1px w-50px bg-primary rounded"></div>
@@ -82,7 +82,7 @@
                         {% else %}
                             <p class="text-muted small mb-4 flex-grow-1">{% trans "Bu kategori için açıklama bulunmamaktadır." %}</p>
                         {% endif %}
-                        
+
                         <div class="mt-auto">
                             <span class="text-primary fw-bold small tracking-wide hover-underline">
                                 {% trans "Kategoriyi incele" %} <i class="bi bi-arrow-right ms-1"></i>
@@ -105,7 +105,7 @@
 
 <style>
     .card-img-wrapper {
-        height: 280px; 
+        height: 280px;
     }
     .line-clamp-3 {
         display: -webkit-box;
