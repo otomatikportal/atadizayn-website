@@ -140,7 +140,9 @@
         {% endif %}
         <div class="category-documents">
           <h3 class="h5 mb-3">{% trans "Belgeler" %}</h3>
-          <d{% if document.file %}
+          <div class="row g-2">
+            {% for document in category.documents.all %}
+            {% if document.file %}
             <div class="col-12 col-lg-6">
               <div class="d-flex align-items-center gap-2 p-3 border rounded bg-light">
                 <i class="bi {{ document.icon_name }} flex-shrink-0 fs-3"></i>
@@ -150,9 +152,7 @@
                 </a>
               </div>
             </div>
-            {% endif %}a>
-              </div>
-            </div>
+            {% endif %}
             {% endfor %}
           </div>
         </div>
