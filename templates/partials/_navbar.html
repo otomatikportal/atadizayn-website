@@ -7,7 +7,7 @@
     <a class="navbar-brand fw-bold d-flex align-items-center p-0"
        href="{% url 'home' %}">
       <img src="{% static 'svg/ata_logo_white_text.svg' %}"
-           alt="{% trans 'Atadizayn' %}"
+           alt="{% trans "Atadizayn" %}"
            class="navbar-logo">
     </a>
     <button class="navbar-toggler border-0"
@@ -76,14 +76,14 @@
             <i class="bi bi-journal-text me-1"></i> {% trans "Blog" %}
           </a>
         </li>
-        <li class="nav-item mt-md-0 mt-3">
+        <li class="nav-item mt-md-0">
           <a class="nav-link {% if request.resolver_match.url_name == 'blog-announcements' %}active{% endif %}"
              href="{% url 'blog-announcements' %}">
             <i class="bi bi-megaphone me-1"></i> {% trans "Duyurular" %}
           </a>
         </li>
       </ul>
-      <div class="d-flex align-items-center gap-2">
+      <div class="d-grid d-lg-flex align-items-lg-center gap-2 mt-2 mt-lg-0">
         <form class="d-flex"
               role="search"
               action="{% url 'global_search' %}"
@@ -91,15 +91,15 @@
           <input class="form-control me-2 border-0 opacity-75 focus-ring focus-ring-light"
                  type="search"
                  name="q"
-                 placeholder="{% trans 'Arama...' %}"
-                 aria-label="{% trans 'Search' %}"
+                 placeholder="{% trans "Arama..." %}"
+                 aria-label="{% trans "Search" %}"
                  value="{{ request.GET.q }}">
           <button class="btn btn-light text-info fw-bold" type="submit">
             <i class="bi bi-search"></i>
           </button>
         </form>
-        <div class="dropdown">
-          <button class="btn btn-light text-info d-flex align-items-center justify-content-center"
+        <div class="dropdown d-grid d-lg-block">
+          <button class="btn btn-light text-info d-flex align-items-center justify-content-center w-100"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -107,8 +107,7 @@
                   title="{% trans "Language" %}">
             <i class="bi bi-translate"></i>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end p-2 border-0 shadow-lg mt-2"
-              style="min-width: 12rem">
+          <ul class="dropdown-menu dropdown-menu-end p-2 border-0 shadow-lg mt-2">
             {% for language in languages %}
               {% get_language_switch_url language.code as switch_url %}
               <li>
