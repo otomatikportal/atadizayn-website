@@ -64,7 +64,7 @@ def get_config(key, default=""):
     """
     try:
         config = SiteConfiguration.objects.get(key=key)
-        return config.value
+        return config.value or default
     except SiteConfiguration.DoesNotExist:
         return default
 

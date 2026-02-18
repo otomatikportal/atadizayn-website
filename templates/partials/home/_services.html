@@ -1,4 +1,8 @@
-{% load i18n static %}
+{% load i18n static core_tags %}
+{% get_config 'services_link_design_rnd' '#' as services_link_design_rnd %}
+{% get_config 'services_link_mold_production' '#' as services_link_mold_production %}
+{% get_config 'services_link_injection' '#' as services_link_injection %}
+{% get_config 'services_link_assembly_logistics' '#' as services_link_assembly_logistics %}
 <style>
     .service-icon {
         width: 55px;
@@ -64,7 +68,7 @@
                             <div class="service-icon-svg icon-cad"></div>
                         </div>
                         <h3 class="h5 fw-bold mb-0">{% trans "Tasarım & Ar-Ge" %}</h3>
-                        <a href="#" class="link ms-auto text-decoration-none">
+                        <a href="{{ services_link_design_rnd }}" class="link ms-auto text-decoration-none">
                             {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -83,7 +87,7 @@
                             <div class="service-icon-svg icon-mold"></div>
                         </div>
                         <h3 class="h5 fw-bold mb-0">{% trans "Kalıp Üretimi" %}</h3>
-                        <a href="#" class="link ms-auto text-decoration-none">
+                        <a href="{{ services_link_mold_production }}" class="link ms-auto text-decoration-none">
                             {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -102,7 +106,7 @@
                             <div class="service-icon-svg icon-robot"></div>
                         </div>
                         <h3 class="h5 fw-bold mb-0">{% trans "Enjeksiyon" %}</h3>
-                        <a href="#" class="link ms-auto text-decoration-none">
+                        <a href="{{ services_link_injection }}" class="link ms-auto text-decoration-none">
                             {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -121,7 +125,7 @@
                             <i class="bi bi-tools fs-2"></i>
                         </div>
                         <h3 class="h5 fw-bold mb-0">{% trans "Montaj & Lojistik" %}</h3>
-                        <a href="#" class="link ms-auto text-decoration-none">
+                        <a href="{{ services_link_assembly_logistics }}" class="link ms-auto text-decoration-none">
                             {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
