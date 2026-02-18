@@ -8,7 +8,8 @@
 <style>
   .carousel-image {
     aspect-ratio: 1/1;
-    min-height: 400px;
+    width: 100%;
+    object-fit: contain;
   }
   .carousel-control-custom {
     width: 40px;
@@ -50,6 +51,7 @@
     <!-- Product Intro Section -->
     <section class="product-intro mb-5">
         <div class="mb-4">
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-2">{% trans "Ürün" %}</span>
             <h1 class="display-4 fw-bold mb-3">{{ product.name }}</h1>
             {% if product.description %}
             <p class="lead text-muted">{{ product.description }}</p>

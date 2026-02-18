@@ -12,7 +12,7 @@
                 <input class="form-control form-control-lg border-0 rounded-pill ps-4 focus-ring-none"
                        type="search"
                        name="q"
-                      placeholder="{% trans "Ürün, kategori, kod veya paylaşım ara..."" %}"
+                      placeholder="{% trans "Ürün, kategori, kod veya paylaşım ara..." %}"
                        aria-label="{% trans "Search" %}"
                        value="{{ query|default:'' }}"
                        style="box-shadow: none">
@@ -168,7 +168,7 @@
                                                     <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle align-self-start mb-2">{% trans "Paylaşım" %}</span>
                                                 {% endif %}
                                             {% elif item.collection %}
-                                                <span class="badge bg-light text-secondary border align-self-start mb-2">{% trans "Kategori" %}</span>
+                                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle align-self-start mb-2">{% trans "Kategori" %}</span>
                                             {% else %}
                                                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle align-self-start mb-2">{% trans "Ürün" %}</span>
                                             {% endif %}
