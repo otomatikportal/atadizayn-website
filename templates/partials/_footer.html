@@ -48,20 +48,29 @@
         {% endif %}
       </div>
     </div>
-    <div class="row pt-3 mt-3 border-top align-items-center">
-      <div class="col-12 col-md-4">
-        <div class="text-body-secondary">{% trans "© 2026 Atadizayn. Tüm Hakları Saklıdır." %}</div>
-      </div>
-      <div class="col-12 col-md-4 text-md-end">
-        <div class="text-body-secondary">{% trans "Made in Türkiye" %}</div>
-      </div>
-      <div class="col-12 col-md-4 text-center my-2 my-md-0">
+    <div class="row pt-3 mt-3 border-top align-items-start align-items-md-center">
+      <div class="col-12 col-md-4 d-flex justify-content-start align-items-center gap-3 mb-2 mb-md-0 order-1">
         <a href="{% url 'admin:index' %}">
           <img src="{% static 'svg/ata_logo_no_text.svg' %}"
                alt="{% trans "Atadizayn" %}"
-               style="width:64px;
-                      height:auto">
+               width="64">
         </a>
+        <a href="https://atahome.com.tr/" target="_blank" rel="noopener noreferrer">
+          <img src="{% static 'img/ata_home_logo.png' %}"
+               alt="Ata Home"
+               width="64">
+        </a>
+        <a href="https://atapet.com/" target="_blank" rel="noopener noreferrer">
+          <img src="{% static 'img/ata_pet_logo.png' %}"
+               alt="Ata Pet"
+               width="64">
+        </a>
+      </div>
+      <div class="col-12 col-md-4 text-md-center mb-2 mb-md-0 order-2">
+        <div class="text-body-secondary">{% trans "© 2026 Atadizayn. Tüm Hakları Saklıdır." %}</div>
+      </div>
+      <div class="col-12 col-md-4 text-md-end order-3">
+        <div class="text-body-secondary">{% trans "Made in Türkiye" %}</div>
       </div>
     </div>
   </div>
