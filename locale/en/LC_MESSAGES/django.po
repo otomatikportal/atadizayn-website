@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 10:26+0300\n"
+"POT-Creation-Date: 2026-02-19 13:58+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,8 +54,6 @@ msgid "Yayında"
 msgstr "Published"
 
 #: .\atadizayn_website\blog\models.py:25
-
-#| msgid "Politikalarımız"
 msgid "Politikalar"
 msgstr "Our Policies"
 
@@ -74,8 +71,6 @@ msgid "Kurumsal"
 msgstr "Corporate"
 
 #: .\atadizayn_website\blog\models.py:34
-
-#| msgid "Paket ağırlığı"
 msgid "Sayfa Başlığı"
 msgstr "Package weight"
 
@@ -96,8 +91,6 @@ msgid "Lütfen gerekmedikçe değiştirmeyin."
 msgstr "Please don't change unless it's required."
 
 #: .\atadizayn_website\blog\models.py:51
-
-#| msgid "Açıklama"
 msgid "Meta / Kısa Açıklama"
 msgstr "Description"
 
@@ -113,8 +106,6 @@ msgid "Sayfa İçeriği"
 msgstr "Page Content"
 
 #: .\atadizayn_website\blog\models.py:66
-
-#| msgid "Görsel"
 msgid "Kapak Görseli"
 msgstr "Image"
 
@@ -128,26 +119,18 @@ msgid "Koleksiyon"
 msgstr "Collection"
 
 #: .\atadizayn_website\blog\models.py:90
-
-#| msgid "Kurumsal"
 msgid "Durum"
 msgstr "Corporate"
 
 #: .\atadizayn_website\blog\models.py:96
-
-#| msgid "Yayım tarihi"
 msgid "Yayım Tarihi"
 msgstr "Publish date"
 
 #: .\atadizayn_website\blog\models.py:100
-
-#| msgid "Oluşturulma tarihi"
 msgid "Oluşturulma Tarihi"
 msgstr "Date created"
 
 #: .\atadizayn_website\blog\models.py:101
-
-#| msgid "Güncellenme tarihi"
 msgid "Güncellenme Tarihi"
 msgstr "Modified"
 
@@ -206,14 +189,10 @@ msgid "Bu markayı kaydırıcıda göster/gizle"
 msgstr ""
 
 #: .\atadizayn_website\core\models.py:30
-
-#| msgid "Kategori görseli"
 msgid "Marka Şerit Görseli"
 msgstr "Category image"
 
 #: .\atadizayn_website\core\models.py:31
-
-#| msgid "Kategori görselleri"
 msgid "Marka Şerit Görselleri"
 msgstr "Category images"
 
@@ -232,14 +211,10 @@ msgid "Bu varlığın nerede kullanıldığına dair dahili not"
 msgstr ""
 
 #: .\atadizayn_website\core\models.py:59
-
-#| msgid "Paket ağırlığı"
 msgid "Site Varlığı"
 msgstr "Package weight"
 
 #: .\atadizayn_website\core\models.py:60
-
-#| msgid "Sistem Kayıtları"
 msgid "Site Varlıkları"
 msgstr "System Records"
 
@@ -248,8 +223,6 @@ msgid "Konfigürasyon için benzersiz anahtar (örn. 'contact_email')"
 msgstr ""
 
 #: .\atadizayn_website\core\models.py:75
-
-#| msgid "Site konfigürasyonu"
 msgid "Konfigürasyon değeri"
 msgstr "Site configuration"
 
@@ -266,8 +239,6 @@ msgid "Site konfigürasyonları"
 msgstr "Site configurations"
 
 #: .\atadizayn_website\products\apps.py:8
-
-#| msgid "Ürün görseli"
 msgid "Ürün yönetimi"
 msgstr "Product image"
 
@@ -318,6 +289,7 @@ msgstr "Modified"
 #: .\atadizayn_website\products\models\category_models.py:208
 #: .\atadizayn_website\products\models\product_models.py:20
 #: .\templates\core\search_results.html:171
+#: .\templates\products\category_detail.html:62
 msgid "Kategori"
 msgstr "Category"
 
@@ -382,11 +354,12 @@ msgstr "Category documents"
 #: .\atadizayn_website\products\models\product_models.py:209
 #: .\atadizayn_website\products\models\product_models.py:264
 #: .\templates\core\search_results.html:173
+#: .\templates\products\product_detail.html:54
 msgid "Ürün"
 msgstr "Product"
 
 #: .\atadizayn_website\products\models\product_models.py:58
-#: .\templates\products\category_detail.html:170
+#: .\templates\products\category_detail.html:179
 msgid "Ürünler"
 msgstr "Products"
 
@@ -415,7 +388,7 @@ msgid "Kod (SKU)"
 msgstr "Code (SKU)"
 
 #: .\atadizayn_website\products\models\product_models.py:275
-#: .\templates\products\product_detail.html:150
+#: .\templates\products\product_detail.html:159
 msgid "Ölçü"
 msgstr "Size"
 
@@ -452,9 +425,9 @@ msgstr ""
 "products on an industrial scale"
 
 #: .\templates\blog\detail.html:83 .\templates\blog\detail.html:88
-#: .\templates\products\category_detail.html:47
-#: .\templates\products\category_detail.html:52
-#: .\templates\products\product_detail.html:46
+#: .\templates\products\category_detail.html:48
+#: .\templates\products\category_detail.html:53
+#: .\templates\products\product_detail.html:47
 msgid "Geri dön"
 msgstr "Go back"
 
@@ -464,8 +437,6 @@ msgid "Blog"
 msgstr "Blog"
 
 #: .\templates\blog\detail.html:105 .\templates\blog\detail.html:112
-
-#| msgid "Yayım tarihi"
 msgid "Yayın Tarihi"
 msgstr "Publish date"
 
@@ -491,14 +462,14 @@ msgid "Blog sayfalama"
 msgstr "Blog Pages"
 
 #: .\templates\blog\index.html:97 .\templates\core\search_results.html:202
-#: .\templates\products\category_detail.html:94
-#: .\templates\products\product_detail.html:78
+#: .\templates\products\category_detail.html:103
+#: .\templates\products\product_detail.html:87
 msgid "Önceki"
 msgstr "Previous"
 
 #: .\templates\blog\index.html:111 .\templates\core\search_results.html:220
-#: .\templates\products\category_detail.html:98
-#: .\templates\products\product_detail.html:82
+#: .\templates\products\category_detail.html:107
+#: .\templates\products\product_detail.html:91
 msgid "Sonraki"
 msgstr "Next"
 
@@ -507,14 +478,10 @@ msgid "Henüz yayınlanmış blog yazısı bulunmuyor."
 msgstr "No blog posts yet."
 
 #: .\templates\core\policy_detail.html:13
-
-#| msgid "Ana sayfa"
 msgid "Ana Sayfa"
 msgstr "Home"
 
 #: .\templates\core\policy_detail.html:20
-
-#| msgid "Güncellenme tarihi"
 msgid "Son Güncelleme:"
 msgstr "Modified"
 
@@ -523,8 +490,6 @@ msgid "Arama Sonuçları"
 msgstr "Search Results"
 
 #: .\templates\core\search_results.html:15
-
-#| msgid "Ürün, kategori veya kod ara..."
 msgid "Ürün, kategori, kod veya paylaşım ara..."
 msgstr "Search products, categories or codes..."
 
@@ -556,11 +521,16 @@ msgid "Anasayfaya Dön"
 msgstr "Back to Home"
 
 #: .\templates\core\search_results.html:53
-#: .\templates\core\search_results.html:56
+#: .\templates\core\search_results.html:56 .\templates\partials\_navbar.html:37
 #: .\templates\partials\home\_products.html:37
 #: .\templates\partials\home\_products.html:41
-msgid "POS Standlar"
-msgstr "POS Displays"
+#: .\templates\products\category_detail.html:53 .\templates\stand_index.html:5
+#: .\templates\stand_index.html:16 .\templates\stand_index.html:22
+#: .\templates\stand_index.html:34 .\templates\stand_index.html:38
+#, fuzzy
+#| msgid "POS Stand Çözümleri"
+msgid "POS ve Marka Görünürlük Çözümleri"
+msgstr "POS and Brand Visibility Solutions"
 
 #: .\templates\core\search_results.html:58
 #: .\templates\core\search_results.html:76
@@ -575,11 +545,12 @@ msgstr "View"
 
 #: .\templates\core\search_results.html:71
 #: .\templates\core\search_results.html:74 .\templates\part_index.html:5
-#: .\templates\part_index.html:16 .\templates\part_index.html:23
-#: .\templates\part_index.html:30 .\templates\partials\_navbar.html:58
+#: .\templates\part_index.html:16 .\templates\part_index.html:22
+#: .\templates\part_index.html:34 .\templates\part_index.html:38
+#: .\templates\partials\_navbar.html:58
 #: .\templates\partials\home\_products.html:57
 #: .\templates\partials\home\_products.html:60
-#: .\templates\products\category_detail.html:47
+#: .\templates\products\category_detail.html:48
 msgid "Bağlantı ve Mağaza Ekipmanları"
 msgstr "Fasteners and Store Equipment"
 
@@ -599,26 +570,26 @@ msgstr "Post"
 msgid "Detay"
 msgstr "Details"
 
-#: .\templates\part_index.html:33
+#: .\templates\part_index.html:25 .\templates\part_index.html:41
 msgid ""
 "Endüstriyel bağlantı çözümleri, mağaza ekipmanları ve geniş ürün yelpazemiz."
 msgstr ""
 "Industrial fastening solutions, store equipment, and our extensive product "
 "range."
 
-#: .\templates\part_index.html:66 .\templates\stand_index.html:67
+#: .\templates\part_index.html:75 .\templates\stand_index.html:75
 msgid "Çeşit"
 msgstr "Types"
 
-#: .\templates\part_index.html:83 .\templates\stand_index.html:84
+#: .\templates\part_index.html:92 .\templates\stand_index.html:92
 msgid "Bu kategori için açıklama bulunmamaktadır."
 msgstr "No description available for this category."
 
-#: .\templates\part_index.html:88 .\templates\stand_index.html:89
+#: .\templates\part_index.html:97 .\templates\stand_index.html:97
 msgid "Kategoriyi incele"
 msgstr "View category"
 
-#: .\templates\part_index.html:99 .\templates\stand_index.html:100
+#: .\templates\part_index.html:108 .\templates\stand_index.html:108
 msgid "Henüz bu koleksiyonda kategori bulunmamaktadır."
 msgstr "There are no categories in this collection yet."
 
@@ -627,8 +598,6 @@ msgid "Kategori bulunamadı."
 msgstr "No categories found."
 
 #: .\templates\partials\_footer.html:33
-
-#| msgid "Kategori bulunamadı."
 msgid "Kurumsal içerik bulunamadı."
 msgstr "No categories found."
 
@@ -640,28 +609,21 @@ msgstr "Our Policies"
 msgid "Politika bulunamadı."
 msgstr "No policies found."
 
-#: .\templates\partials\_footer.html:53
+#: .\templates\partials\_footer.html:55 .\templates\partials\_navbar.html:10
+msgid "Atadizayn"
+msgstr "Atadizayn"
+
+#: .\templates\partials\_footer.html:70
 msgid "© 2026 Atadizayn. Tüm Hakları Saklıdır."
 msgstr "© 2026 Atadizayn. All Rights Reserved."
 
-#: .\templates\partials\_footer.html:56
-msgid "Made in Türkiye"
-msgstr "Made in Türkiye"
-
-#: .\templates\partials\_footer.html:61 .\templates\partials\_navbar.html:10
-msgid "Atadizayn"
-msgstr "Atadizayn"
+#: .\templates\partials\_footer.html:73
+msgid "Made by"
+msgstr ""
 
 #: .\templates\partials\_navbar.html:28
 msgid "Ana sayfa"
 msgstr "Home"
-
-#: .\templates\partials\_navbar.html:37
-#: .\templates\products\category_detail.html:52 .\templates\stand_index.html:5
-#: .\templates\stand_index.html:16 .\templates\stand_index.html:23
-#: .\templates\stand_index.html:30
-msgid "POS Stand Çözümleri"
-msgstr "POS Display Solutions"
 
 #: .\templates\partials\_navbar.html:47 .\templates\partials\_navbar.html:68
 msgid "Kategori yok"
@@ -725,14 +687,10 @@ msgid "Haritada Aç"
 msgstr "Open in maps"
 
 #: .\templates\partials\home\_contact.html:29
-
-#| msgid "Atadizayn"
 msgid "Ata Dizayn Konum"
 msgstr "Atadizayn"
 
 #: .\templates\partials\home\_contact.html:41
-
-#| msgid "İletişim"
 msgid "İletişim Bilgileri"
 msgstr "Contact"
 
@@ -825,8 +783,6 @@ msgstr ""
 "needs."
 
 #: .\templates\partials\home\_search_cta.html:6
-
-#| msgid "Arama..."
 msgid "Arama"
 msgstr "Search..."
 
@@ -839,8 +795,6 @@ msgid "Güçlü arama özelliğimizi deneyin."
 msgstr "Try our strong search feature."
 
 #: .\templates\partials\home\_search_cta.html:15
-
-#| msgid "Ürün, kategori veya kod ara..."
 msgid "Ürün, kategori, kod veya paylaşımların içinde ara..."
 msgstr "Search products, categories or codes..."
 
@@ -906,47 +860,58 @@ msgid ""
 "getiriyoruz."
 msgstr "We assemble, package, and prepare the manufactured parts for shipment."
 
-#: .\templates\products\category_detail.html:142
-#: .\templates\products\product_detail.html:118
+#: .\templates\products\category_detail.html:66
+#: .\templates\products\product_detail.html:58
+msgid "Düzenle"
+msgstr ""
+
+#: .\templates\products\category_detail.html:151
+#: .\templates\products\product_detail.html:127
 msgid "Belgeler"
 msgstr "Documents"
 
-#: .\templates\products\category_detail.html:150
-#: .\templates\products\product_detail.html:125
+#: .\templates\products\category_detail.html:159
+#: .\templates\products\product_detail.html:134
 msgid "İndir"
 msgstr "Download"
 
-#: .\templates\products\product_detail.html:142
+#: .\templates\products\product_detail.html:151
 msgid "Modeller / Varyantlar"
 msgstr "Models / Variants"
 
-#: .\templates\products\product_detail.html:149
+#: .\templates\products\product_detail.html:158
 msgid "SKU / Kod"
 msgstr "SKU / Code"
 
-#: .\templates\products\product_detail.html:151
-#: .\templates\products\product_detail.html:186
+#: .\templates\products\product_detail.html:160
+#: .\templates\products\product_detail.html:195
 msgid "Paket Boyutu"
 msgstr "Package Size"
 
-#: .\templates\products\product_detail.html:152
-#: .\templates\products\product_detail.html:189
+#: .\templates\products\product_detail.html:161
+#: .\templates\products\product_detail.html:198
 msgid "Paket İçi Adet"
 msgstr "Quantity per Pack"
 
-#: .\templates\products\product_detail.html:153
-#: .\templates\products\product_detail.html:192
+#: .\templates\products\product_detail.html:162
+#: .\templates\products\product_detail.html:201
 msgid "Ağırlık"
 msgstr "Weight"
 
-#: .\templates\products\product_detail.html:154
-#: .\templates\products\product_detail.html:195
+#: .\templates\products\product_detail.html:163
+#: .\templates\products\product_detail.html:204
 msgid "Min. Sipariş"
 msgstr "Min. Order"
 
-#: .\templates\stand_index.html:33
+#: .\templates\stand_index.html:25 .\templates\stand_index.html:41
 msgid "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları."
 msgstr "Creative and durable display designs that make your brand stand out."
+
+#~ msgid "POS Standlar"
+#~ msgstr "POS Displays"
+
+#~ msgid "Made in Türkiye"
+#~ msgstr "Made in Türkiye"
 
 #~ msgid "Kanonik URL"
 #~ msgstr "Canonical URL"
