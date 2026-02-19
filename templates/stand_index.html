@@ -9,31 +9,38 @@
 {% block content %}
 
 {# --- HERO SECTION --- #}
-<div class="position-relative w-100 bg-secondary bg-opacity-25 overflow-hidden mb-5">
+<div class="position-relative w-100 bg-secondary bg-opacity-25 overflow-hidden">
 	{# Desktop Banner (16:9) #}
 	<div class="d-none d-lg-block position-relative w-100">
 		<div style="padding-top: 40%;" class="position-relative">
 			<img src="{% asset_url 'stand_index_banner_desktop' %}" alt="{% trans "POS Stand Çözümleri" %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
 		</div>
+		{# Desktop Overlay Content #}
+		<div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white z-1 px-3">
+			<div class="bg-dark bg-opacity-50 p-4 rounded-3 shadow-sm backdrop-blur">
+				<h1 class="display-4 fw-bold mb-2">
+					{% trans "POS Stand Çözümleri" %}
+				</h1>
+				<p class="lead mx-auto mb-0">
+					{% trans "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları." %}
+				</p>
+			</div>
+		</div>
 	</div>
 
-	{# Mobile Banner (1:1) #}
-	<div class="d-lg-none position-relative w-100">
+	{# Mobile Banner (1:1) and Content Below #}
+	<div class="d-lg-none w-100">
 		 <div style="padding-top: 100%;" class="position-relative">
 			<img src="{% asset_url 'stand_index_banner_mobile' %}" alt="{% trans "POS Stand Çözümleri" %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
 		 </div>
-	</div>
-
-	{# Overlay Content #}
-	<div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white z-1 px-3">
-		<div class="bg-dark bg-opacity-50 p-4 rounded-3 shadow-sm backdrop-blur">
-			<h1 class="display-4 fw-bold mb-2">
-				{% trans "POS Stand Çözümleri" %}
-			</h1>
-			<p class="lead mx-auto mb-0 d-none d-md-block">
-				{% trans "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları." %}
-			</p>
-		</div>
+		 <div class="bg-dark text-white p-4 text-center">
+			 <h1 class="h2 fw-bold mb-2">
+				 {% trans "POS Stand Çözümleri" %}
+			 </h1>
+			 <p class="mb-0">
+				 {% trans "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları." %}
+			 </p>
+		 </div>
 	</div>
 </div>
 
@@ -44,7 +51,7 @@
 </style>
 
 {# --- CATEGORIES GRID --- #}
-<div class="container pb-5">
+<div class="container py-5">
 	<div class="row g-4 justify-content-center">
 		{% for category in categories %}
 		<div class="col-md-6 col-lg-4">
