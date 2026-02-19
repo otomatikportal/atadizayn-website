@@ -527,7 +527,6 @@ msgstr "Back to Home"
 #: .\templates\products\category_detail.html:53 .\templates\stand_index.html:5
 #: .\templates\stand_index.html:16 .\templates\stand_index.html:22
 #: .\templates\stand_index.html:34 .\templates\stand_index.html:38
-#, fuzzy
 #| msgid "POS Stand Çözümleri"
 msgid "POS ve Marka Görünürlük Çözümleri"
 msgstr "POS and Brand Visibility Solutions"
