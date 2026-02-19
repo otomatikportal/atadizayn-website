@@ -60,7 +60,14 @@
     <!-- Category Header -->
     <div class="mb-4">
       <span class="badge bg-success-subtle text-success border border-success-subtle mb-2">{% trans "Kategori" %}</span>
-      <h1 class="display-4 fw-bold mb-3">{{ category.name }}</h1>
+      <h1 class="display-4 fw-bold mb-3 d-flex align-items-center gap-3">
+        {{ category.name }}
+        {% if user.is_staff %}
+        <a href="{% url 'admin:products_category_change' category.pk %}" class="btn btn-sm btn-outline-secondary" target="_blank" title="{% trans 'Düzenle' %}">
+          <i class="bi bi-pencil"></i>
+        </a>
+        {% endif %}
+      </h1>
       {% if category.description %}
       <p class="lead text-muted">{{ category.description }}</p>
       {% endif %}

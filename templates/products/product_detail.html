@@ -52,7 +52,14 @@
     <section class="product-intro mb-5">
         <div class="mb-4">
             <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-2">{% trans "Ürün" %}</span>
-            <h1 class="display-4 fw-bold mb-3">{{ product.name }}</h1>
+            <h1 class="display-4 fw-bold mb-3 d-flex align-items-center gap-3">
+                {{ product.name }}
+                {% if user.is_staff %}
+                <a href="{% url 'admin:products_product_change' product.pk %}" class="btn btn-sm btn-outline-secondary" target="_blank" title="{% trans 'Düzenle' %}">
+                    <i class="bi bi-pencil"></i>
+                </a>
+                {% endif %}
+            </h1>
             {% if product.description %}
             <p class="lead text-muted">{{ product.description }}</p>
             {% endif %}
