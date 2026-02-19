@@ -9,35 +9,37 @@
 {% block content %}
 
 {# --- HERO SECTION --- #}
-<div class="position-relative w-100 bg-dark overflow-hidden mb-5">
+<div class="position-relative w-100 bg-secondary bg-opacity-25 overflow-hidden mb-5">
 	{# Desktop Banner (16:9) #}
 	<div class="d-none d-lg-block position-relative w-100">
 		<div style="padding-top: 40%;" class="position-relative">
-			<img src="{% asset_url 'stand_index_banner_desktop' %}" alt="{% trans "POS Stand Çözümleri" %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
+			<img src="{% asset_url 'stand_index_banner_desktop' %}" alt="{% trans "POS Stand Çözümleri" %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
 		</div>
 	</div>
 
 	{# Mobile Banner (1:1) #}
 	<div class="d-lg-none position-relative w-100">
 		 <div style="padding-top: 100%;" class="position-relative">
-			<img src="{% asset_url 'stand_index_banner_mobile' %}" alt="{% trans "POS Stand Çözümleri" %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-75">
+			<img src="{% asset_url 'stand_index_banner_mobile' %}" alt="{% trans "POS Stand Çözümleri" %}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
 		 </div>
 	</div>
 
 	{# Overlay Content #}
 	<div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white z-1 px-3">
-		<h1 class="display-4 fw-bold mb-2 text-shadow">
-			{% trans "POS Stand Çözümleri" %}
-		</h1>
-		<p class="lead w-75 mx-auto text-shadow d-none d-md-block">
-			{% trans "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları." %}
-		</p>
+		<div class="bg-dark bg-opacity-50 p-4 rounded-3 shadow-sm backdrop-blur">
+			<h1 class="display-4 fw-bold mb-2">
+				{% trans "POS Stand Çözümleri" %}
+			</h1>
+			<p class="lead mx-auto mb-0 d-none d-md-block">
+				{% trans "Markanızı öne çıkaran yaratıcı ve dayanıklı stand tasarımları." %}
+			</p>
+		</div>
 	</div>
 </div>
 
 <style>
-	.text-shadow {
-		text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+	.backdrop-blur {
+		backdrop-filter: blur(4px);
 	}
 </style>
 
