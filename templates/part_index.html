@@ -69,12 +69,14 @@
                         {% endif %}
 
                         {# Badge: Item Count #}
+                        {% if category.items_count > 0 %}
                         <div class="position-absolute top-0 end-0 m-3">
                             <span class="badge bg-white text-dark shadow-sm px-3 py-2 border border-light">
                                 <i class="bi bi-box-seam me-1 text-primary"></i>
                                 {{ category.items_count }} {% trans "Çeşit" %}
                             </span>
                         </div>
+                        {% endif %}
                     </div>
 
                     <div class="card-body p-4 text-center d-flex flex-column">
