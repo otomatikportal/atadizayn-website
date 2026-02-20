@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render
 from django.views.generic import DetailView
+from django.utils.translation import gettext_lazy as _
 
 from atadizayn_website.core.slug_utils import build_active_language_slug_lookup_q
 
@@ -10,17 +11,17 @@ from .models import BlogPost
 
 
 COLLECTION_LABELS = {
-    "policy": "Politikalar",
-    "announcement": "Duyurular",
-    "post": "Blog paylaşımları",
-    "corporate": "Kurumsal",
+    "policy": _("Politikalar"),
+    "announcement": _("Duyurular"),
+    "post": _("Blog paylaşımları"),
+    "corporate": _("Kurumsal"),
 }
 
 COLLECTION_SUBTITLES = {
-    "policy": "Tüm politika içeriklerimizi bu sayfada bulabilirsiniz.",
-    "announcement": "En güncel duyurularımızı burada takip edebilirsiniz.",
-    "post": "Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar.",
-    "corporate": "Kurumsal içerik ve paylaşımlarımız.",
+    "policy": _("Tüm politika içeriklerimizi bu sayfada bulabilirsiniz."),
+    "announcement": _("En güncel duyurularımızı burada takip edebilirsiniz."),
+    "post": _("Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar."),
+    "corporate": _("Kurumsal içerik ve paylaşımlarımız."),
 }
 
 
@@ -38,7 +39,7 @@ def blog_index(request):
         "blog/index.html",
         {
             "page_obj": page_obj,
-            "page_title_text": "Blog paylaşımları",
+            "page_title_text": COLLECTION_LABELS["post"],
             "page_subtitle_text": COLLECTION_SUBTITLES["post"],
         },
     )
@@ -74,4 +75,7 @@ class BlogDetailView(DetailView):
     def get_object(self, queryset=None):
         queryset = queryset or self.get_queryset()
         slug = self.kwargs["slug"]
-        return queryset.get(build_active_language_slug_lookup_q(slug))
+        try:
+            return queryset.get(build_active_language_slug_lookup_q(slug))
+        except BlogPost.DoesNotExist:
+            raise Http404(_("Blog yazısı bulunamadı."))

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-19 13:58+0300\n"
+"POT-Creation-Date: 2026-02-20 11:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,20 +53,21 @@ msgstr "Draft"
 msgid "Yayında"
 msgstr "Published"
 
-#: .\atadizayn_website\blog\models.py:25
+#: .\atadizayn_website\blog\models.py:25 .\atadizayn_website\blog\views.py:14
 msgid "Politikalar"
 msgstr "Our Policies"
 
-#: .\atadizayn_website\blog\models.py:26 .\templates\blog\detail.html:83
-#: .\templates\partials\_navbar.html:82
+#: .\atadizayn_website\blog\models.py:26 .\atadizayn_website\blog\views.py:15
+#: .\templates\blog\detail.html:83 .\templates\partials\_navbar.html:82
 msgid "Duyurular"
 msgstr "Announcements"
 
-#: .\atadizayn_website\blog\models.py:27
+#: .\atadizayn_website\blog\models.py:27 .\atadizayn_website\blog\views.py:16
 msgid "Blog paylaşımları"
 msgstr "Blog posts"
 
-#: .\atadizayn_website\blog\models.py:28 .\templates\partials\_footer.html:23
+#: .\atadizayn_website\blog\models.py:28 .\atadizayn_website\blog\views.py:17
+#: .\templates\partials\_footer.html:23
 msgid "Kurumsal"
 msgstr "Corporate"
 
@@ -167,6 +168,28 @@ msgstr "This slug is used in another blog post"
 #: .\atadizayn_website\blog\models.py:205
 msgid "Kapak görseli 3:1 oranında olmalıdır."
 msgstr "Cover image must be 3:1"
+
+#: .\atadizayn_website\blog\views.py:21
+msgid "Tüm politika içeriklerimizi bu sayfada bulabilirsiniz."
+msgstr ""
+
+#: .\atadizayn_website\blog\views.py:22
+msgid "En güncel duyurularımızı burada takip edebilirsiniz."
+msgstr ""
+
+#: .\atadizayn_website\blog\views.py:23 .\templates\blog\index.html:46
+msgid "Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar."
+msgstr "News, ideas and product related posts from Ata Dizayn"
+
+#: .\atadizayn_website\blog\views.py:24
+#| msgid "Kurumsal içerik bulunamadı."
+msgid "Kurumsal içerik ve paylaşımlarımız."
+msgstr "No categories found."
+
+#: .\atadizayn_website\blog\views.py:81
+#| msgid "Politika bulunamadı."
+msgid "Blog yazısı bulunamadı."
+msgstr "No policies found."
 
 #: .\atadizayn_website\core\apps.py:7
 msgid "Temel Özellikler"
@@ -416,6 +439,40 @@ msgstr "Product Variant"
 msgid "Ürün Varyantları"
 msgstr "Product Variants"
 
+#: .\templates\404.html:5
+#| msgid "Kategori bulunamadı."
+msgid "Sayfa Bulunamadı"
+msgstr "No categories found."
+
+#: .\templates\404.html:13
+#| msgid "Aradığınızı bulamadınız mı?"
+msgid "Aradığınız sayfa bulunamadı."
+msgstr "Can't find what you are looking for?"
+
+#: .\templates\404.html:15
+msgid ""
+"Ulaşmaya çalıştığınız sayfa silinmiş, adı değiştirilmiş veya geçici olarak "
+"kullanım dışı olabilir."
+msgstr ""
+
+#: .\templates\404.html:18 .\templates\500.html:18
+#: .\templates\core\search_results.html:44
+msgid "Anasayfaya Dön"
+msgstr "Back to Home"
+
+#: .\templates\500.html:5
+msgid "Sunucu Hatası"
+msgstr ""
+
+#: .\templates\500.html:13
+msgid "Beklenmedik bir hata oluştu."
+msgstr ""
+
+#: .\templates\500.html:15
+msgid ""
+"Şu anda işleminizi gerçekleştiremiyoruz. Lütfen daha sonra tekrar deneyiniz."
+msgstr ""
+
 #: .\templates\base.html:13
 msgid ""
 "Ata Dizayn enjeksiyon kalıbı ve POS pazarlama ürünlerini endüstriyel ölçekte "
@@ -447,10 +504,6 @@ msgstr "Explore blog posts from Ata Dizayn"
 #: .\templates\blog\index.html:34 .\templates\partials\home\_blog.html:38
 msgid "Paylaşımlar"
 msgstr "Posts"
-
-#: .\templates\blog\index.html:46
-msgid "Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar."
-msgstr "News, ideas and product related posts from Ata Dizayn"
 
 #: .\templates\blog\index.html:84 .\templates\partials\home\_blog.html:75
 #: .\templates\partials\home\_blog.html:117
@@ -516,10 +569,6 @@ msgstr "Sorry, no results were found matching your search."
 msgid "Lütfen bir arama terimi girin."
 msgstr "Please enter a search term."
 
-#: .\templates\core\search_results.html:44
-msgid "Anasayfaya Dön"
-msgstr "Back to Home"
-
 #: .\templates\core\search_results.html:53
 #: .\templates\core\search_results.html:56 .\templates\partials\_navbar.html:37
 #: .\templates\partials\home\_products.html:37
@@ -527,7 +576,6 @@ msgstr "Back to Home"
 #: .\templates\products\category_detail.html:53 .\templates\stand_index.html:5
 #: .\templates\stand_index.html:16 .\templates\stand_index.html:22
 #: .\templates\stand_index.html:34 .\templates\stand_index.html:38
-#| msgid "POS Stand Çözümleri"
 msgid "POS ve Marka Görünürlük Çözümleri"
 msgstr "POS and Brand Visibility Solutions"
 
@@ -576,19 +624,19 @@ msgstr ""
 "Industrial fastening solutions, store equipment, and our extensive product "
 "range."
 
-#: .\templates\part_index.html:75 .\templates\stand_index.html:75
+#: .\templates\part_index.html:76 .\templates\stand_index.html:76
 msgid "Çeşit"
 msgstr "Types"
 
-#: .\templates\part_index.html:92 .\templates\stand_index.html:92
+#: .\templates\part_index.html:94 .\templates\stand_index.html:94
 msgid "Bu kategori için açıklama bulunmamaktadır."
 msgstr "No description available for this category."
 
-#: .\templates\part_index.html:97 .\templates\stand_index.html:97
+#: .\templates\part_index.html:99 .\templates\stand_index.html:99
 msgid "Kategoriyi incele"
 msgstr "View category"
 
-#: .\templates\part_index.html:108 .\templates\stand_index.html:108
+#: .\templates\part_index.html:110 .\templates\stand_index.html:110
 msgid "Henüz bu koleksiyonda kategori bulunmamaktadır."
 msgstr "There are no categories in this collection yet."
 
