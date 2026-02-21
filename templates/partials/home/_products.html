@@ -18,16 +18,16 @@
 </style>
 {# --- PRODUCTS SECTION --- #}
 <section class="container my-5 py-4" id="products">
-    <div class="text-start mb-5">
+    <div class="text-start mb-md-5 mb-2">
         <span class="badge text-bg-primary text-white px-3 fs-3 py-2 mb-3 shadow-sm">{% trans "Ürünlerimiz" %}</span>
         <h2 class="display-5 fw-bold mb-2">{% trans "Kalite ve Çeşitlilik" %}</h2>
         <p class="text-muted w-75">
             {% trans "Sektörün ihtiyaçlarına yönelik geniş ürün gamımızla hizmetinizdeyiz." %}
         </p>
     </div>
-    <div class="row g-4">
+    <div class="row g-1 g-md-4">
         {# Category 1: Stands #}
-        <article class="col-md-6">
+        <article class="col-6">
             <a href="{% url "stand_index" %}" class="text-decoration-none product-category-card">
                 <div class="card border-0 shadow-lg overflow-hidden text-white h-100 rounded-4">
                     {# Image Background using SiteAsset #}
@@ -37,7 +37,7 @@
                              alt="{% trans "POS ve Marka Görünürlük Çözümleri" %}"
                              class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         {# Content Overlay #}
-                        <div class="card-img-overlay d-flex flex-column justify-content-end p-4 gradient-overlay">
+                        <div class="card-img-overlay d-flex flex-column justify-content-end p-2 p-md-4 gradient-overlay">
                             <h3 class="display-6 fw-bold mb-1">{% trans "POS ve Marka Görünürlük Çözümleri" %}</h3>
                             <p class="mb-0 text-white-50 fs-5">
                                 <i class="bi bi-arrow-right-circle me-2"></i>{% trans "İncele" %}
@@ -48,7 +48,7 @@
             </a>
         </article>
         {# Category 2: Fixings (Parts) #}
-        <article class="col-md-6">
+        <article class="col-6">
             <a href="{% url "part_index" %}"
                class="text-decoration-none product-category-card">
                 <div class="card border-0 shadow-lg overflow-hidden text-white h-100 rounded-4">
@@ -56,7 +56,7 @@
                         <img src="{% asset_url 'fixings_banner' %}"
                              alt="{% trans "Bağlantı ve Mağaza Ekipmanları" %}"
                              class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-                        <div class="card-img-overlay d-flex flex-column justify-content-end p-4 gradient-overlay">
+                        <div class="card-img-overlay d-flex flex-column justify-content-end p-2 p-md-4 gradient-overlay">
                             <h3 class="display-6 fw-bold mb-1">{% trans "Bağlantı ve Mağaza Ekipmanları" %}</h3>
                             <p class="mb-0 text-white-50 fs-5">
                                 <i class="bi bi-arrow-right-circle me-2"></i>{% trans "İncele" %}
