@@ -1,0 +1,30 @@
+{% load i18n core_tags %}
+
+<section class="bg-primary text-white py-3 shadow-sm border-top border-bottom" id="catalogs">
+    <div class="container d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 gap-md-5">
+        {% get_config 'part_catalog_gdrivelink' as part_link %}
+        {% get_config 'stand_catalog_gdrivelink' as stand_link %}
+
+        {% if part_link or stand_link %}
+            <div class="d-flex align-items-center mb-2 mb-md-0">
+                <span class="fw-bold text-uppercase small bg-white text-primary px-3 py-1 rounded-pill">
+                    <i class="bi bi-download me-1"></i>{% trans "Kataloglarımızı İnceleyin" %}
+                </span>
+            </div>
+            
+            {% if part_link %}
+                <a href="{{ part_link }}" target="_blank" class="text-white text-decoration-none d-flex align-items-center">
+                    <i class="bi bi-file-earmark-pdf fs-4 me-2 lh-1 text-white-50"></i>
+                    <span class="fw-semibold">{% trans "Parça Kataloğu" %}</span>
+                </a>
+            {% endif %}
+
+            {% if stand_link %}
+                <a href="{{ stand_link }}" target="_blank" class="text-white text-decoration-none d-flex align-items-center">
+                    <i class="bi bi-file-earmark-pdf fs-4 me-2 lh-1 text-white-50"></i>
+                    <span class="fw-semibold">{% trans "Stand Kataloğu" %}</span>
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+</section>
