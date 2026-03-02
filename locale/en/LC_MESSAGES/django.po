@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-20 11:21+0300\n"
+"POT-Creation-Date: 2026-03-02 09:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,12 +182,10 @@ msgid "Atadizayn’dan haberler, fikirler ve ürün odaklı paylaşımlar."
 msgstr "News, ideas and product related posts from Ata Dizayn"
 
 #: .\atadizayn_website\blog\views.py:24
-#| msgid "Kurumsal içerik bulunamadı."
 msgid "Kurumsal içerik ve paylaşımlarımız."
 msgstr "No categories found."
 
 #: .\atadizayn_website\blog\views.py:81
-#| msgid "Politika bulunamadı."
 msgid "Blog yazısı bulunamadı."
 msgstr "No policies found."
 
@@ -440,12 +438,10 @@ msgid "Ürün Varyantları"
 msgstr "Product Variants"
 
 #: .\templates\404.html:5
-#| msgid "Kategori bulunamadı."
 msgid "Sayfa Bulunamadı"
 msgstr "No categories found."
 
 #: .\templates\404.html:13
-#| msgid "Aradığınızı bulamadınız mı?"
 msgid "Aradığınız sayfa bulunamadı."
 msgstr "Can't find what you are looking for?"
 
@@ -592,8 +588,8 @@ msgstr "View"
 
 #: .\templates\core\search_results.html:71
 #: .\templates\core\search_results.html:74 .\templates\part_index.html:5
-#: .\templates\part_index.html:16 .\templates\part_index.html:22
-#: .\templates\part_index.html:34 .\templates\part_index.html:38
+#: .\templates\part_index.html:17 .\templates\part_index.html:24
+#: .\templates\part_index.html:36 .\templates\part_index.html:40
 #: .\templates\partials\_navbar.html:58
 #: .\templates\partials\home\_products.html:57
 #: .\templates\partials\home\_products.html:60
@@ -617,26 +613,26 @@ msgstr "Post"
 msgid "Detay"
 msgstr "Details"
 
-#: .\templates\part_index.html:25 .\templates\part_index.html:41
+#: .\templates\part_index.html:27 .\templates\part_index.html:43
 msgid ""
 "Endüstriyel bağlantı çözümleri, mağaza ekipmanları ve geniş ürün yelpazemiz."
 msgstr ""
 "Industrial fastening solutions, store equipment, and our extensive product "
 "range."
 
-#: .\templates\part_index.html:76 .\templates\stand_index.html:76
+#: .\templates\part_index.html:78 .\templates\stand_index.html:76
 msgid "Çeşit"
 msgstr "Types"
 
-#: .\templates\part_index.html:94 .\templates\stand_index.html:94
+#: .\templates\part_index.html:96 .\templates\stand_index.html:94
 msgid "Bu kategori için açıklama bulunmamaktadır."
 msgstr "No description available for this category."
 
-#: .\templates\part_index.html:99 .\templates\stand_index.html:99
+#: .\templates\part_index.html:101 .\templates\stand_index.html:99
 msgid "Kategoriyi incele"
 msgstr "View category"
 
-#: .\templates\part_index.html:110 .\templates\stand_index.html:110
+#: .\templates\part_index.html:112 .\templates\stand_index.html:110
 msgid "Henüz bu koleksiyonda kategori bulunmamaktadır."
 msgstr "There are no categories in this collection yet."
 
@@ -660,12 +656,12 @@ msgstr "No policies found."
 msgid "Atadizayn"
 msgstr "Atadizayn"
 
-#: .\templates\partials\_footer.html:70
+#: .\templates\partials\_footer.html:68
 msgid "© 2026 Atadizayn. Tüm Hakları Saklıdır."
 msgstr "© 2026 Atadizayn. All Rights Reserved."
 
-#: .\templates\partials\_footer.html:73
-msgid "Made by"
+#: .\templates\partials\_footer.html:71
+msgid "Made by "
 msgstr ""
 
 #: .\templates\partials\_navbar.html:28
@@ -715,6 +711,18 @@ msgstr "All Announcements"
 #: .\templates\partials\home\_blog.html:121
 msgid "Henüz yayınlanmış duyuru bulunmuyor."
 msgstr "No announcements yet."
+
+#: .\templates\partials\home\_catalogs.html:11
+msgid "Kataloglarımızı İnceleyin"
+msgstr "See our catalogs"
+
+#: .\templates\partials\home\_catalogs.html:18
+msgid "Parça Kataloğu"
+msgstr "Parts Catalog"
+
+#: .\templates\partials\home\_catalogs.html:25
+msgid "Stand Kataloğu"
+msgstr "Stand Catalog"
 
 #: .\templates\partials\home\_contact.html:10
 #: .\templates\partials\home\_hero.html:97
