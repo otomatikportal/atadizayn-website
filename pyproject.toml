@@ -1,7 +1,3 @@
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "atadizayn_website"
 version = "0.1.0"
@@ -20,7 +16,7 @@ dependencies = [
     "boto3>=1.34",
     "django-modeltranslation>=0.19",
     "Pillow>=10.0",
-    "whitenoise",
+    "whitenoise[brotli]",
     "django-ckeditor-5>=0.2.19",
     "django-image-cropping",
     "easy-thumbnails",
@@ -93,8 +89,3 @@ quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "auto"
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["config", "atadizayn_website"]
-namespaces = false

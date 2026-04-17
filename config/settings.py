@@ -2,15 +2,40 @@ from pathlib import Path
 
 import environ
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env()
 
-environ.Env.read_env(BASE_DIR / ".env")
+env = environ.Env(
+    DEBUG=(bool),
+    SECRET_KEY=(str),
+    ALLOWED_HOSTS=(list),
+    DB_NAME=(str),
+    DB_USER=(str),
+    DB_PASSWORD=(str),
+    DB_HOST=(str),
+    DB_PORT=(int, 5432),
+    TIME_ZONE=(str),
+    SITE_ID=(int, 1),
+    MEDIA_STORAGE=(str),
+    CORS_ALLOWED_ORIGINS=(list),
+    CSRF_TRUSTED_ORIGINS=(list),
+    AWS_ACCESS_KEY_ID=(str, ""),
+    AWS_SECRET_ACCESS_KEY=(str, ""),
+    AWS_STORAGE_BUCKET_NAME=(str, ""),
+    AWS_S3_ENDPOINT_URL=(str, ""),
+    AWS_S3_REGION_NAME=(str, ""),
+    AWS_S3_CUSTOM_DOMAIN=(str, ""),
+    SECURE_SSL_REDIRECT=(bool),
+    SECURE_HSTS_SECONDS=(int, 31536000),
+    IS_BEHIND_PROXY=(bool),
+)
 
-SECRET_KEY = env("SECRET_KEY")
+env_file = BASE_DIR / ".env"
+if env_file.exists():
+    environ.Env.read_env(str(env_file))
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+SECRET_KEY = env.str("SECRET_KEY")
+DEBUG = env.bool("DEBUG")
 
 INSTALLED_APPS = [
     "corsheaders",
@@ -29,8 +54,11 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.postgres",
-    # "cookie_consent",
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ["django_extensions"]
+    INTERNAL_IPS = ["127.0.0.1"]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -69,9 +97,14 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
-    "default": env.db(
-        "DATABASE_URL",
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -140,7 +173,7 @@ if MEDIA_STORAGE == "s3":
     AWS_DEFAULT_ACL = None
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=31536000"}
-    AWS_LOCATION = ""  # Empty because custom domain points to bucket root
+    AWS_LOCATION = ""
 
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
     STORAGES["default"] = {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}
@@ -160,6 +193,31 @@ CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
 
 MODELTRANSLATION_CUSTOM_FIELDS = ("CKEditor5Field",)
 
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", default=True)
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = env.int("SECURE_HSTS_SECONDS", default=31536000)
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    if env("IS_BEHIND_PROXY"):
+        SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+else:
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_HSTS_SECONDS = 0
+
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS")
+
 CKEDITOR_5_CONFIGS = {
     "default": {
         "toolbar": [
@@ -176,7 +234,7 @@ CKEDITOR_5_CONFIGS = {
             "|",
             "outdent",
             "indent",
-            "|",  # Required for nesting lists
+            "|",
             "insertTable",
             "|",
             "undo",
@@ -196,9 +254,9 @@ CKEDITOR_5_CONFIGS = {
         },
         "list": {
             "properties": {
-                "styles": True,  # Allows different bullet styles (circle, square, etc.)
-                "startIndex": True,  # Allows starting ordered lists at a specific number
-                "reversed": True,  # Allows reversed ordered lists
+                "styles": True,
+                "startIndex": True,
+                "reversed": True,
             }
         },
         "heading": {
@@ -211,16 +269,41 @@ CKEDITOR_5_CONFIGS = {
         },
     },
     "page_design": {
-        # A robust toolbar for layout and design
         "toolbar": [
-            "heading", "|",
-            "fontFamily", "fontSize", "fontColor", "fontBackgroundColor", "|",
-            "bold", "italic", "underline", "strikethrough", "subscript", "superscript", "removeFormat", "|",
-            "alignment", "|",  # Crucial for design (Left, Center, Right, Justify)
-            "bulletedList", "numberedList", "todoList", "outdent", "indent", "|",
-            "link", "blockQuote", "insertTable", "imageUpload", "mediaEmbed", "horizontalLine", "|",
-            "sourceEditing", "|", # Allows editing raw HTML for fine-tuning
-            "undo", "redo"
+            "heading",
+            "|",
+            "fontFamily",
+            "fontSize",
+            "fontColor",
+            "fontBackgroundColor",
+            "|",
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "subscript",
+            "superscript",
+            "removeFormat",
+            "|",
+            "alignment",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "todoList",
+            "outdent",
+            "indent",
+            "|",
+            "link",
+            "blockQuote",
+            "insertTable",
+            "imageUpload",
+            "mediaEmbed",
+            "horizontalLine",
+            "|",
+            "sourceEditing",
+            "|",
+            "undo",
+            "redo",
         ],
         "heading": {
             "options": [
@@ -234,24 +317,19 @@ CKEDITOR_5_CONFIGS = {
         },
         "image": {
             "toolbar": [
-                "imageTextAlternative", "toggleImageCaption",
-                "imageStyle:inline", "imageStyle:block", "imageStyle:side",
-                "linkImage" # Allows clicking image to go to a URL
+                "imageTextAlternative",
+                "toggleImageCaption",
+                "imageStyle:inline",
+                "imageStyle:block",
+                "imageStyle:side",
+                "linkImage",
             ]
         },
         "table": {
-            "contentToolbar": [
-                "tableColumn", "tableRow", "mergeTableCells",
-                "tableProperties", "tableCellProperties"
-            ]
+            "contentToolbar": ["tableColumn", "tableRow", "mergeTableCells", "tableProperties", "tableCellProperties"]
         },
-        # Allow defining custom styles (e.g., for div wrappers) if needed
-        "htmlSupport": {
-            "allow": [
-                {"name": "/^.*$/", "styles": True, "attributes": True, "classes": True}
-            ]
-        }
-    }
+        "htmlSupport": {"allow": [{"name": "/^.*$/", "styles": True, "attributes": True, "classes": True}]},
+    },
 }
 
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
