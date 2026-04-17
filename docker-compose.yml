@@ -24,8 +24,6 @@ services:
       - SECURE_SSL_REDIRECT=${SECURE_SSL_REDIRECT}
       - SECURE_HSTS_SECONDS=${SECURE_HSTS_SECONDS}
       - IS_BEHIND_PROXY=${IS_BEHIND_PROXY}
-    ports:
-      - "${APP_PORT:-8000}:8000"
 
     volumes:
       - django_media:/app/media
