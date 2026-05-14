@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: atadizayn_dev
+      POSTGRES_USER: atadizayn
+      POSTGRES_PASSWORD: devpassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U atadizayn -d atadizayn_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+ 
+volumes:
+  postgres_data:
+ 

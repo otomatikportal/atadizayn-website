@@ -17,7 +17,6 @@ class BrandCarouselImage(models.Model):
     )
     website_url = models.URLField(
         blank=True,
-        null=True,
         default="",
         help_text=_("Müşteri web sitesi URL'si (isteğe bağlı)"),
     )
@@ -51,7 +50,6 @@ class SiteAsset(models.Model):
     description = models.CharField(
         max_length=255,
         blank=True,
-        null=True,
         help_text=_("Bu varlığın nerede kullanıldığına dair dahili not"),
     )
 
@@ -73,13 +71,11 @@ class SiteConfiguration(models.Model):
     )
     value = models.TextField(
         help_text=_("Konfigürasyon değeri"),
-        null=True,
         blank=True,
     )
     description = models.CharField(
         max_length=255,
         blank=True,
-        null=True,
         help_text=_("Bu ayarın ne yaptığını anlatan dahili not"),
     )
 
